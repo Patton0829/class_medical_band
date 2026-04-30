@@ -1,0 +1,521 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: 艾滋病医疗条带检测
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.36@73e3e28eca163b96da65ef9eab8633f9e7257213ff0d2f2bed93b28b552d2cda
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: knowledge-retrieval
+      id: 1774535638292-source-1774535677292-target
+      selected: false
+      source: '1774535638292'
+      sourceHandle: source
+      target: '1774535677292'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1774535677292-source-1774535696846-target
+      selected: false
+      source: '1774535677292'
+      sourceHandle: source
+      target: '1774535696846'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: if-else
+      id: 1774535638292-source-1774588150334-target
+      selected: false
+      source: '1774535638292'
+      sourceHandle: source
+      target: '1774588150334'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1774588150334-true-1774537053530-target
+      selected: false
+      source: '1774588150334'
+      sourceHandle: 'true'
+      target: '1774537053530'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1774537053530-source-1774535696846-target
+      selected: false
+      source: '1774537053530'
+      sourceHandle: source
+      target: '1774535696846'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1774588150334-false-1774535696846-target
+      selected: false
+      source: '1774588150334'
+      sourceHandle: 'false'
+      target: '1774535696846'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1774535696846-fail-branch-1774603435168-target
+      selected: false
+      source: '1774535696846'
+      sourceHandle: fail-branch
+      target: '1774603435168'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1774535696846-source-1774536226991-target
+      source: '1774535696846'
+      sourceHandle: source
+      target: '1774536226991'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1774603435168-source-1774604205608-target
+      source: '1774603435168'
+      sourceHandle: source
+      target: '1774604205608'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - hint: ''
+          label: input
+          max_length: 256
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: input
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          hint: ''
+          label: picture
+          options: []
+          placeholder: ''
+          required: false
+          type: file
+          variable: picture
+      height: 135
+      id: '1774535638292'
+      position:
+        x: -222.41359557752676
+        y: 313.4915658290095
+      positionAbsolute:
+        x: -222.41359557752676
+        y: 313.4915658290095
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - M2f1Avu2yxXYWQ65cm/sd0IeX+eCcaBmnuZ+EDUOw53N5pJ/D7Febf+BV96E46Al
+        - bRKb4TDCapyJDRCmnmblQ1XwEtR8gRIfV5rDMRdDDIz+OlUyV3iSnkSolft4CQE6
+        - t0dOqDMQTDI0tKPt3Yx1C/Tj3SMvEtHvhBJs2+/K4cm+rXT+FYZSg/aJG5Gub0++
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: qwen3-rerank
+            provider: langgenius/tongyi/tongyi
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0
+            vector_setting:
+              embedding_model_name: bge-m3:latest
+              embedding_provider_name: langgenius/ollama/ollama
+              vector_weight: 1
+            weight_type: customized
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1774535638292'
+        - input
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 146
+      id: '1774535677292'
+      position:
+        x: 221.30546667752162
+        y: 109.77445579602954
+      positionAbsolute:
+        x: 221.30546667752162
+        y: 109.77445579602954
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1774535677292'
+          - result
+        error_strategy: fail-branch
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.6-plus
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 8e2b3c06-3596-4eea-9182-b80840e0e110
+          role: system
+          text: '你是艾滋病医疗条带解读助手。请严格基于两类信息回答：
+
+            1) 知识检索结果（上下文）
+
+            2) 视觉检测结果（如果有）
+
+
+            回答要求：
+
+            - 使用中文
+
+            - 先给结论，再给依据
+
+            - 若视觉检测结果为空或无效，明确说明“未检测到有效条带点位”，并仅基于知识库与用户文本给出保守建议
+
+            - 不编造检测点位或医学结论
+
+            - 如涉及医疗风险，提醒用户以临床检测和医生判断为准
+
+            '
+        - id: 0bf4af71-c64e-4772-8c26-c22807b0f32d
+          role: user
+          text: '用户问题：
+
+            {{{#1774535638292.input#}}}
+
+            '
+        - id: b48b1bab-c996-4d52-8fa2-42a56114ad6f
+          role: user
+          text: '知识库检索结果：
+
+            {{{#context#}}}
+
+            '
+        - id: 1f68159b-7118-459d-900c-b6157984009c
+          role: user
+          text: '视觉检测结果（来自HTTP节点）：{{#1774537053530.body#}}
+
+
+            如果上面的视觉检测结果为空、null、或缺少detected_points，请按“无图模式”回答，如果存在视觉检测结果的话，请你完成：
+
+            1) 提取并列出检测到的点位（detected_points）
+
+            2) 结合知识库判断条带类型/可能结论
+
+            3) 给出简短解释与下一步建议（1-3条）
+
+            '
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 124
+      id: '1774535696846'
+      position:
+        x: 593.6054986567468
+        y: 590.6298568990826
+      positionAbsolute:
+        x: 593.6054986567468
+        y: 590.6298568990826
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1774535696846'
+          - text
+          value_type: string
+          variable: text
+        selected: false
+        title: 输出
+        type: end
+      height: 88
+      id: '1774536226991'
+      position:
+        x: 903.9314812757568
+        y: 334.4915658290095
+      positionAbsolute:
+        x: 903.9314812757568
+        y: 334.4915658290095
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1064
+            key: ''
+            type: text
+            value: "{\n  \"filename\": \"{{#1774535638292.picture.name#}}\",\n  \"\
+              conf_threshold\": 0.3\n}"
+          type: json
+        desc: 调用本地yolo模型进行视觉检测，检测条带的点位
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: Yolo模型调用
+        type: http-request
+        url: http://host.docker.internal:8000/detect
+        variables: []
+      height: 181
+      id: '1774537053530'
+      position:
+        x: 258.38760502447565
+        y: 383.5624682100561
+      positionAbsolute:
+        x: 258.38760502447565
+        y: 383.5624682100561
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: exists
+            id: f7601280-631d-41ad-9ae1-8773f65ba874
+            value: ''
+            varType: file
+            variable_selector:
+            - '1774535638292'
+            - picture
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 判断用户是否输入图片
+        type: if-else
+      height: 124
+      id: '1774588150334'
+      position:
+        x: -27.09059487898554
+        y: 609.6153988681516
+      positionAbsolute:
+        x: -27.09059487898554
+        y: 609.6153988681516
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1774535677292'
+          - result
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 3b900185-ebdc-4379-bf89-13a7911be602
+          role: system
+          text: '你是有关艾滋病的专家。如果用户问题和知识检索结果相关，基于知识检索结果回答用户问题，如果无关，请直接回答用户问题，无视知识检索结果。
+
+
+            回答要求：
+
+            - 使用中文
+
+            - 先给结论，再给依据
+
+            - 不编造医学结论
+
+            - 如涉及医疗风险，提醒用户以临床检测和医生判断为准'
+        - id: 3aff13fe-3d74-4e6f-a9a3-b04494b220d0
+          role: user
+          text: '用户问题：
+
+            {{{#1774535638292.input#}}}
+
+            '
+        - id: db52296e-a063-49e0-aec1-89cd4141ff0c
+          role: user
+          text: '知识库检索结果：
+
+            {{{#context#}}}
+
+            '
+        selected: false
+        title: LLM 2
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1774603435168'
+      position:
+        x: 815.021822351804
+        y: 815.007327240204
+      positionAbsolute:
+        x: 815.021822351804
+        y: 815.007327240204
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1774603435168'
+          - text
+          value_type: string
+          variable: text
+        selected: false
+        title: 输出 2
+        type: end
+      height: 88
+      id: '1774604205608'
+      position:
+        x: 1065.2025999732616
+        y: 561.7945060765123
+      positionAbsolute:
+        x: 1065.2025999732616
+        y: 561.7945060765123
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 355.92404417105627
+      y: 47.49784719791458
+      zoom: 0.6041398399905602
+  rag_pipeline_variables: []
