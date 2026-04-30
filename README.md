@@ -1,3 +1,9 @@
-pip install -r requirements.txt
+pip install -r requirements.txt安装依赖
+code目录下为目标检测模型训练的代码
+dataset目录下为艾滋病医疗条带的数据集
 
 使用dify搭建智能体调用训练好的视觉检测模型box_best.pt即可
+
+dify工作流里放置了智能体搭建需要用到的yml文件，dify拉取到本地导入DSL文件就可以得到智能体需要用到的工具
+
+使用运行指令.txt在本机暴露接口，供智能体调用目标检测大模型yolo模型，对医疗条带进行目标检测得到医疗条带点位
