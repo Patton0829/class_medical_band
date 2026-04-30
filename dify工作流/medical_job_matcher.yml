@@ -1,0 +1,2212 @@
+app:
+  description: 根据resume_json进行医学生的岗位匹配
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: medical_job_matcher
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.36@73e3e28eca163b96da65ef9eab8633f9e7257213ff0d2f2bed93b28b552d2cda
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: code
+      id: 1775898017818-source-1775898022071-target
+      source: '1775898017818'
+      sourceHandle: source
+      target: '1775898022071'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1775898022071-source-1775898794925-target
+      source: '1775898022071'
+      sourceHandle: source
+      target: '1775898794925'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1775898794925-source-1775900115994-target
+      source: '1775898794925'
+      sourceHandle: source
+      target: '1775900115994'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1775901025596-source-1775898939042-target
+      source: '1775901025596'
+      sourceHandle: source
+      target: '1775898939042'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1775900115994-source-1775917331319-target
+      source: '1775900115994'
+      sourceHandle: source
+      target: '1775917331319'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1775917331319-source-1775961049393-target
+      source: '1775917331319'
+      sourceHandle: source
+      target: '1775961049393'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775961049393-source-1775961820469-target
+      source: '1775961049393'
+      sourceHandle: source
+      target: '1775961820469'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1775961820469-source-1775966722790-target
+      source: '1775961820469'
+      sourceHandle: source
+      target: '1775966722790'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1775966722790-source-1775901025596-target
+      source: '1775966722790'
+      sourceHandle: source
+      target: '1775901025596'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1775898017818-source-1776091881959-target
+      source: '1775898017818'
+      sourceHandle: source
+      target: '1776091881959'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1776091881959-source-1775898794925-target
+      source: '1776091881959'
+      sourceHandle: source
+      target: '1775898794925'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1776091881959-source-1775900115994-target
+      source: '1776091881959'
+      sourceHandle: source
+      target: '1775900115994'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: resume_json
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: resume_json
+        - default: '["西安交通大学第一附属医院", "西京医院"]'
+          hint: ''
+          label: target_hospital
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: target_hospitals
+        - default: ''
+          hint: ''
+          label: preferred_department
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: preferred_department
+      height: 161
+      id: '1775898017818'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(target_hospitals: str, preferred_department: str = \"\"):\n\
+          \    all_jobs_db = [\n      {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"其他专技\",\n    \"department\": \"医务处\",\n\
+          \    \"position_name\": \"翻译\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"老挝语\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事老挝语翻译工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"护理\",\n    \"department\": \"护理处\",\n \
+          \   \"position_name\": \"护师\",\n    \"headcount\": 30,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"护理学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事护理相关工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"急诊科\",\n\
+          \    \"position_name\": \"医师\",\n    \"headcount\": 2,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"临床医学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事急诊科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"急诊科\",\n \
+          \   \"position_name\": \"助理研究员\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"基础医学及相关专业\"\n    ],\n\
+          \    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"\
+          research_requirements\": [],\n    \"experience_requirements\": [],\n   \
+          \ \"notes\": [\n      \"从事基础医学研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"心血管内科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"内科学（心血管病）\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事心血管内科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"医技\"\
+          ,\n    \"department\": \"心血管内科\",\n    \"position_name\": \"技师\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"内科学（心血管病）\"\n    ],\n    \"required_keywords\": [],\n    \"\
+          preferred_keywords\": [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事放射和超声检查工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"肾脏内科\",\n    \"position_name\": \"医师\",\n    \"\
+          headcount\": 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"肾脏病学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事肾脏内科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"血液内科\",\n    \"position_name\": \"医师\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"临床医学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事血液内科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"内分泌科\",\n    \"position_name\": \"医师\",\n    \"\
+          headcount\": 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"内分泌学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事内分泌科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"胃肠外科\",\n    \"position_name\": \"医师\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"外科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事器官移植医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"胃肠外科\",\n    \"position_name\": \"医师\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"外科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事普通外科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\"\
+          ,\n    \"department\": \"胃肠外科\",\n    \"position_name\": \"研究实习员\",\n  \
+          \  \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"外科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事肿瘤研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"呼吸内科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 3,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"内科学及相关专业\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事呼吸内科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"医技\"\
+          ,\n    \"department\": \"呼吸内科\",\n    \"position_name\": \"技师\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"睡眠\",\n      \"康复理疗\"\n    ],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n \
+          \   \"experience_requirements\": [],\n    \"notes\": [\n      \"从事呼吸内科医技工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"老年医学一科\",\n    \"\
+          position_name\": \"医师\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"老年医学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事老年病医疗工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"医技\",\n    \"department\": \"老年医学一科\",\n\
+          \    \"position_name\": \"技师\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"康复治疗学\",\n      \"中医康复学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事临床医技工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"老年医学二科\",\n    \"position_name\": \"助理研究员\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"内科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事基础医学研究工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"肝胆外科\",\n    \"position_name\": \"主治医师\",\n   \
+          \ \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"影像诊断学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事肝胆外科临床医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"肝胆外科\",\n    \"position_name\": \"主治医师\",\n   \
+          \ \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"临床医学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事肝胆外科临床医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\"\
+          ,\n    \"department\": \"肝胆外科\",\n    \"position_name\": \"研究实习员\",\n  \
+          \  \"headcount\": 3,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"分子生物学\",\n      \"基础医学\",\n      \"生命科学及相关专业\"\n    ],\n  \
+          \  \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事基础医学研究工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"骨科\",\n\
+          \    \"position_name\": \"医师\",\n    \"headcount\": 4,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"骨外科\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事骨科临床医疗工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"骨科\",\n\
+          \    \"position_name\": \"医师\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"临床医学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事骨科临床医疗工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"骨科\",\n  \
+          \  \"position_name\": \"助理研究员\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"矿化医学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事基础医学研究工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"烧伤外科\",\n\
+          \    \"position_name\": \"医师\",\n    \"headcount\": 2,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"外科学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事烧伤整形外科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"烧伤外科\",\n\
+          \    \"position_name\": \"助理研究员\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"生物学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事基础医学研究工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"整形外科\",\n\
+          \    \"position_name\": \"医师\",\n    \"headcount\": 2,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"外科学（整形外科学）\"\n    ],\n\
+          \    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"\
+          research_requirements\": [],\n    \"experience_requirements\": [],\n   \
+          \ \"notes\": [\n      \"从事整形外科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"整形外科\",\n    \"position_name\": \"研究实习员\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"病理学\",\n      \"免疫学\",\n      \"外科学（整形外科学）\",\n      \"生物化学\",\n\
+          \      \"分子生物\",\n      \"材料科学与工程\",\n      \"生物医学工程\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事生命科学研究工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"心血管外科\",\n    \"\
+          position_name\": \"医师\",\n    \"headcount\": 2,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"外科学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事心血管外科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"心血管外科\",\n\
+          \    \"position_name\": \"研究实习员\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"生物学\",\n      \"药学\",\n\
+          \      \"基础医学\",\n      \"临床医学及相关专业\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事基础医学研究工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"泌尿外科\",\n    \"position_name\"\
+          : \"主治医师\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n\
+          \    \"major_requirements\": [\n      \"外科学（泌尿外）\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事器官移植医疗工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"泌尿外科\",\n    \"position_name\"\
+          : \"医师\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n\
+          \    \"major_requirements\": [\n      \"外科学（泌尿外）\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事器官移植医疗工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"神经外科\",\n    \"position_name\"\
+          : \"副主任医师\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"外科学（神外）\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事神经外科医疗工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"麻醉科\",\n    \"position_name\"\
+          : \"医师\",\n    \"headcount\": 20,\n    \"degree_requirement\": \"硕士\",\n\
+          \    \"major_requirements\": [\n      \"临床医学\",\n      \"麻醉学及相关专业\"\n  \
+          \  ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事麻醉科医疗、疼痛医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"麻醉科\",\n    \"position_name\": \"副研究员\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"统计学与流行病学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事公共卫生与预防医学研究工作\"\n    ]\n  },\n  {\n \
+          \   \"hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\":\
+          \ \"临床医疗\",\n    \"department\": \"神经内科\",\n    \"position_name\": \"医师\"\
+          ,\n    \"headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"神经病学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事神经内科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"神经内科\",\n    \"position_name\": \"医师\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"神经病学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事神经内科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\"\
+          ,\n    \"department\": \"神经内科\",\n    \"position_name\": \"技师\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"生物医学工程\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事临床研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"中医科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"针灸推拿\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事中医科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"医技\",\n    \"\
+          department\": \"中医科\",\n    \"position_name\": \"技师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n\
+          \      \"针灸推拿\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事中医科推拿、针灸、按摩工作\"\n    ]\n  },\n  {\n \
+          \   \"hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\":\
+          \ \"临床医疗\",\n    \"department\": \"眼科\",\n    \"position_name\": \"主治医师\"\
+          ,\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"眼眶眼肿瘤\",\n      \"神经眼科\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事眼科医疗工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"眼科\",\n    \"position_name\"\
+          : \"助理研究员\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"材料学\",\n      \"信息学\"\n    ],\n\
+          \    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"\
+          research_requirements\": [],\n    \"experience_requirements\": [],\n   \
+          \ \"notes\": [\n      \"从事生命科学研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"耳鼻咽喉科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"耳鼻咽喉科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事耳鼻咽喉科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"耳鼻咽喉科\",\n    \"position_name\": \"医师\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"耳鼻咽喉头颈外科学\"\n    ],\n    \"required_keywords\": [],\n    \"\
+          preferred_keywords\": [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事外科、内科、耳鼻咽喉科医疗有关工作\"\n    ]\n  },\n  {\n\
+          \    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"医技\",\n    \"department\": \"耳鼻咽喉科\",\n    \"position_name\": \"技师\"\
+          ,\n    \"headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"医学影像学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事CT操作和诊断工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"儿科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 3,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"儿科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事儿科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"儿科\",\n    \"position_name\": \"研究实习员\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"基础医学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事基础医学研究工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"妇产科\",\n    \"position_name\": \"医师\",\n    \"\
+          headcount\": 4,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"妇产科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事妇产科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"妇产科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"生殖医学及相关专业\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事男科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"妇产科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 2,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n\
+          \      \"超声医学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事超声科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"妇产科\",\n    \"position_name\": \"研究实习员\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"医学相关专业\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事肿瘤研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"肿瘤科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"肿瘤学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事肿瘤科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"皮肤科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 5,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"皮肤病与性病学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事皮肤科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"皮肤科\",\n    \"position_name\": \"研究实习员\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"基础科研及相关专业\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事肿瘤研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"皮肤科\",\n    \"position_name\": \"研究实习员\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"基础科研及相关专业\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事基础医学研究工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\"\
+          ,\n    \"department\": \"皮肤科\",\n    \"position_name\": \"助理研究员\",\n   \
+          \ \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"分析化学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事中药活性成分研究工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"放射诊断科\",\n    \"position_name\": \"医师\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"放射影像学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事放射诊断科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"放射诊断科\",\n    \"position_name\": \"主治医师\",\n  \
+          \  \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"临床医学\",\n      \"影像医学与核医学\",\n      \"医学影像学\",\n      \"放射影像学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事放射诊断科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"医技\",\n    \"\
+          department\": \"放射诊断科\",\n    \"position_name\": \"技师\",\n    \"headcount\"\
+          : 2,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n\
+          \      \"临床医学\",\n      \"影像医学与核医学\",\n      \"医学影像学\",\n      \"放射影像学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事CT、磁共振、X线检查工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"放射诊断科\",\n    \"position_name\": \"助理研究员\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"图像信息处理\",\n      \"电子工程\",\n      \"人工智能\",\n      \"生物医学工程等医学工程\"\
+          ,\n      \"数学\",\n      \"统计及相关专业\"\n    ],\n    \"required_keywords\":\
+          \ [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事大数据知识挖掘研究工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"放射治疗科\",\n    \"\
+          position_name\": \"医师\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"放射医学\",\n      \"肿瘤学\"\
+          ,\n      \"放射肿瘤学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事放射治疗科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"医技\"\
+          ,\n    \"department\": \"放射治疗科\",\n    \"position_name\": \"技师\",\n    \"\
+          headcount\": 2,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"医学影像技术\",\n      \"生物医学工程\",\n      \"医学影像学及相关专业\"\n    ],\n\
+          \    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"\
+          research_requirements\": [],\n    \"experience_requirements\": [],\n   \
+          \ \"notes\": [\n      \"从事放射技术相关工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"放射治疗科\",\n    \"position_name\": \"助理工程师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"生物医学工程\",\n      \"物理\",\n      \"核技术相关专业\",\n      \"控制科学与工程\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事大型医疗设备质量控制工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"超声诊断科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"医学影像学\",\n      \"超声医学\",\n      \"影像医学与核医学及相关专业\"\n    ],\n  \
+          \  \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事超声科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"超声诊断科\",\n\
+          \    \"position_name\": \"助理工程师\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"生物医学工程\",\n      \"微电子\"\
+          ,\n      \"材料学\",\n      \"电子信息工程\",\n      \"电子信息科学与技术\",\n      \"计算机应用技术及相关专业\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事科学研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"超声诊断科\",\n    \"position_name\": \"助理工程师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"生物医学工程\",\n      \"生物科学\",\n      \"生物与医药\",\n      \"生物学（遗传学）\"\
+          ,\n      \"统计学\",\n      \"生物工程及相关专业\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事科学研究工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"核医学科\",\n    \"position_name\"\
+          : \"主治医师\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n\
+          \    \"major_requirements\": [\n      \"影像医学与核医学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事核医学科医疗工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"核医学科\",\n    \"position_name\"\
+          : \"医师\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n\
+          \    \"major_requirements\": [\n      \"影像医学与核医学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事核医学科医疗工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"医技\",\n    \"department\": \"核医学科\",\n    \"position_name\"\
+          : \"技师\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n\
+          \    \"major_requirements\": [\n      \"医学技术\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事核医学科相关检查工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"核医学科\",\n    \"position_name\"\
+          : \"研究实习员\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"药物化学及相关专业\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事放射化学研究工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"实验外科\",\n    \"position_name\"\
+          : \"助理研究员\",\n    \"headcount\": 2,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"基础医学\",\n      \"生物学\",\n    \
+          \  \"公共卫生与预防医学\",\n      \"动物医学及相关专业\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事基础医学研究工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"医技\",\n    \"department\": \"康复理疗科\",\n    \"position_name\"\
+          : \"技师\",\n    \"headcount\": 3,\n    \"degree_requirement\": \"硕士\",\n\
+          \    \"major_requirements\": [\n      \"康复治疗学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事康复理疗技术应用相关专业工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"检验科\",\n    \"position_name\"\
+          : \"助理研究员\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"医学检验\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事大数据知识挖掘研究工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"检验科\",\n    \"position_name\"\
+          : \"助理研究员\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"生化与分子生物学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事感染免疫研究工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"检验科\",\n    \"position_name\"\
+          : \"助理研究员\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"药理学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事微生物与生化药学研究工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"药剂科\",\n    \"position_name\"\
+          : \"药师\",\n    \"headcount\": 2,\n    \"degree_requirement\": \"博士\",\n\
+          \    \"major_requirements\": [\n      \"临床药学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事临床用药指导工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"心理科\",\n    \"position_name\"\
+          : \"研究实习员\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"医学\",\n      \"生物学及相关专业\"\n  \
+          \  ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事生命科学研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"病理科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"病理学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事病理科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"营养科\",\n    \"position_name\": \"主治医师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n\
+          \      \"临床医学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事营养科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"营养科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"临床医学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事营养科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"信息科\",\n    \"position_name\": \"助理工程师\",\n    \"headcount\"\
+          : 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"计算机科学与技术\",\n      \"软件工程\",\n      \"电子信息\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事大数据知识挖掘研究科研工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"重症医学科\",\n    \"\
+          position_name\": \"医师\",\n    \"headcount\": 3,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"急诊医学\",\n      \"外科学\"\
+          ,\n      \"麻醉学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事重疾医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n    \"\
+          department\": \"重症医学科\",\n    \"position_name\": \"研究实习员\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"神经生物学\",\n      \"细胞生物学\",\n      \"生物化学与分子生物学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          从事神经生物学研究工作\"\n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"全科医学科\"\
+          ,\n    \"position_name\": \"医师\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"全科医学专业\",\n      \"临床医学及相关专业\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事全科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"医技\",\n    \"\
+          department\": \"全科医学科\",\n    \"position_name\": \"技师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n\
+          \      \"临床医学\",\n      \"康复医学\",\n      \"运动医学\",\n      \"医学技术\",\n  \
+          \    \"中医学\",\n      \"针灸推拿学\",\n      \"预防医学\",\n      \"营养学及相关专业\"\n \
+          \   ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事康复理疗技术应用相关专业工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"感染性疾病科\",\n    \"position_name\": \"医师\",\n   \
+          \ \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"内科学\",\n      \"传染病学\"\n    ],\n    \"required_keywords\":\
+          \ [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事感染科医疗工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"综合外科\",\n    \"position_name\"\
+          : \"研究实习员\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"基础医学\",\n      \"生命科学\"\n    ],\n\
+          \    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"\
+          research_requirements\": [],\n    \"experience_requirements\": [],\n   \
+          \ \"notes\": [\n      \"从事基础医学研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"介入手术中心\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"影像医学与核医学\",\n      \"外科学\",\n      \"肿瘤学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"从事临床医疗工作\"\
+          \n    ]\n  },\n  {\n    \"hospital\": \"西京医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"介入手术中心\",\n    \"position_name\"\
+          : \"副研究员\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n\
+          \    \"major_requirements\": [\n      \"影像医学与核医学\",\n      \"材料学\"\n   \
+          \ ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"从事基础医学研究工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"\
+          department\": \"消化内科\",\n    \"position_name\": \"医师\",\n    \"headcount\"\
+          : 4,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"临床医学内科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事消化内科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"综合诊疗中心\",\n    \"position_name\": \"医师\",\n   \
+          \ \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"耳鼻喉\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事耳鼻咽喉科医疗工作\"\n    ]\n  },\n  {\n    \"\
+          hospital\": \"西京医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"综合诊疗中心\",\n    \"position_name\": \"医师\",\n   \
+          \ \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"眼科\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"从事眼科医疗工作\"\n    ]\n  },\n  {\n    \"hospital\"\
+          : \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"呼吸与危重症医学科\",\n    \"headcount\": 3,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"内科学（呼吸系病学方向）\"\n    ],\n\
+          \    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"\
+          research_requirements\": [],\n    \"experience_requirements\": [],\n   \
+          \ \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\"\
+          : \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"消化内科\",\n    \"headcount\": 10,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"内科学（消化系病学方向）\"\n    ],\n\
+          \    \"required_keywords\": [],\n    \"preferred_keywords\": [\n      \"\
+          介入基础\"\n    ],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"其中2人从事专职内镜工作，要求有执业证及规培证；1人有介入基础者优先\"\n\
+          \    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\": \"\
+          西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n\
+          \    \"department\": \"消化内科\",\n    \"headcount\": 10,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [\n      \"内镜基础\"\n    ],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [\n      \"副高及以上职称\",\n      \"\
+          成熟型人才\",\n      \"从事专职内镜工作\"\n    ],\n    \"notes\": [\n      \"成熟型人才；要求副高及以上职称，从事专职内镜工作，要求有内镜基础\"\
+          \n    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\":\
+          \ \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"心血管内科\",\n    \"headcount\": 13,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"内科学（心血管病方向）\"\n    ],\n\
+          \    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"\
+          research_requirements\": [],\n    \"experience_requirements\": [],\n   \
+          \ \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\"\
+          : \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"心血管内科\",\n    \"headcount\": 13,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n \
+          \   \"experience_requirements\": [\n      \"副高及以上职称\",\n      \"成熟型人才\"\n\
+          \    ],\n    \"notes\": [\n      \"成熟型人才；要求副高及以上职称\"\n    ],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"心血管内科\"\
+          ,\n    \"headcount\": 13,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [],\n    \"required_keywords\": [\n      \"医师资格证\",\n      \"规培证\"\n \
+          \   ],\n    \"preferred_keywords\": [],\n    \"research_requirements\":\
+          \ [],\n    \"experience_requirements\": [\n      \"技术医疗岗\"\n    ],\n   \
+          \ \"notes\": [\n      \"技术医疗岗，主要从事心脏超声工作；具备医师资格证及规培证\"\n    ],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"血液内科\",\n\
+          \    \"headcount\": 4,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"内科学\",\n      \"肿瘤学\"\n    ],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n \
+          \   \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"康复医学科\"\
+          ,\n    \"headcount\": 2,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"康复医学与理疗学\",\n      \"神经病学\",\n      \"内科学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          康复医学与理疗学要求硕士、神经病学与内科学要求博士\"\n    ],\n    \"position_name\": \"临床医师\"\n \
+          \ },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n  \
+          \  \"job_category\": \"临床医疗\",\n    \"department\": \"内分泌代谢科\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"内科学（内分泌与代谢病方向）\"\n    ],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n \
+          \   \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"涉外病房（一）\"\
+          ,\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"内科学\",\n      \"老年医学\"\n    ],\n    \"required_keywords\":\
+          \ [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"肿瘤放疗科\"\
+          ,\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"肿瘤学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n\
+          \    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"肿瘤内科\",\n    \"headcount\": 2,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"肿瘤学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"\
+          hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"皮肤科\",\n    \"headcount\": 1,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"皮肤病与性病学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"\
+          hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"感染科\",\n    \"headcount\": 2,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"重症医学\"\
+          ,\n      \"内科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n\
+          \    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"重症医学科\",\n    \"headcount\": 5,\n   \
+          \ \"degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n     \
+          \ \"重症医学\",\n      \"急诊医学\",\n      \"内科学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\
+          \n    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\":\
+          \ \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"儿科\",\n    \"headcount\": 3,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"儿外科学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          学历要求为硕士及以上\"\n    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"\
+          hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"老年医学科\",\n    \"headcount\": 1,\n   \
+          \ \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n     \
+          \ \"老年医学\",\n      \"内科学\"\n    ],\n    \"required_keywords\": [],\n   \
+          \ \"preferred_keywords\": [],\n    \"research_requirements\": [],\n    \"\
+          experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"生殖医学科\"\
+          ,\n    \"headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"妇产科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [\n      \"副高及以上职称\",\n      \"三甲医院生殖医学科至少5年工作经历\",\n      \"成熟型人才\"\n\
+          \    ],\n    \"notes\": [\n      \"成熟型人才；要求副高及以上职称，有三甲医院生殖医学科至少5年工作经历\"\n\
+          \    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\": \"\
+          西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n\
+          \    \"department\": \"急诊中心\",\n    \"headcount\": 12,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"急诊医学\",\n      \"内科学\"\
+          ,\n      \"外科学\",\n      \"重症医学\"\n    ],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n \
+          \   \"experience_requirements\": [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\
+          \n    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\":\
+          \ \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"急诊中心\",\n    \"headcount\": 12,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"急诊医学\",\n      \"内科学\"\
+          ,\n      \"外科学\",\n      \"重症医学\"\n    ],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n \
+          \   \"experience_requirements\": [\n      \"副高及以上职称\",\n      \"亚专科急诊内科或急诊外科工作\"\
+          ,\n      \"三甲医院5年以上工作经历\",\n      \"成熟型人才\"\n    ],\n    \"notes\": [\n\
+          \      \"成熟型人才；要求副高及以上职称，在亚专科急诊内科或急诊外科工作，要求有三甲医院5年以上工作经历\"\n    ],\n   \
+          \ \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\"\
+          ,\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\"\
+          : \"神经内科\",\n    \"headcount\": 11,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"神经病学\",\n      \"内科学\",\n    \
+          \  \"老年医学\",\n      \"重症医学\"\n    ],\n    \"required_keywords\": [],\n \
+          \   \"preferred_keywords\": [],\n    \"research_requirements\": [],\n  \
+          \  \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"神经内科\",\n\
+          \    \"headcount\": 11,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"神经病学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [\n      \"博士后经历\"\n    ],\n    \"research_requirements\": [],\n    \"\
+          experience_requirements\": [\n      \"副高及以上职称\",\n      \"成熟型人才\"\n    ],\n\
+          \    \"notes\": [\n      \"成熟型人才；要求副高及以上职称，神经病学专业，其中1人要求具备博士后经历\"\n    ],\n\
+          \    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\"\
+          ,\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\"\
+          : \"全科医学科\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\"\
+          ,\n    \"major_requirements\": [\n      \"全科医学\",\n      \"老年医学\",\n   \
+          \   \"内科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n\
+          \    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"外科重症医学科\",\n    \"headcount\": 7,\n \
+          \   \"degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n   \
+          \   \"重症医学\",\n      \"内科学\",\n      \"外科学\",\n      \"麻醉学\",\n      \"\
+          急诊医学\",\n      \"肿瘤学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\n    ],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"普通外科\",\n\
+          \    \"headcount\": 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"外科学\",\n      \"肿瘤学\"\n    ],\n    \"required_keywords\": [\n\
+          \      \"医师资格证\"\n    ],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          具备医师资格证\"\n    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\"\
+          : \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"肝胆外科\",\n    \"headcount\": 4,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"外科学（基本外科肝外方向）\",\n   \
+          \   \"内科学（消化系病方向）\",\n      \"重症医学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"肝胆外科\",\n\
+          \    \"headcount\": 4,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"外科学（基本外科肝外方向）\",\n      \"内科学（消化系病方向）\",\n      \"重症医学\"\n\
+          \    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [\n\
+          \      \"副高及以上职称\",\n      \"成熟型人才\"\n    ],\n    \"notes\": [\n      \"\
+          成熟型人才；要求副高及以上职称\"\n    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n\
+          \    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"肿瘤外科\",\n    \"headcount\": 2,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"外科学\"\
+          ,\n      \"肿瘤学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n\
+          \    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"泌尿外科\",\n    \"headcount\": 4,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"外科学（泌尿外科方向）\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"\
+          hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"泌尿外科\",\n    \"headcount\": 4,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"泌尿外科\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [\n\
+          \      \"副高及以上职称\",\n      \"同级别医院相关工作经历\",\n      \"能独立带组开展工作\",\n    \
+          \  \"成熟型人才\"\n    ],\n    \"notes\": [\n      \"成熟型人才；要求副高及以上职称，具备同级别医院相关工作经历，泌尿外科专业（尿路成型、男科方向），能独立带组开展工作\"\
+          \n    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\":\
+          \ \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"骨科\",\n    \"headcount\": 3,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"骨科学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [],\n    \"\
+          position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\"\
+          ,\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\"\
+          : \"肾移植科\",\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n\
+          \    \"major_requirements\": [\n      \"外科学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"血管外科\",\n\
+          \    \"headcount\": 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"外科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n\
+          \    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"血管外科\",\n    \"headcount\": 2,\n    \"\
+          degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n      \"外科学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [\n\
+          \      \"副高及以上职称\",\n      \"三甲医院血管外科3年以上工作经历\",\n      \"熟练掌握介入及外科手术操作\"\
+          ,\n      \"成熟型人才\"\n    ],\n    \"notes\": [\n      \"成熟型人才；要求副高及以上职称，具备三甲医院血管外科3年以上工作经历，熟练掌握介入及外科手术操作\"\
+          \n    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\":\
+          \ \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"神经外科\",\n    \"headcount\": 14,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"外科学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [],\n    \"\
+          position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\"\
+          ,\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\"\
+          : \"神经外科\",\n    \"headcount\": 14,\n    \"degree_requirement\": \"硕士\"\
+          ,\n    \"major_requirements\": [\n      \"外科学\",\n      \"小儿矫形骨科\"\n   \
+          \ ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [\n\
+          \      \"副高及以上职称\",\n      \"成熟型人才\"\n    ],\n    \"notes\": [\n      \"\
+          成熟型人才；要求副高及以上职称，1人要求小儿矫形骨科专业\"\n    ],\n    \"position_name\": \"临床医师\"\n\
+          \  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"临床医疗\",\n    \"department\": \"妇产科\",\n    \"headcount\"\
+          : 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"妇产科学\",\n      \"中医妇科学\"\n    ],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n \
+          \   \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"妇产科\",\n\
+          \    \"headcount\": 2,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"中医妇科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [\n      \"副高及以上职称\",\n      \"成熟型人才\"\n    ],\n    \"notes\": [\n   \
+          \   \"成熟型人才；要求副高及以上职称，中医妇科学专业\"\n    ],\n    \"position_name\": \"临床医师\"\
+          \n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n\
+          \    \"job_category\": \"临床医疗\",\n    \"department\": \"心血管外科\",\n    \"\
+          headcount\": 6,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"外科学\",\n      \"内科学\",\n      \"重症医学\",\n      \"麻醉学\"\n  \
+          \  ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [\n \
+          \     \"规培证\"\n    ],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"具备规培证优先\"\n    ],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"心血管外科\"\
+          ,\n    \"headcount\": 6,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [\n \
+          \     \"规培证\"\n    ],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [\n      \"技术医疗岗\",\n      \"从事体外循环工作\"\n    ],\n    \"notes\": [\n  \
+          \    \"技术医疗岗，从事体外循环工作，具备规培证优先\"\n    ],\n    \"position_name\": \"临床医师\"\
+          \n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n\
+          \    \"job_category\": \"临床医疗\",\n    \"department\": \"麻醉手术部\",\n    \"\
+          headcount\": 4,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"麻醉学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\n    ],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"耳鼻咽喉头颈外科\"\
+          ,\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"耳鼻咽喉科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n\
+          \    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"眼科\",\n    \"headcount\": 1,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"眼科学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"\
+          hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"腹部外科（老年外科）\",\n    \"headcount\": 2,\n\
+          \    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n  \
+          \    \"外科学（普外方向、肝胆方向）\"\n    ],\n    \"required_keywords\": [],\n    \"\
+          preferred_keywords\": [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n\
+          \    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"乳腺外科\",\n    \"headcount\": 1,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"外科学\"\
+          ,\n      \"肿瘤学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [\n      \"副高及以上职称\",\n      \"独立开展DIEP/TRAM等IV级显微外科手术能力\",\n      \"\
+          成熟型人才\"\n    ],\n    \"notes\": [\n      \"成熟型人才；要求副高及以上职称，具备独立开展DIEP、TRAM等IV级显微外科手术能力\"\
+          \n    ],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\":\
+          \ \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\"\
+          ,\n    \"department\": \"口腔科\",\n    \"headcount\": 4,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"口腔医学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [],\n    \"\
+          position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\"\
+          ,\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\"\
+          : \"口腔科\",\n    \"headcount\": 4,\n    \"degree_requirement\": \"硕士\",\n\
+          \    \"major_requirements\": [\n      \"口腔医学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [\n      \"儿牙\",\n      \"修复\",\n   \
+          \   \"急诊\",\n      \"口腔颌面外科\"\n    ],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [\n      \"副高及以上职称\",\n      \"三甲医院5年及以上工作经历\"\
+          ,\n      \"有亚专业专长\",\n      \"成熟型人才\"\n    ],\n    \"notes\": [\n      \"\
+          成熟型人才；要求副高及以上职称，具备三甲医院5年及以上工作经历，有亚专业专长，儿牙、修复、急诊、口腔颌面外科优先\"\n    ],\n   \
+          \ \"position_name\": \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\"\
+          ,\n    \"year\": 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\"\
+          : \"器官捐献科\",\n    \"headcount\": 2,\n    \"degree_requirement\": \"硕士\"\
+          ,\n    \"major_requirements\": [\n      \"内科学\",\n      \"外科学\",\n     \
+          \ \"神经病学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [\n      \"副高及以上职称\",\n      \"成熟型人才\"\n    ],\n    \"notes\": [\n   \
+          \   \"成熟型人才；要求副高及以上职称\"\n    ],\n    \"position_name\": \"临床医师\"\n  },\n\
+          \  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"病理科\",\n    \"headcount\": 1,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"临床病理\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n    \"\
+          hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"超声医学科\",\n    \"headcount\": 10,\n  \
+          \  \"degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n    \
+          \  \"超声医学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [\n      \"超声专业规培证\"\n    ],\n    \"research_requirements\": [],\n   \
+          \ \"experience_requirements\": [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\
+          ,\n      \"具有超声专业规培证优先\"\n    ],\n    \"position_name\": \"临床医师\"\n  },\n\
+          \  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"临床医疗\",\n    \"department\": \"医学影像科\",\n    \"headcount\": 1,\n   \
+          \ \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n     \
+          \ \"影像医学与核医学\",\n      \"放射影像学\"\n    ],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n \
+          \   \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"临床医师\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"临床医疗\",\n    \"department\": \"临床营养科\"\
+          ,\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"内科学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"临床医师\"\n  },\n  {\n\
+          \    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"科研\",\n    \"department\": \"周围血管科\",\n    \"headcount\": 1,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"药理学\"\
+          ,\n      \"病理学与病理生理学\",\n      \"生物化学与分子生物学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"康复医学科\",\n\
+          \    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"生物医学工程\",\n      \"内科学\",\n      \"神经病学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"血液内科\",\n\
+          \    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"基础医学\",\n      \"免疫学\",\n      \"病理学与病理生理学\",\n      \"干细胞与再生医学\"\
+          ,\n      \"生物医学工程\",\n      \"生物学\",\n      \"生理学\",\n      \"细胞生物学\"\n\
+          \    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n    \"hospital\"\
+          : \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n\
+          \    \"department\": \"疼痛科\",\n    \"headcount\": 2,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"神经生物学\",\n      \"生物医学工程\"\
+          ,\n      \"麻醉学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n \
+          \   \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"科研\",\n    \"department\": \"肾脏内科\",\n    \"headcount\": 3,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"生物医学工程\"\
+          ,\n      \"内科学\",\n      \"生命科学\"\n    ],\n    \"required_keywords\": [],\n\
+          \    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n \
+          \   \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"重症医学科\",\n\
+          \    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"统计学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n \
+          \   \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"科研\",\n    \"department\": \"生殖医学科\",\n    \"headcount\": 2,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"生物学\"\
+          ,\n      \"生物医学工程\",\n      \"基础医学\",\n      \"临床医学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [\n      \"妇产科和生殖方向\"\n    ],\n    \"\
+          notes\": [\n      \"妇产科和生殖方向\"\n    ],\n    \"position_name\": \"科研岗\"\n\
+          \  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"科研\",\n    \"department\": \"胸外科\",\n    \"headcount\"\
+          : 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"基础医学\",\n      \"生物学\",\n      \"细胞生物学\",\n      \"生物化学与分子生物学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [\n\
+          \      \"博后经历\"\n    ],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"具备博后经历\"\n    ],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"泌尿外科\",\n\
+          \    \"headcount\": 8,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"基础医学\",\n      \"生物与医药\",\n      \"生物化学与分子生物学\",\n      \"\
+          免疫学\",\n      \"肿瘤学\",\n      \"病原生物学\",\n      \"外科学\"\n    ],\n    \"\
+          required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [\n      \"泌尿外科方向\"\n    ],\n  \
+          \  \"notes\": [\n      \"泌尿外科方向\"\n    ],\n    \"position_name\": \"科研岗\"\
+          \n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n\
+          \    \"job_category\": \"科研\",\n    \"department\": \"骨科\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n\
+          \      \"生物医学工程\",\n      \"材料科学与工程\",\n      \"骨科学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"肾移植科\",\n\
+          \    \"headcount\": 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"基础医学\",\n      \"免疫学\",\n      \"病理学与病理生理学\",\n      \"细胞生物学\"\
+          ,\n      \"分子生物学\",\n      \"基因工程\",\n      \"生物医药\",\n      \"生物技术\"\n\
+          \    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n    \"hospital\"\
+          : \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n\
+          \    \"department\": \"血管外科\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"计算机科学与技术\",\n      \"\
+          智能影像工程\",\n      \"医工学\"\n    ],\n    \"required_keywords\": [],\n    \"\
+          preferred_keywords\": [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n \
+          \   \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"科研\",\n    \"department\": \"妇产科\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"流行病与卫生统计学\",\n      \"\
+          公共卫生\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n \
+          \   \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"科研\",\n    \"department\": \"心血管外科\",\n    \"headcount\": 3,\n    \"\
+          degree_requirement\": \"博士\",\n    \"major_requirements\": [\n      \"临床医学\"\
+          ,\n      \"药学\",\n      \"材料科学与工程\"\n    ],\n    \"required_keywords\":\
+          \ [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"检验科\",\n \
+          \   \"headcount\": 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"生物化学与分子生物学\",\n      \"化学\",\n      \"生物医学工程\"\n    ],\n  \
+          \  \"required_keywords\": [],\n    \"preferred_keywords\": [\n      \"博后经历\"\
+          \n    ],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"具备博后经历\"\n    ],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"医学影像科\",\n\
+          \    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"影像医学与核医学\",\n      \"放射影像学\",\n      \"生物医学工程\"\n    ],\n \
+          \   \"required_keywords\": [],\n    \"preferred_keywords\": [],\n    \"\
+          research_requirements\": [],\n    \"experience_requirements\": [],\n   \
+          \ \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n    \"hospital\"\
+          : \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n\
+          \    \"department\": \"心血管内科\",\n    \"headcount\": 2,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"生命科学\",\n      \"医学\"\n\
+          \    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n    \"hospital\"\
+          : \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"科研\",\n\
+          \    \"department\": \"精神心理卫生科\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"博士\",\n    \"major_requirements\": [\n      \"神经生物学\",\n      \"微生物学\"\
+          ,\n      \"病理学与病理生理学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n \
+          \   \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"科研\",\n    \"department\": \"免疫代谢性疾病研究所\",\n    \"headcount\": 5,\n\
+          \    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n  \
+          \    \"生物学\",\n      \"基础医学\",\n      \"临床医学\",\n      \"生物信息学\",\n    \
+          \  \"免疫学\",\n      \"内科学\",\n      \"生物与医药\",\n      \"药学\",\n      \"流行病与卫生统计学\"\
+          ,\n      \"公共卫生\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n \
+          \   \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"科研\",\n    \"department\": \"脑科学研究中心\",\n    \"headcount\": 2,\n   \
+          \ \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n     \
+          \ \"神经生物学\",\n      \"微生物学\",\n      \"病理学与病理生理学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"转化医学中心\",\n\
+          \    \"headcount\": 2,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"基础医学\",\n      \"临床医学\",\n      \"生物学\",\n      \"生物医学工程\"\
+          ,\n      \"生物信息学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [],\n    \"position_name\": \"科研岗\"\n  },\n  {\n \
+          \   \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\"\
+          : \"科研\",\n    \"department\": \"肿瘤精准医疗研究所－精准治疗\",\n    \"headcount\": 2,\n\
+          \    \"degree_requirement\": \"博士\",\n    \"major_requirements\": [\n  \
+          \    \"化学\",\n      \"生物学\",\n      \"肿瘤学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"人才高地\",\n\
+          \    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"肿瘤学\",\n      \"生物医学工程\",\n      \"药学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"科研\",\n    \"department\": \"中国医院发展改革研究院\"\
+          ,\n    \"headcount\": 1,\n    \"degree_requirement\": \"博士\",\n    \"major_requirements\"\
+          : [\n      \"公共管理\",\n      \"公共卫生\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [],\n    \"position_name\"\
+          : \"科研岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"护理\",\n    \"department\": \"护理储备\",\n\
+          \    \"headcount\": 60,\n    \"degree_requirement\": \"本科\",\n    \"major_requirements\"\
+          : [\n      \"护理学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"学历要求为本科及以上\"\n    ],\n    \"position_name\"\
+          : \"护理岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"医技\",\n    \"department\": \"心血管内科\",\n\
+          \    \"headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"医学影像技术\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [\n      \"从事介入手术室相关工作\"\n    ],\n    \"notes\": [\n      \"从事介入手术室相关工作\"\
+          \n    ],\n    \"position_name\": \"医技岗\"\n  },\n  {\n    \"hospital\": \"\
+          西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"医技\",\n  \
+          \  \"department\": \"康复医学科\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"康复治疗学\",\n      \"康复医学与理疗学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [],\n\
+          \    \"research_requirements\": [],\n    \"experience_requirements\": [],\n\
+          \    \"notes\": [\n      \"学历要求为硕士及以上\"\n    ],\n    \"position_name\":\
+          \ \"医技岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"医技\",\n    \"department\": \"肿瘤放疗科\",\n\
+          \    \"headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"医学影像技术\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\n    ],\n    \"position_name\"\
+          : \"医技岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"医技\",\n    \"department\": \"生殖医学科\",\n\
+          \    \"headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"医学检验技术\",\n      \"医学检验学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [\n      \"人类胚胎实验室实操作经验\",\n      \"\
+          IVF全流程操作\",\n      \"胚胎活检\",\n      \"PGT\",\n      \"生殖医学相关论文\",\n    \
+          \  \"参与科研项目\"\n    ],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"具有人类胚胎实验室实操作经验，熟练掌握IVF全流程操作；掌握胚胎活检、PGT（植入前遗传学检测）技术；发表过生殖医学相关论文或参与科研项目者优先\"\
+          \n    ],\n    \"position_name\": \"医技岗\"\n  },\n  {\n    \"hospital\": \"\
+          西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"医技\",\n  \
+          \  \"department\": \"精神心理卫生科\",\n    \"headcount\": 1,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"心理学\",\n      \"精神病与精神卫生学\"\
+          \n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\": [\n\
+          \      \"心理治疗师证\",\n      \"团体治疗培训证书\"\n    ],\n    \"research_requirements\"\
+          : [],\n    \"experience_requirements\": [],\n    \"notes\": [\n      \"\
+          心理学专业要求有心理治疗师证优先，有团体治疗培训证书优先\"\n    ],\n    \"position_name\": \"医技岗\"\n\
+          \  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n \
+          \   \"job_category\": \"医技\",\n    \"department\": \"急诊中心\",\n    \"headcount\"\
+          : 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\": [\n\
+          \      \"呼吸治疗学\",\n      \"康复医学与理疗学\",\n      \"临床医学\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [\n      \"从事急诊EICU呼吸治疗师工作\"\n    ],\n\
+          \    \"notes\": [\n      \"从事急诊EICU呼吸治疗师工作\"\n    ],\n    \"position_name\"\
+          : \"医技岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"医技\",\n    \"department\": \"眼科\",\n  \
+          \  \"headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"眼科学\",\n      \"眼视光学\"\n    ],\n    \"required_keywords\":\
+          \ [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\
+          \n    ],\n    \"position_name\": \"医技岗\"\n  },\n  {\n    \"hospital\": \"\
+          西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"医技\",\n  \
+          \  \"department\": \"医学影像科\",\n    \"headcount\": 2,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"影像医学与核医学\",\n      \"\
+          放射影像学\",\n      \"医学影像技术\"\n    ],\n    \"required_keywords\": [],\n   \
+          \ \"preferred_keywords\": [],\n    \"research_requirements\": [],\n    \"\
+          experience_requirements\": [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\n\
+          \    ],\n    \"position_name\": \"医技岗\"\n  },\n  {\n    \"hospital\": \"\
+          西安交通大学第一附属医院\",\n    \"year\": 2026,\n    \"job_category\": \"检验\",\n  \
+          \  \"department\": \"血液内科\",\n    \"headcount\": 2,\n    \"degree_requirement\"\
+          : \"硕士\",\n    \"major_requirements\": [\n      \"临床检验诊断学\",\n      \"临床病理\"\
+          ,\n      \"医学检验技术\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\n    ],\n    \"position_name\"\
+          : \"检验岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"检验\",\n    \"department\": \"心血管外科\",\n\
+          \    \"headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"临床检验诊断学\",\n      \"医学检验技术\"\n    ],\n    \"required_keywords\"\
+          : [\n      \"检验技术资格证\"\n    ],\n    \"preferred_keywords\": [],\n    \"\
+          research_requirements\": [],\n    \"experience_requirements\": [],\n   \
+          \ \"notes\": [\n      \"具备检验技术资格证\"\n    ],\n    \"position_name\": \"检验岗\"\
+          \n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\": 2026,\n\
+          \    \"job_category\": \"其他专技\",\n    \"department\": \"PET-CT\",\n    \"\
+          headcount\": 1,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"核医学\"\n    ],\n    \"required_keywords\": [],\n    \"preferred_keywords\"\
+          : [],\n    \"research_requirements\": [],\n    \"experience_requirements\"\
+          : [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\n    ],\n    \"position_name\"\
+          : \"专技岗\"\n  },\n  {\n    \"hospital\": \"西安交通大学第一附属医院\",\n    \"year\"\
+          : 2026,\n    \"job_category\": \"管理培训生\",\n    \"department\": \"储备\",\n\
+          \    \"headcount\": 4,\n    \"degree_requirement\": \"硕士\",\n    \"major_requirements\"\
+          : [\n      \"临床医学\",\n      \"管理学等\"\n    ],\n    \"required_keywords\"\
+          : [],\n    \"preferred_keywords\": [],\n    \"research_requirements\": [],\n\
+          \    \"experience_requirements\": [],\n    \"notes\": [\n      \"学历要求为硕士及以上\"\
+          \n    ],\n    \"position_name\": \"管理培训生\"\n  }\n]\n\n    try:\n       \
+          \ hospitals = json.loads(target_hospitals) if isinstance(target_hospitals,\
+          \ str) else target_hospitals\n    except Exception:\n        hospitals =\
+          \ []\n\n    if not isinstance(hospitals, list):\n        hospitals = []\n\
+          \n    hospitals = [str(x).strip() for x in hospitals if str(x).strip()]\n\
+          \    preferred_department = str(preferred_department or \"\").strip()\n\n\
+          \    candidate_jobs = []\n\n    for job in all_jobs_db:\n        hospital\
+          \ = str(job.get(\"hospital\", \"\")).strip()\n        department = str(job.get(\"\
+          department\", \"\")).strip()\n\n        if hospitals and hospital not in\
+          \ hospitals:\n            continue\n\n        if preferred_department and\
+          \ preferred_department not in department:\n            continue\n\n    \
+          \    candidate_jobs.append(job)\n\n    return {\n        \"candidate_jobs\"\
+          : json.dumps(candidate_jobs, ensure_ascii=False),\n        \"candidate_jobs_count\"\
+          : len(candidate_jobs)\n    }"
+        code_language: python3
+        outputs:
+          candidate_jobs:
+            children: null
+            type: string
+          candidate_jobs_count:
+            children: null
+            type: number
+        selected: false
+        title: MULTI_HOSPITAL_JOB_RETRIEVER
+        type: code
+        variables:
+        - value_selector:
+          - '1775898017818'
+          - target_hospitals
+          value_type: string
+          variable: target_hospitals
+        - value_selector:
+          - '1775898017818'
+          - preferred_department
+          value_type: string
+          variable: preferred_department
+      height: 52
+      id: '1775898022071'
+      position:
+        x: 382
+        y: 282
+      positionAbsolute:
+        x: 382
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\ndef degree_to_rank(x: str) -> int:\n    mapping = {\n\
+          \        \"本科\": 1,\n        \"硕士\": 2,\n        \"博士\": 3\n    }\n    return\
+          \ mapping.get((x or \"\").strip(), 0)\n\ndef main(candidate_jobs, highest_degree:\
+          \ str, major_hits, certificate_hits):\n    try:\n        candidate_jobs\
+          \ = json.loads(candidate_jobs) if isinstance(candidate_jobs, str) else candidate_jobs\n\
+          \    except Exception:\n        candidate_jobs = []\n\n    if not isinstance(candidate_jobs,\
+          \ list):\n        candidate_jobs = []\n\n    if not isinstance(major_hits,\
+          \ list):\n        major_hits = []\n\n    if not isinstance(certificate_hits,\
+          \ list):\n        certificate_hits = []\n\n    qualified_jobs = []\n   \
+          \ unqualified_jobs = []\n\n    for job in candidate_jobs:\n        if not\
+          \ isinstance(job, dict):\n            continue\n\n        hard_pass = True\n\
+          \        reasons = []\n\n        job_degree = (job.get(\"degree_requirement\"\
+          , \"\") or \"\").strip()\n        if degree_to_rank(highest_degree) < degree_to_rank(job_degree):\n\
+          \            hard_pass = False\n            reasons.append(f\"学历不满足：岗位要求{job_degree}\"\
+          )\n\n        job_majors = job.get(\"major_requirements\", [])\n        if\
+          \ not isinstance(job_majors, list):\n            job_majors = []\n\n   \
+          \     major_match = False\n        if job_majors:\n            for jm in\
+          \ job_majors:\n                jm = (jm or \"\").strip()\n             \
+          \   for mh in major_hits:\n                    mh = (mh or \"\").strip()\n\
+          \                    if jm and mh and (jm in mh or mh in jm):\n        \
+          \                major_match = True\n                        break\n   \
+          \             if major_match:\n                    break\n\n        if job_majors\
+          \ and not major_match:\n            reasons.append(\"专业/方向不完全匹配\")\n\n \
+          \       job_required_keywords = job.get(\"required_keywords\", [])\n   \
+          \     if not isinstance(job_required_keywords, list):\n            job_required_keywords\
+          \ = []\n\n        for req in job_required_keywords:\n            req = (req\
+          \ or \"\").strip()\n            if req and req not in certificate_hits:\n\
+          \                hard_pass = False\n                reasons.append(f\"缺少必要条件：{req}\"\
+          )\n\n        item = {\n            \"department\": job.get(\"department\"\
+          , \"\"),\n            \"job_category\": job.get(\"job_category\", \"\"),\n\
+          \            \"degree_requirement\": job.get(\"degree_requirement\", \"\"\
+          ),\n            \"major_requirements\": job.get(\"major_requirements\",\
+          \ []),\n            \"major_match\": major_match,\n            \"hard_pass\"\
+          : hard_pass,\n            \"hard_fail_reasons\": reasons,\n            \"\
+          raw_job\": job\n        }\n\n        if hard_pass:\n            qualified_jobs.append(item)\n\
+          \        else:\n            unqualified_jobs.append(item)\n\n    return\
+          \ {\n    \"qualified_jobs\": json.dumps(qualified_jobs, ensure_ascii=False),\n\
+          \    \"unqualified_jobs\": json.dumps(unqualified_jobs, ensure_ascii=False),\n\
+          \    \"qualified_jobs_count\": len(qualified_jobs),\n    \"unqualified_jobs_count\"\
+          : len(unqualified_jobs)\n}"
+        code_language: python3
+        desc: 硬门槛过滤器
+        outputs:
+          qualified_jobs:
+            children: null
+            type: string
+          qualified_jobs_count:
+            children: null
+            type: number
+          unqualified_jobs:
+            children: null
+            type: string
+          unqualified_jobs_count:
+            children: null
+            type: number
+        selected: false
+        title: hard_requirement_filter
+        type: code
+        variables:
+        - value_selector:
+          - '1775898022071'
+          - candidate_jobs
+          value_type: string
+          variable: candidate_jobs
+        - value_selector:
+          - '1776091881959'
+          - structured_output
+          - highest_degree
+          value_type: object
+          variable: highest_degree
+        - value_selector:
+          - '1776091881959'
+          - structured_output
+          - major_hits
+          value_type: object
+          variable: major_hits
+        - value_selector:
+          - '1776091881959'
+          - structured_output
+          - certificate_hits
+          value_type: object
+          variable: certificate_hits
+      height: 80
+      id: '1775898794925'
+      position:
+        x: 703
+        y: 342
+      positionAbsolute:
+        x: 703
+        y: 342
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775901025596'
+          - text
+          value_type: string
+          variable: match_analysis
+        selected: false
+        title: 输出
+        type: end
+      height: 88
+      id: '1775898939042'
+      position:
+        x: 750.9200000000001
+        y: 584.2560000000001
+      positionAbsolute:
+        x: 750.9200000000001
+        y: 584.2560000000001
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\ndef safe_list(x):\n    return x if isinstance(x, list)\
+          \ else []\n\ndef text_join(parts):\n    if not isinstance(parts, list):\n\
+          \        return \"\"\n    return \"\\n\".join([str(x) for x in parts if\
+          \ x is not None])\n\ndef contains_any(text, keywords):\n    text = str(text\
+          \ or \"\")\n    return any(k in text for k in keywords)\n\ndef infer_position_name(job):\n\
+          \    position_name = str(job.get(\"position_name\", \"\")).strip()\n   \
+          \ if position_name:\n        return position_name\n\n    category = str(job.get(\"\
+          job_category\", \"\")).strip()\n    if category == \"临床医疗\":\n        return\
+          \ \"临床医师\"\n    if category == \"科研\":\n        return \"科研岗\"\n    if category\
+          \ == \"医技\":\n        return \"医技岗\"\n    if category == \"检验\":\n     \
+          \   return \"检验岗\"\n    if category == \"护理\":\n        return \"护理岗\"\n\
+          \    if category == \"管理培训生\":\n        return \"管理培训生\"\n    if category\
+          \ == \"其他专技\":\n        return \"专技岗\"\n    return category or \"岗位\"\n\n\
+          def infer_candidate_type(all_resume_text, major_hits, certificate_hits,\
+          \ research_hits):\n    text = str(all_resume_text or \"\")\n    major_hits\
+          \ = safe_list(major_hits)\n    certificate_hits = safe_list(certificate_hits)\n\
+          \    research_hits = safe_list(research_hits)\n\n    if any(k in text for\
+          \ k in [\"副主任医师\", \"主任医师\", \"副高\", \"正高\", \"独立带组\", \"8年工作经历\", \"5年工作经历\"\
+          ]):\n        return \"clinical_senior\"\n\n    if \"护理学\" in major_hits\
+          \ or \"护士执业证\" in certificate_hits or any(k in text for k in [\"护理学\", \"\
+          重症护理\", \"护理实习\"]):\n        return \"nursing\"\n\n    if any(k in text\
+          \ for k in [\"公共管理\", \"医院管理\", \"管理学\", \"医务部\", \"DRG\", \"运营管理\"]):\n\
+          \        return \"management\"\n\n    if (\n        any(k in text for k\
+          \ in [\"基础医学\", \"神经生物学\", \"生物学\", \"生物医学工程\", \"生物信息学\", \"免疫学\"])\n \
+          \       and len(research_hits) > 0\n        and \"执业医师资格证\" not in certificate_hits\n\
+          \        and \"医师资格证\" not in certificate_hits\n    ):\n        return \"\
+          research\"\n\n    if any(k in text for k in [\"医学影像技术\", \"临床检验诊断学\", \"\
+          检验\", \"康复治疗学\", \"呼吸治疗学\", \"放射影像学\"]):\n        return \"medical_tech\"\
+          \n\n    return \"clinical_junior\"\n\ndef main(qualified_jobs, major_hits,\
+          \ certificate_hits, research_hits, hospital_hits, all_resume_text):\n  \
+          \  try:\n        qualified_jobs = json.loads(qualified_jobs) if isinstance(qualified_jobs,\
+          \ str) else qualified_jobs\n    except Exception:\n        qualified_jobs\
+          \ = []\n\n    qualified_jobs = safe_list(qualified_jobs)\n    major_hits\
+          \ = safe_list(major_hits)\n    certificate_hits = safe_list(certificate_hits)\n\
+          \    research_hits = safe_list(research_hits)\n    hospital_hits = safe_list(hospital_hits)\n\
+          \    all_resume_text = str(all_resume_text or \"\")\n\n    scored_jobs =\
+          \ []\n\n    candidate_type = infer_candidate_type(\n        all_resume_text=all_resume_text,\n\
+          \        major_hits=major_hits,\n        certificate_hits=certificate_hits,\n\
+          \        research_hits=research_hits\n    )\n\n    # 泛专业：只能算弱相关，不能算高度对口\n\
+          \    generic_majors = {\"临床医学\", \"医学\", \"基础医学\", \"生命科学\"}\n\n    # 直接对应关系：专业方向\
+          \ -> 最对口科室\n    direct_map = {\n        \"神经病学\": [\"神经内科\"],\n        \"\
+          呼吸系病学\": [\"呼吸与危重症医学科\"],\n        \"急诊医学\": [\"急诊中心\"],\n        \"重症医学\"\
+          : [\"重症医学科\", \"外科重症医学科\"],\n        \"骨科学\": [\"骨科\"],\n        \"超声医学\"\
+          : [\"超声医学科\"],\n        \"影像医学与核医学\": [\"医学影像科\"],\n        \"放射影像学\": [\"\
+          医学影像科\"],\n        \"口腔医学\": [\"口腔科\"],\n        \"眼科学\": [\"眼科\"],\n  \
+          \      \"耳鼻咽喉科学\": [\"耳鼻咽喉头颈外科\"],\n        \"妇产科学\": [\"妇产科\", \"生殖医学科\"\
+          ],\n        \"肿瘤学\": [\"肿瘤内科\", \"肿瘤放疗科\", \"肿瘤外科\"],\n        \"康复医学与理疗学\"\
+          : [\"康复医学科\"],\n        \"临床病理\": [\"病理科\"],\n        \"临床检验诊断学\": [\"检验科\"\
+          , \"血液内科\"],\n        \"医学检验技术\": [\"检验科\", \"血液内科\"],\n        \"内科学（心血管病方向）\"\
+          : [\"心血管内科\"],\n        \"内科学（消化系病方向）\": [\"消化内科\"],\n        \"内科学（内分泌与代谢病方向）\"\
+          : [\"内分泌代谢科\"],\n        \"外科学（泌尿外科方向）\": [\"泌尿外科\"]\n    }\n\n    # 强相关关系：专业方向\
+          \ -> 可延展科室\n    related_map = {\n        \"神经病学\": [\"康复医学科\", \"老年医学科\"\
+          , \"重症医学科\", \"急诊中心\", \"全科医学科\", \"疼痛科\"],\n        \"呼吸系病学\": [\"重症医学科\"\
+          , \"急诊中心\", \"感染科\"],\n        \"急诊医学\": [\"重症医学科\", \"外科重症医学科\"],\n   \
+          \     \"重症医学\": [\"急诊中心\", \"感染科\", \"呼吸与危重症医学科\"],\n        \"内科学\": [\"\
+          老年医学科\", \"全科医学科\", \"急诊中心\", \"重症医学科\", \"感染科\", \"康复医学科\", \"血液内科\", \"\
+          心血管内科\", \"内分泌代谢科\"],\n        \"外科学\": [\"外科重症医学科\", \"血管外科\", \"普通外科\"\
+          , \"肝胆外科\", \"肿瘤外科\", \"泌尿外科\"],\n        \"临床医学\": [\"神经内科\", \"急诊中心\"\
+          , \"重症医学科\", \"老年医学科\", \"全科医学科\", \"康复医学科\", \"转化医学中心\"],\n        \"神经生物学\"\
+          : [\"脑科学研究中心\", \"精神心理卫生科\", \"疼痛科\"]\n    }\n\n    # 明显成熟型/高年资岗位关键词\n \
+          \   senior_keywords = [\n        \"成熟型人才\", \"副高及以上\", \"正高\", \"三甲医院5年以上\"\
+          , \"5年工作经历\",\n        \"独立带组\", \"独立开展\", \"同级别医院相关工作经历\"\n    ]\n\n  \
+          \  # 明显专职/技术岗位关键词\n    special_keywords = [\n        \"技术医疗岗\", \"专职内镜\"\
+          , \"体外循环\", \"专职\", \"从事介入手术室相关工作\",\n        \"EICU呼吸治疗师\", \"胚胎实验室\",\
+          \ \"从事心脏超声工作\", \"IVF\", \"PGT\",\n        \"人类胚胎实验室\", \"呼吸治疗师\"\n    ]\n\
+          \n    # 神经病学方向候选人不应靠前的非相关专科\n    weak_for_neuro_departments = {\n      \
+          \  \"骨科\", \"麻醉科\", \"血液内科\", \"眼科\", \"耳鼻咽喉头颈外科\",\n        \"口腔科\", \"\
+          妇产科\", \"泌尿外科\", \"乳腺外科\", \"皮肤科\", \"消化内科\", \"全科医学科\"\n    }\n\n    clinical_departments\
+          \ = {\n        \"神经内科\", \"神经外科\", \"呼吸与危重症医学科\", \"重症医学科\", \"外科重症医学科\"\
+          ,\n        \"急诊中心\", \"老年医学科\", \"康复医学科\", \"感染科\", \"心血管内科\",\n       \
+          \ \"消化内科\", \"内分泌代谢科\", \"血液内科\", \"肿瘤内科\", \"妇产科\", \"骨科\",\n        \"\
+          普通外科\", \"肝胆外科\", \"泌尿外科\", \"ICU\", \"内科\", \"外科\"\n    }\n\n    for item\
+          \ in qualified_jobs:\n        if not isinstance(item, dict):\n         \
+          \   continue\n\n        job = item.get(\"raw_job\", {}) if isinstance(item.get(\"\
+          raw_job\", {}), dict) else {}\n        hospital = str(job.get(\"hospital\"\
+          , \"\")).strip()\n        department = str(item.get(\"department\", \"\"\
+          ) or job.get(\"department\", \"\")).strip()\n        job_category = str(item.get(\"\
+          job_category\", \"\") or job.get(\"job_category\", \"\")).strip()\n    \
+          \    position_name = infer_position_name(job)\n\n        notes = text_join(job.get(\"\
+          notes\", []))\n        exp_req = text_join(job.get(\"experience_requirements\"\
+          , []))\n        pref_kw = safe_list(job.get(\"preferred_keywords\", []))\n\
+          \        majors = safe_list(job.get(\"major_requirements\", []))\n\n   \
+          \     score = 0\n        reasons = []\n        gap_items = []\n\n      \
+          \  # ---------- 1. 学历 ----------\n        degree_score = 25\n        score\
+          \ += degree_score\n        reasons.append(\"学历满足岗位要求\")\n\n        # ----------\
+          \ 2. 专业/方向 ----------\n        major_score = 0\n        direct_hit = False\n\
+          \        related_hit = False\n        generic_match = False\n\n        normalized_majors\
+          \ = []\n        for jm in majors:\n            jm = str(jm or \"\").strip()\n\
+          \            if not jm:\n                continue\n\n            if (\n\
+          \                jm in generic_majors\n                or \"临床医学\" in jm\n\
+          \                or \"医学相关\" in jm\n                or \"相关专业\" in jm\n\
+          \                or \"临床医学及相关专业\" in jm\n            ):\n              \
+          \  generic_match = True\n                continue\n\n            normalized_majors.append(jm)\n\
+          \n        # 2.1 严格直接命中：必须是非泛专业的真实方向命中\n        for jm in normalized_majors:\n\
+          \            for mh in major_hits:\n                mh = str(mh or \"\"\
+          ).strip()\n                if not mh:\n                    continue\n  \
+          \              if jm == mh or jm in mh or mh in jm:\n                  \
+          \  direct_hit = True\n                    break\n            if direct_hit:\n\
+          \                break\n\n        # 2.2 科室-方向映射直命中\n        if not direct_hit:\n\
+          \            for mh in major_hits:\n                mh = str(mh or \"\"\
+          ).strip()\n                if mh in direct_map and department in direct_map[mh]:\n\
+          \                    direct_hit = True\n                    break\n\n  \
+          \      # 2.3 强相关映射\n        if not direct_hit:\n            for mh in major_hits:\n\
+          \                mh = str(mh or \"\").strip()\n                if mh in\
+          \ related_map and department in related_map[mh]:\n                    related_hit\
+          \ = True\n                    break\n\n        # 2.4 简历中直接提到该科室\n      \
+          \  resume_department_hit = bool(department and department in all_resume_text)\n\
+          \n        # 2.5 打分\n        if direct_hit:\n            major_score = 35\n\
+          \            reasons.append(\"专业/方向与岗位高度对口\")\n        elif resume_department_hit:\n\
+          \            major_score = 30\n            reasons.append(\"具有目标科室相关经历\"\
+          )\n        elif related_hit:\n            major_score = 22\n           \
+          \ reasons.append(\"专业方向与岗位较强相关\")\n        elif generic_match:\n       \
+          \     major_score = 2\n            reasons.append(\"岗位要求偏泛医学背景，与当前方向非直接对口\"\
+          )\n        elif major_hits:\n            major_score = 0\n            reasons.append(\"\
+          具备医学背景，但与岗位专业关联较弱\")\n\n        score += major_score\n\n        # ----------\
+          \ 3. 证书 / 规培 ----------\n        has_doc_cert = (\"执业医师资格证\" in certificate_hits\
+          \ or \"医师资格证\" in certificate_hits)\n        has_training = (\"规培证\" in\
+          \ certificate_hits or \"规培\" in certificate_hits)\n\n        certificate_score\
+          \ = 0\n        if job_category in [\"临床医疗\", \"医技\", \"检验\"]:\n        \
+          \    if has_doc_cert and has_training:\n                certificate_score\
+          \ = 20\n                reasons.append(\"执业医师资格证和规培条件较完整\")\n          \
+          \  elif has_doc_cert or has_training:\n                certificate_score\
+          \ = 10\n                reasons.append(\"具备部分临床资格条件\")\n\n        score\
+          \ += certificate_score\n\n        # ---------- 4. 科研 ----------\n      \
+          \  research_score = 0\n        if contains_any(text_join(research_hits),\
+          \ [\"SCI\", \"论文\", \"课题\", \"科研\", \"国自然\", \"基金\", \"博后\", \"博士后\"]):\n\
+          \            research_score = 10\n            reasons.append(\"具备科研成果或论文经历\"\
+          )\n\n        score += research_score\n\n        # ---------- 5. 医院平台 ----------\n\
+          \        hospital_score = 0\n        if hospital_hits:\n            hospital_score\
+          \ = 10\n            reasons.append(\"具备三甲/附属医院相关背景\")\n\n        score +=\
+          \ hospital_score\n\n        # ---------- 6. 优先项 gap ----------\n       \
+          \ all_hits_text = text_join(major_hits + certificate_hits + research_hits\
+          \ + hospital_hits + [all_resume_text])\n        for pk in pref_kw:\n   \
+          \         pk = str(pk or \"\").strip()\n            if pk and pk not in\
+          \ all_hits_text:\n                gap_items.append(pk)\n\n        # ----------\
+          \ 7. 高年资/成熟型降权 ----------\n        senior_penalty = 0\n        if contains_any(notes\
+          \ + \"\\n\" + exp_req, senior_keywords):\n            if candidate_type\
+          \ == \"clinical_senior\":\n                senior_penalty = 0\n        \
+          \    else:\n                senior_penalty += 35\n                reasons.append(\"\
+          岗位偏成熟型/高年资人才，对应届候选人不占优\")\n\n        # ---------- 8. 专职/技术岗降权 ----------\n\
+          \        special_penalty = 0\n        if contains_any(notes + \"\\n\" +\
+          \ exp_req, special_keywords):\n            special_penalty += 20\n     \
+          \       reasons.append(\"岗位更偏技术/专职方向，与当前背景不完全一致\")\n\n        # ----------\
+          \ 9. 必要条件缺失 ----------\n        required_penalty = 0\n        req_kw = safe_list(job.get(\"\
+          required_keywords\", []))\n        for req in req_kw:\n            req =\
+          \ str(req or \"\").strip()\n            if req and req not in all_hits_text:\n\
+          \                required_penalty += 20\n                gap_items.append(req)\n\
+          \n        # ---------- 10. 岗位类型微调 ----------\n        category_bonus = 0\n\
+          \n        if candidate_type in [\"clinical_junior\", \"clinical_senior\"\
+          ]:\n            if job_category == \"临床医疗\":\n                category_bonus\
+          \ = 12\n            elif job_category == \"科研\":\n                category_bonus\
+          \ = 2\n            elif job_category in [\"医技\", \"检验\"]:\n            \
+          \    category_bonus = -18\n            elif job_category == \"护理\":\n  \
+          \              category_bonus = -40\n            elif job_category == \"\
+          管理培训生\":\n                category_bonus = -35\n            else:\n    \
+          \            category_bonus = -20\n\n        elif candidate_type == \"research\"\
+          :\n            if job_category == \"科研\":\n                category_bonus\
+          \ = 12\n            elif job_category == \"临床医疗\":\n                category_bonus\
+          \ = -10\n            elif job_category in [\"医技\", \"检验\"]:\n          \
+          \      category_bonus = -8\n            else:\n                category_bonus\
+          \ = -15\n\n        elif candidate_type == \"nursing\":\n            if job_category\
+          \ == \"护理\":\n                category_bonus = 15\n            else:\n \
+          \               category_bonus = -35\n\n        elif candidate_type == \"\
+          management\":\n            if job_category == \"管理培训生\":\n             \
+          \   category_bonus = 15\n            elif job_category == \"科研\":\n    \
+          \            category_bonus = 2\n            else:\n                category_bonus\
+          \ = -30\n\n        elif candidate_type == \"medical_tech\":\n          \
+          \  if job_category in [\"医技\", \"检验\", \"其他专技\"]:\n                category_bonus\
+          \ = 12\n            elif job_category == \"临床医疗\":\n                category_bonus\
+          \ = -12\n            elif job_category == \"科研\":\n                category_bonus\
+          \ = -5\n            else:\n                category_bonus = -15\n\n    \
+          \    else:\n            if job_category == \"临床医疗\":\n                category_bonus\
+          \ = 5\n            elif job_category in [\"医技\", \"检验\"]:\n            \
+          \    category_bonus = 2\n            elif job_category == \"科研\":\n    \
+          \            category_bonus = 0\n            else:\n                category_bonus\
+          \ = -5\n\n        score += category_bonus\n\n        # ---------- 10.1 临床路径完整时，进一步压低技师岗\
+          \ ----------\n        clinical_ready_penalty = 0\n        has_clinical_department\
+          \ = any(d in all_resume_text for d in clinical_departments)\n\n        if\
+          \ candidate_type in [\"clinical_junior\", \"clinical_senior\"] and has_doc_cert\
+          \ and has_training and has_clinical_department:\n            if position_name\
+          \ in [\"技师\", \"医技岗\", \"检验岗\"] or job_category in [\"医技\", \"检验\"]:\n \
+          \               clinical_ready_penalty = 20\n                reasons.append(\"\
+          已具备完整临床路径，技师类岗位优先级应下调\")\n\n        score -= clinical_ready_penalty\n\n\
+          \        # ---------- 11. 医院经历延续性 ----------\n        hospital_resume_bonus\
+          \ = 0\n        if hospital and hospital in all_resume_text:\n          \
+          \  hospital_resume_bonus = 5\n            reasons.append(\"与既有医院经历存在延续性\"\
+          )\n\n        score += hospital_resume_bonus\n\n        # ---------- 12.\
+          \ 针对神经病学候选人的专科收紧 ----------\n        specialty_penalty = 0\n        if \"\
+          神经病学\" in major_hits and department in weak_for_neuro_departments:\n   \
+          \         specialty_penalty += 18\n            reasons.append(\"该专科与神经病学方向关联较弱，不宜优先推荐\"\
+          )\n\n        score -= specialty_penalty\n\n        # ---------- 13. 最终扣分\
+          \ ----------\n        score = score - senior_penalty - special_penalty -\
+          \ required_penalty\n        score = max(0, min(100, score))\n\n        scored_jobs.append({\n\
+          \            \"hospital\": hospital,\n            \"department\": department,\n\
+          \            \"position_name\": position_name,\n            \"job_category\"\
+          : job_category,\n            \"match_score\": score,\n            \"match_reasons\"\
+          : reasons,\n            \"gap_items\": gap_items,\n            \"trace\"\
+          : {\n                \"degree_score\": degree_score,\n                \"\
+          major_score\": major_score,\n                \"certificate_score\": certificate_score,\n\
+          \                \"research_score\": research_score,\n                \"\
+          hospital_score\": hospital_score,\n                \"category_bonus\": category_bonus,\n\
+          \                \"clinical_ready_penalty\": clinical_ready_penalty,\n \
+          \               \"hospital_resume_bonus\": hospital_resume_bonus,\n    \
+          \            \"specialty_penalty\": specialty_penalty,\n               \
+          \ \"senior_penalty\": senior_penalty,\n                \"special_penalty\"\
+          : special_penalty,\n                \"required_penalty\": required_penalty\n\
+          \            },\n            \"raw_job\": job\n        })\n\n    def category_rank(cat):\n\
+          \        if cat == \"临床医疗\":\n            return 4\n        if cat in [\"\
+          医技\", \"检验\"]:\n            return 3\n        if cat == \"科研\":\n      \
+          \      return 2\n        return 1\n\n    scored_jobs.sort(\n        key=lambda\
+          \ x: (\n            x[\"match_score\"],\n            category_rank(x.get(\"\
+          job_category\", \"\")),\n            x.get(\"hospital\", \"\"),\n      \
+          \      x.get(\"department\", \"\"),\n            x.get(\"position_name\"\
+          , \"\")\n        ),\n        reverse=True\n    )\n\n    return {\n     \
+          \   \"scored_jobs\": json.dumps(scored_jobs, ensure_ascii=False)\n    }"
+        code_language: python3
+        outputs:
+          scored_jobs:
+            children: null
+            type: string
+        selected: false
+        title: JOB_MATCH_SCORER
+        type: code
+        variables:
+        - value_selector:
+          - '1775898794925'
+          - qualified_jobs
+          value_type: string
+          variable: qualified_jobs
+        - value_selector:
+          - '1776091881959'
+          - structured_output
+          - major_hits
+          value_type: object
+          variable: major_hits
+        - value_selector:
+          - '1776091881959'
+          - structured_output
+          - certificate_hits
+          value_type: object
+          variable: certificate_hits
+        - value_selector:
+          - '1776091881959'
+          - structured_output
+          - research_hits
+          value_type: object
+          variable: research_hits
+        - value_selector:
+          - '1776091881959'
+          - structured_output
+          - hospital_hits
+          value_type: object
+          variable: hospital_hits
+        - value_selector:
+          - '1776091881959'
+          - structured_output
+          - all_resume_text
+          value_type: object
+          variable: all_resume_text
+      height: 52
+      id: '1775900115994'
+      position:
+        x: 484.16352000000006
+        y: 505.87264000000005
+      positionAbsolute:
+        x: 484.16352000000006
+        y: 505.87264000000005
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 翻译成用户能直接看懂的分析结果
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash-2026-02-23
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 93e15dfa-54e3-4355-b9a5-49aec2d98498
+          role: system
+          text: '你是一名专业的医学生求职顾问。
+
+
+            候选人简历：
+
+            {{#1775898017818.resume_json#}}
+
+
+            最终重排后的推荐岗位：
+
+            {{#1775961820469.reranked_jobs#}}
+
+
+            最终推荐岗位数量：
+
+            {{#1775961820469.reranked_count#}}
+
+
+            目标医院：
+
+            {{#1775898017818.target_hospitals#}}
+
+
+            请输出一段自然、专业、面向求职者的岗位推荐分析。
+
+
+            要求：
+
+            1. 如果 reranked_count >= 3，则输出 Top1、Top2、Top3
+
+            2. 如果 reranked_count = 2，则只输出 Top1、Top2，不要提 Top3
+
+            3. 如果 reranked_count = 1，则只输出 Top1，不要提 Top2、Top3
+
+            4. 如果 reranked_count = 0，则明确说明当前没有找到合适岗位，并给出后续建议
+
+            5. 不要虚构岗位，不要补足数量，不要重复岗位
+
+            6. 解释为什么这样排序
+
+            7. 说明候选人的核心优势
+
+            8. 说明当前主要短板
+
+            9. 给出简历优化建议
+
+            10. 不要输出 JSON
+
+            11. 不要重复原始字段名
+
+            12. 不要写成“就诊经验”，应写成“轮转经历 / 临床经历 / 实习经历 / 工作经历”'
+        selected: false
+        title: GAP_ANALYZER
+        type: llm
+        vision:
+          enabled: false
+      height: 116
+      id: '1775901025596'
+      position:
+        x: 484.16352000000006
+        y: 691.989835264
+      positionAbsolute:
+        x: 484.16352000000006
+        y: 691.989835264
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\ndef main(scored_jobs: str):\n    try:\n        jobs\
+          \ = json.loads(scored_jobs)\n    except:\n        return {\n           \
+          \ \"top5_jobs\": \"[]\",\n            \"top5_count\": 0\n        }\n\n \
+          \   # 先按分数排序\n    jobs = sorted(\n        jobs,\n        key=lambda x: x.get(\"\
+          match_score\", 0),\n        reverse=True\n    )\n\n    # 去重：医院 + 科室 + 岗位名\n\
+          \    seen = set()\n    deduped = []\n\n    for job in jobs:\n        hospital\
+          \ = job.get(\"hospital\", \"\")\n        department = job.get(\"department\"\
+          , \"\")\n        position_name = job.get(\"position_name\", \"\")\n\n  \
+          \      dedup_key = f\"{hospital}_{department}_{position_name}\"\n\n    \
+          \    if dedup_key in seen:\n            continue\n\n        seen.add(dedup_key)\n\
+          \        deduped.append(job)\n\n        if len(deduped) >= 5:\n        \
+          \    break\n\n    return {\n        \"top5_jobs\": json.dumps(deduped, ensure_ascii=False),\n\
+          \        \"top5_count\": len(deduped)\n    }"
+        code_language: python3
+        outputs:
+          top5_count:
+            children: null
+            type: number
+          top5_jobs:
+            children: null
+            type: string
+        selected: false
+        title: TOP5_SELECTOR
+        type: code
+        variables:
+        - value_selector:
+          - '1775900115994'
+          - scored_jobs
+          value_type: string
+          variable: scored_jobs
+      height: 52
+      id: '1775917331319'
+      position:
+        x: 212.0545663643735
+        y: 572.100050092485
+      positionAbsolute:
+        x: 212.0545663643735
+        y: 572.100050092485
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash-2026-02-23
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 81192418-1e4b-475a-8f92-01991379ca7e
+          role: system
+          text: "你是一名医院招聘专家，请基于候选人简历和候选岗位列表，对岗位进行跨医院语义重排。\n\n候选人简历：\n{{#1775898017818.resume_json#}}\n\
+            \n候选岗位列表（已包含规则分与trace）：\n{{#1775917331319.top5_jobs#}}\n\n请严格遵守以下规则：\n\
+            \n1. 输出必须是 JSON 数组\n2. 每个元素必须且只能包含以下字段：\n   - rank\n   - hospital\n  \
+            \ - department\n   - position_name\n   - final_score\n   - rerank_reason\n\
+            3. hospital 字段只能填写医院名称，例如“西京医院”或“西安交通大学第一附属医院”\n4. department 字段只能填写科室名称，例如“神经内科”“老年医学科”\n\
+            5. position_name 字段只能填写岗位名称，例如“医师”“临床医师”“科研岗”\n6. 不要把医院名称写进 department\n\
+            7. 不要把科室名称写进 hospital\n8. 不要遗漏字段\n9. 不要输出 markdown，不要加 ```json 代码块\n10.\
+            \ 不要输出解释性文字，只输出 JSON 数组\n\n排序原则：\n1. 专业方向与科室直接一致优先\n2. 候选人已有科室经历优先\n3.\
+            \ 临床医疗岗位优先于泛科研岗位\n4. 不得仅因为“临床医学博士”这一泛背景，就把与主方向无直接关系的专科排入前3\n5. 对“骨科、血液内科、麻醉科、眼科、耳鼻喉、口腔科、妇产科、泌尿外科”等与神经病学无直接关系的专科，若无明确经历或方向证据，不应排在老年医学科、康复医学科、重症医学科、急诊中心之前\n\
+            6. 对“成熟型人才、副高及以上、三甲多年工作经历、独立带组”等岗位明显降权\n\n请输出最终前3名岗位。"
+        selected: false
+        title: LLM_RERANKER
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775961049393'
+      position:
+        x: -71.56577177599996
+        y: 675.2205491200002
+      positionAbsolute:
+        x: -71.56577177599996
+        y: 675.2205491200002
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\nimport re\n\ndef extract_json_block(text: str) -> str:\n\
+          \    text = str(text or \"\").strip()\n\n    # 去掉 markdown 代码块\n    code_block_match\
+          \ = re.search(r\"```json\\s*(.*?)\\s*```\", text, re.DOTALL | re.IGNORECASE)\n\
+          \    if code_block_match:\n        return code_block_match.group(1).strip()\n\
+          \n    code_block_match = re.search(r\"```\\s*(.*?)\\s*```\", text, re.DOTALL)\n\
+          \    if code_block_match:\n        return code_block_match.group(1).strip()\n\
+          \n    return text\n\ndef safe_int(x, default=0):\n    try:\n        return\
+          \ int(float(x))\n    except:\n        return default\n\ndef main(text: str):\n\
+          \    cleaned = extract_json_block(text)\n\n    try:\n        data = json.loads(cleaned)\n\
+          \    except:\n        return {\n            \"reranked_jobs\": \"[]\",\n\
+          \            \"reranked_count\": 0\n        }\n\n    if not isinstance(data,\
+          \ list):\n        return {\n            \"reranked_jobs\": \"[]\",\n   \
+          \         \"reranked_count\": 0\n        }\n\n    deduped = []\n    seen\
+          \ = set()\n\n    for item in data:\n        if not isinstance(item, dict):\n\
+          \            continue\n\n        hospital = str(item.get(\"hospital\", \"\
+          \")).strip()\n        department = str(item.get(\"department\", \"\")).strip()\n\
+          \        position_name = str(item.get(\"position_name\", \"\")).strip()\n\
+          \        final_score = safe_int(item.get(\"final_score\", 0))\n        rerank_reason\
+          \ = str(item.get(\"rerank_reason\", \"\")).strip()\n\n        # 核心字段缺失则跳过\n\
+          \        if not hospital or not department or not position_name:\n     \
+          \       continue\n\n        dedup_key = f\"{hospital}_{department}_{position_name}\"\
+          \n        if dedup_key in seen:\n            continue\n\n        seen.add(dedup_key)\n\
+          \n        deduped.append({\n            \"rank\": len(deduped) + 1,\n  \
+          \          \"hospital\": hospital,\n            \"department\": department,\n\
+          \            \"position_name\": position_name,\n            \"final_score\"\
+          : final_score,\n            \"rerank_reason\": rerank_reason\n        })\n\
+          \n    return {\n        \"reranked_jobs\": json.dumps(deduped, ensure_ascii=False),\n\
+          \        \"reranked_count\": len(deduped)\n    }"
+        code_language: python3
+        outputs:
+          reranked_count:
+            children: null
+            type: number
+          reranked_jobs:
+            children: null
+            type: string
+        selected: false
+        title: RERANK_RESULT_CLEANER
+        type: code
+        variables:
+        - value_selector:
+          - '1775961049393'
+          - text
+          value_type: string
+          variable: text
+      height: 52
+      id: '1775961820469'
+      position:
+        x: 195.37562419200003
+        y: 675.2205491200002
+      positionAbsolute:
+        x: 195.37562419200003
+        y: 675.2205491200002
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\ndef main(reranked_jobs: str):\n    try:\n        data\
+          \ = json.loads(reranked_jobs) if isinstance(reranked_jobs, str) else reranked_jobs\n\
+          \    except Exception:\n        data = []\n\n    if not isinstance(data,\
+          \ list):\n        data = []\n\n    fixed = []\n\n    for i, item in enumerate(data,\
+          \ start=1):\n        if not isinstance(item, dict):\n            continue\n\
+          \n        hospital = str(item.get(\"hospital\", \"\")).strip()\n       \
+          \ department = str(item.get(\"department\", \"\")).strip()\n        position_name\
+          \ = str(item.get(\"position_name\", \"\")).strip()\n        rerank_reason\
+          \ = str(item.get(\"rerank_reason\", \"\")).strip()\n\n        try:\n   \
+          \         final_score = int(item.get(\"final_score\", 0))\n        except\
+          \ Exception:\n            final_score = 0\n\n        # 简单兜底：如果 hospital\
+          \ 为空且 department 看起来像医院名，交换\n        if not hospital and department in [\"\
+          西京医院\", \"西安交通大学第一附属医院\"]:\n            hospital = department\n        \
+          \    department = \"\"\n\n        # 没有科室名的直接丢掉\n        if not department:\n\
+          \            continue\n\n        fixed.append({\n            \"rank\": i,\n\
+          \            \"hospital\": hospital,\n            \"department\": department,\n\
+          \            \"position_name\": position_name,\n            \"final_score\"\
+          : final_score,\n            \"rerank_reason\": rerank_reason\n        })\n\
+          \n    return {\n        \"validated_reranked_jobs\": json.dumps(fixed, ensure_ascii=False),\n\
+          \        \"validated_reranked_count\": len(fixed)\n    }"
+        code_language: python3
+        outputs:
+          validated_reranked_count:
+            children: null
+            type: number
+          validated_reranked_jobs:
+            children: null
+            type: string
+        selected: false
+        title: RERANK_JSON_VALIDATOR
+        type: code
+        variables:
+        - value_selector:
+          - '1775961820469'
+          - reranked_jobs
+          value_type: string
+          variable: reranked_jobs
+      height: 52
+      id: '1775966722790'
+      position:
+        x: 187.78880307200018
+        y: 762.9368151040002
+      positionAbsolute:
+        x: 187.78880307200018
+        y: 762.9368151040002
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params: {}
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 1ac87599-8d39-4afb-8303-1e3ec252743a
+          role: system
+          text: "你是一名医学岗位匹配解析专家。\n\n你的任务是：\n从用户输入的标准 resume_json 中，\n提取用于医疗岗位匹配的核心条件标签。\n\
+            \n请严格基于用户提供的 resume_json 内容进行解析，\n禁止脑补不存在的信息。\n\n==================================================\n\
+            【输入】\n==================================================\n\n输入一定是标准医学简历\
+            \ JSON，可能包含：\n\n- 基本信息\n- 教育经历\n- 校园经历\n- 实习经历\n- 项目经历\n- 其他信息\n\n==================================================\n\
+            【输出字段】\n==================================================\n\n你必须输出严格\
+            \ JSON，对应以下字段：\n\n{\n  \"highest_degree\": \"最高学历\",\n  \"major_hits\"\
+            : [],\n  \"certificate_hits\": [],\n  \"research_hits\": [],\n  \"hospital_hits\"\
+            : [],\n  \"all_resume_text\": \"完整文本拼接\"\n}\n\n==================================================\n\
+            【字段规则】\n==================================================\n\n1）highest_degree\n\
+            从高到低识别：\n博士 > 硕士 > 本科 > 大专\n\n2）major_hits\n只提取真实专业/方向标签，例如：\n- 神经病学\n\
+            - 临床医学\n- 呼吸系病学\n- 重症医学\n- 神经生物学\n- 骨科学\n- 内科学\n- 外科学\n- 医学检验技术\n- 护理学\n\
+            \n禁止输出泛化描述：\n- 医学背景\n- 临床方向\n- 医疗相关\n\n3）certificate_hits\n提取真实证书：\n-\
+            \ 执业医师资格证\n- 医师资格证\n- 规培证\n- 护士资格证\n- 检验技术资格证\n\n4）research_hits\n如果存在以下任一信息即可提取：\n\
+            - SCI\n- 论文\n- 国自然\n- 基金\n- 课题\n- 博士后\n- 科研项目\n\n5）hospital_hits\n只提取用户真实经历中出现的医院：\n\
+            例如：\n- 西京医院\n- 西安交通大学第一附属医院\n\n禁止联想：\n- 湘雅医院\n- 华西医院\n- 协和医院\n\n6）all_resume_text\n\
+            把整个 resume_json 所有文本内容自然拼接成一个字符串。\n\n==================================================\n\
+            【强约束】\n==================================================\n\n1. 严禁输出 markdown\n\
+            2. 严禁输出解释\n3. 严禁输出代码块\n4. 只能输出 JSON\n5. 缺失字段返回空数组或空字符串\n6. 不允许新增不存在医院\n\
+            7. hospital_hits 必须100%忠于 resume_json 原文\n\n以下为用户输入resume_json:\n{{#1775898017818.resume_json#}}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              all_resume_text:
+                type: string
+              certificate_hits:
+                items:
+                  type: string
+                type: array
+              highest_degree:
+                type: string
+              hospital_hits:
+                items:
+                  type: string
+                type: array
+              major_hits:
+                items:
+                  type: string
+                type: array
+              research_hits:
+                items:
+                  type: string
+                type: array
+            required:
+            - highest_degree
+            - major_hits
+            - certificate_hits
+            - research_hits
+            - hospital_hits
+            - all_resume_text
+            type: object
+        structured_output_enabled: true
+        title: RESUME_CONDITION_LLM_PARSER
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776091881959'
+      position:
+        x: 382
+        y: 373
+      positionAbsolute:
+        x: 382
+        y: 373
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 72.06425040009117
+      y: -77.54088712340621
+      zoom: 0.7752267978712597
+  rag_pipeline_variables: []

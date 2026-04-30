@@ -1,0 +1,851 @@
+app:
+  description: 通过与用户的对话，获取项目经历
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: resume_project_builder
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.36@73e3e28eca163b96da65ef9eab8633f9e7257213ff0d2f2bed93b28b552d2cda
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1775186523371-source-1775186527118-target
+      selected: false
+      source: '1775186523371'
+      sourceHandle: source
+      target: '1775186527118'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775186527118-source-1775186978817-target
+      selected: false
+      source: '1775186527118'
+      sourceHandle: source
+      target: '1775186978817'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1775186978817-source-1775187538911-target
+      selected: false
+      source: '1775186978817'
+      sourceHandle: source
+      target: '1775187538911'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1775187538911-source-1775188186183-target
+      selected: false
+      source: '1775187538911'
+      sourceHandle: source
+      target: '1775188186183'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1775188186183-true-1775188272157-target
+      selected: false
+      source: '1775188186183'
+      sourceHandle: 'true'
+      target: '1775188272157'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1775188186183-false-1775187568540-target
+      selected: false
+      source: '1775188186183'
+      sourceHandle: 'false'
+      target: '1775187568540'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775188272157-source-1775351870885-target
+      selected: false
+      source: '1775188272157'
+      sourceHandle: source
+      target: '1775351870885'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1775351870885-source-1775188773491-target
+      selected: false
+      source: '1775351870885'
+      sourceHandle: source
+      target: '1775188773491'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775187568540-source-1775352127847-target
+      source: '1775187568540'
+      sourceHandle: source
+      target: '1775352127847'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1775352127847-source-1775188845736-target
+      source: '1775352127847'
+      sourceHandle: source
+      target: '1775188845736'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: user_message
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: user_message
+        - default: '{}'
+          hint: ''
+          label: resume_json
+          options: []
+          placeholder: ''
+          required: false
+          type: paragraph
+          variable: resume_json
+      height: 135
+      id: '1775186523371'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen-max-latest
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 1ab63c02-a15d-48dd-b1d7-0b0b9ac5d401
+          role: system
+          text: '你是“项目经历信息抽取器”。
+
+
+            任务：
+
+            从用户当前输入中，抽取可以写入简历“项目经历”模块的事实信息。
+
+
+            要求：
+
+            1. 只能提取用户明确说过的信息
+
+            2. 禁止推测、禁止脑补
+
+            3. 如果某字段没有提到，就留空字符串或空数组
+
+            4. 时间尽量标准化为 YYYY-MM 或 YYYY-MM-DD
+
+            5. 技术名称拆成数组
+
+            6. 只输出符合 schema 的结构化结果
+
+            7. 如果用户输入中出现“我还有一个……项目”“另外一个项目”“做过一个……项目”，且该项目名称与当前项目不同，则必须抽取为一个新的项目对象，不要补到当前已有项目中。
+
+
+            字段范围仅包括：
+
+            - 项目名称
+
+            - 担任角色
+
+            - 开始时间
+
+            - 结束时间
+
+            - 项目背景
+
+            - 项目目标
+
+            - 职责
+
+            - 成果
+
+            - 技术工具'
+        - id: fa547934-0871-4a95-8930-d3fdcbb0d2f5
+          role: user
+          text: 用户消息:{{#1775186523371.user_message#}}
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              项目经历:
+                items:
+                  properties:
+                    开始时间:
+                      type: string
+                    成果:
+                      items:
+                        type: string
+                      type: array
+                    技术工具:
+                      items:
+                        type: string
+                      type: array
+                    担任角色:
+                      type: string
+                    结束时间:
+                      type: string
+                    职责:
+                      items:
+                        type: string
+                      type: array
+                    项目名称:
+                      type: string
+                    项目目标:
+                      type: string
+                    项目背景:
+                      type: string
+                  type: object
+                type: array
+            required:
+            - 项目经历
+            type: object
+        structured_output_enabled: true
+        title: 项目经历抽取器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775186527118'
+      position:
+        x: 378
+        y: 232
+      positionAbsolute:
+        x: 378
+        y: 232
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\nfrom datetime import datetime\n\ndef normalize_list(value):\n\
+          \    if value is None:\n        return []\n    if isinstance(value, list):\n\
+          \        return [str(v).strip() for v in value if str(v).strip()]\n    if\
+          \ isinstance(value, str):\n        value = value.strip()\n        if not\
+          \ value:\n            return []\n        for sep in [\"，\", \",\", \"、\"\
+          , \";\", \"；\"]:\n            if sep in value:\n                return [v.strip()\
+          \ for v in value.split(sep) if v.strip()]\n        return [value]\n    return\
+          \ [str(value).strip()]\n\ndef dedupe_list(items):\n    seen = set()\n  \
+          \  result = []\n    for item in normalize_list(items):\n        if item\
+          \ not in seen:\n            seen.add(item)\n            result.append(item)\n\
+          \    return result\n\ndef safe_str(value):\n    if value is None:\n    \
+          \    return \"\"\n    return str(value).strip()\n\ndef extract_json_from_text(text):\n\
+          \    if not isinstance(text, str):\n        return {}\n    text = text.strip()\n\
+          \    try:\n        return json.loads(text)\n    except:\n        pass\n\n\
+          \    start = text.find(\"{\")\n    end = text.rfind(\"}\")\n    if start\
+          \ != -1 and end != -1 and end > start:\n        candidate = text[start:end\
+          \ + 1]\n        try:\n            return json.loads(candidate)\n       \
+          \ except:\n            return {}\n    return {}\n\ndef normalize_project_item(item):\n\
+          \    \"\"\"\n    把抽取器输出统一成项目对象格式\n    兼容两种情况：\n    1. {\"项目经历\":[{...}]}\n\
+          \    2. {\"项目名称\":\"\", \"担任角色\":\"\", ...}\n    \"\"\"\n    if not isinstance(item,\
+          \ dict):\n        return None\n\n    project = {\n        \"项目名称\": safe_str(item.get(\"\
+          项目名称\", \"\")),\n        \"担任角色\": safe_str(item.get(\"担任角色\", \"\")),\n\
+          \        \"开始时间\": safe_str(item.get(\"开始时间\", \"\")),\n        \"结束时间\"\
+          : safe_str(item.get(\"结束时间\", \"\")),\n        \"项目背景\": safe_str(item.get(\"\
+          项目背景\", \"\")),\n        \"项目目标\": safe_str(item.get(\"项目目标\", \"\")),\n\
+          \        \"职责\": dedupe_list(item.get(\"职责\", [])),\n        \"成果\": dedupe_list(item.get(\"\
+          成果\", [])),\n        \"技术工具\": dedupe_list(item.get(\"技术工具\", [])),\n  \
+          \      \"是否完成\": False,\n        \"信息完整度\": 0\n    }\n    return project\n\
+          \ndef merge_project(current, incoming):\n    str_fields = [\"项目名称\", \"\
+          担任角色\", \"开始时间\", \"结束时间\", \"项目背景\", \"项目目标\"]\n    list_fields = [\"职责\"\
+          , \"成果\", \"技术工具\"]\n\n    for field in str_fields:\n        old_val = safe_str(current.get(field,\
+          \ \"\"))\n        new_val = safe_str(incoming.get(field, \"\"))\n      \
+          \  if not old_val and new_val:\n            current[field] = new_val\n \
+          \       elif old_val and new_val and len(new_val) > len(old_val) and new_val\
+          \ not in old_val:\n            current[field] = new_val\n\n    for field\
+          \ in list_fields:\n        old_list = dedupe_list(current.get(field, []))\n\
+          \        new_list = dedupe_list(incoming.get(field, []))\n        merged\
+          \ = old_list[:]\n        for item in new_list:\n            if item not\
+          \ in merged:\n                merged.append(item)\n        current[field]\
+          \ = merged\n\n    if \"行动\" in current:\n        del current[\"行动\"]\n\n\
+          \    return current\n\ndef calc_completeness(project):\n    \"\"\"\n   \
+          \ 项目完整度评分（总分100）\n    - 项目名称：15\n    - 时间（开始/结束至少一个）：15\n    - 项目背景或项目目标：15\n\
+          \    - 职责：25\n    - 成果：20\n    - 技术工具：10\n    \"\"\"\n    score = 0\n\n\
+          \    if safe_str(project.get(\"项目名称\")):\n        score += 15\n\n    if\
+          \ safe_str(project.get(\"开始时间\")) or safe_str(project.get(\"结束时间\")):\n\
+          \        score += 15\n\n    if safe_str(project.get(\"项目背景\")) or safe_str(project.get(\"\
+          项目目标\")):\n        score += 15\n\n    if dedupe_list(project.get(\"职责\"\
+          , [])):\n        score += 25\n\n    if dedupe_list(project.get(\"成果\", [])):\n\
+          \        score += 20\n\n    if dedupe_list(project.get(\"技术工具\", [])):\n\
+          \        score += 10\n\n    return score\n\ndef finalize_project(project):\n\
+          \    if not isinstance(project, dict):\n        return project\n\n    if\
+          \ \"行动\" in project:\n        del project[\"行动\"]\n\n    project[\"职责\"\
+          ] = dedupe_list(project.get(\"职责\", []))\n    project[\"成果\"] = dedupe_list(project.get(\"\
+          成果\", []))\n    project[\"技术工具\"] = dedupe_list(project.get(\"技术工具\", []))\n\
+          \    project[\"信息完整度\"] = calc_completeness(project)\n\n    # 时间作为强约束：没有开始和结束时间都不允许\
+          \ ready\n    has_time = bool(safe_str(project.get(\"开始时间\")) or safe_str(project.get(\"\
+          结束时间\")))\n    project[\"是否完成\"] = project[\"信息完整度\"] >= 85 and has_time\n\
+          \n    return project\n\ndef contains_new_project_signal(user_message):\n\
+          \    text = safe_str(user_message)\n    signals = [\n        \"我还有一个\",\n\
+          \        \"另外一个项目\",\n        \"另一个项目\",\n        \"还做过一个项目\",\n       \
+          \ \"还有一个项目\",\n        \"此外我还做过\",\n        \"另外我还做过\"\n    ]\n    return\
+          \ any(s in text for s in signals)\n\ndef project_signature(project):\n \
+          \   \"\"\"\n    用于粗粒度判断两个项目是否明显不同\n    \"\"\"\n    name = safe_str(project.get(\"\
+          项目名称\", \"\"))\n    role = safe_str(project.get(\"担任角色\", \"\"))\n    techs\
+          \ = \"|\".join(dedupe_list(project.get(\"技术工具\", []))[:3])\n    return f\"\
+          {name}__{role}__{techs}\"\n\ndef is_new_project(current_project, incoming_project,\
+          \ user_message=\"\"):\n    \"\"\"\n    判定本轮输入是否应新建项目，而不是合并到当前项目。\n    规则（满足任一即可视为新项目）：\n\
+          \    1. 用户文本里明确说“我还有一个项目”等\n    2. incoming 有明确项目名称，且与 current 名称不同\n  \
+          \  3. 当前项目已完成，incoming 又带有明显不同的项目名称/角色/技术栈组合\n    \"\"\"\n    if contains_new_project_signal(user_message):\n\
+          \        return True\n\n    current_name = safe_str(current_project.get(\"\
+          项目名称\", \"\"))\n    incoming_name = safe_str(incoming_project.get(\"项目名称\"\
+          , \"\"))\n\n    if incoming_name and current_name and incoming_name != current_name:\n\
+          \        return True\n\n    current_done = bool(current_project.get(\"是否完成\"\
+          , False))\n    if current_done:\n        current_sig = project_signature(current_project)\n\
+          \        incoming_sig = project_signature(incoming_project)\n        if\
+          \ incoming_name and incoming_sig and incoming_sig != current_sig:\n    \
+          \        return True\n\n    return False\n\ndef init_resume():\n    return\
+          \ {\n        \"项目经历\": [],\n        \"当前项目索引\": 0,\n        \"待追问问题\": [],\n\
+          \        \"最近一次更新\": \"\"\n    }\n\ndef main(resume_json=None, extract_result=None,\
+          \ user_message=None):\n    # 1. 初始化 / 解析 resume_json\n    if not resume_json:\n\
+          \        resume = init_resume()\n    else:\n        if isinstance(resume_json,\
+          \ str):\n            try:\n                resume = json.loads(resume_json)\n\
+          \            except:\n                resume = init_resume()\n        else:\n\
+          \            resume = resume_json\n\n    if not isinstance(resume, dict):\n\
+          \        resume = init_resume()\n\n    if \"项目经历\" not in resume or not\
+          \ isinstance(resume[\"项目经历\"], list):\n        resume[\"项目经历\"] = []\n \
+          \   if \"当前项目索引\" not in resume:\n        resume[\"当前项目索引\"] = 0\n    if\
+          \ \"待追问问题\" not in resume or not isinstance(resume[\"待追问问题\"], list):\n\
+          \        resume[\"待追问问题\"] = []\n    if \"最近一次更新\" not in resume:\n    \
+          \    resume[\"最近一次更新\"] = \"\"\n\n    # 兼容旧项目中残留的“行动”\n    for p in resume[\"\
+          项目经历\"]:\n        if isinstance(p, dict) and \"行动\" in p:\n            del\
+          \ p[\"行动\"]\n\n    # 2. 解析 extract_result\n    if not extract_result:\n\
+          \        increment = {}\n    elif isinstance(extract_result, str):\n   \
+          \     increment = extract_json_from_text(extract_result)\n    else:\n  \
+          \      increment = extract_result\n\n    # 3. 兼容两种抽取结构\n    incoming_project\
+          \ = None\n\n    # 情况 A：标准结构 {\"项目经历\":[{...}]}\n    if isinstance(increment,\
+          \ dict) and \"项目经历\" in increment:\n        projects = increment.get(\"\
+          项目经历\", [])\n        if isinstance(projects, list) and len(projects) > 0\
+          \ and isinstance(projects[0], dict):\n            incoming_project = normalize_project_item(projects[0])\n\
+          \n    # 情况 B：扁平结构 {\"项目名称\":\"\", \"成果\":[...], ...}\n    if incoming_project\
+          \ is None and isinstance(increment, dict):\n        possible_keys = {\n\
+          \            \"项目名称\", \"担任角色\", \"开始时间\", \"结束时间\",\n            \"项目背景\"\
+          , \"项目目标\", \"职责\", \"成果\", \"技术工具\",\n            # 兼容旧 schema 残留\n   \
+          \         \"行动\"\n        }\n        if any(k in increment for k in possible_keys):\n\
+          \            incoming_project = normalize_project_item(increment)\n\n  \
+          \  # 4. 没抽到有效项目，直接返回旧状态\n    if incoming_project is None:\n        resume[\"\
+          最近一次更新\"] = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n        return\
+          \ {\n            \"result\": json.dumps(resume, ensure_ascii=False)\n  \
+          \      }\n\n    # 5. 如果没有项目，直接创建第一个\n    if not resume[\"项目经历\"]:\n    \
+          \    incoming_project = finalize_project(incoming_project)\n        resume[\"\
+          项目经历\"] = [incoming_project]\n        resume[\"当前项目索引\"] = 0\n\n    else:\n\
+          \        idx = resume.get(\"当前项目索引\", 0)\n        if idx >= len(resume[\"\
+          项目经历\"]):\n            idx = len(resume[\"项目经历\"]) - 1\n\n        current_project\
+          \ = resume[\"项目经历\"][idx]\n\n        # 判断是补充当前项目，还是新增新项目\n        if is_new_project(current_project,\
+          \ incoming_project, user_message=user_message):\n            incoming_project\
+          \ = finalize_project(incoming_project)\n            resume[\"项目经历\"].append(incoming_project)\n\
+          \            resume[\"当前项目索引\"] = len(resume[\"项目经历\"]) - 1\n        else:\n\
+          \            merged_project = merge_project(current_project, incoming_project)\n\
+          \            merged_project = finalize_project(merged_project)\n       \
+          \     resume[\"项目经历\"][idx] = merged_project\n\n    resume[\"最近一次更新\"] =\
+          \ datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n\n    return {\n     \
+          \   \"result\": json.dumps(resume, ensure_ascii=False)\n    }"
+        code_language: python3
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: code节点：项目合并
+        type: code
+        variables:
+        - value_selector:
+          - '1775186527118'
+          - structured_output
+          value_type: object
+          variable: extract_result
+        - value_selector:
+          - '1775186523371'
+          - resume_json
+          value_type: string
+          variable: resume_json
+        - value_selector:
+          - '1775186523371'
+          - user_message
+          value_type: string
+          variable: user_message
+      height: 52
+      id: '1775186978817'
+      position:
+        x: 584
+        y: 346
+      positionAbsolute:
+        x: 584
+        y: 346
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1775186978817'
+          - result
+        desc: 判断当前项目经历还缺什么。
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen-max-latest
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 34dc1feb-9b0f-4c30-ae8f-c47ce8a78ced
+          role: system
+          text: "你是“项目经历完整度分析器”。\n\n请根据当前项目 JSON，评估该项目经历是否足以写入简历。\n\n评分规则：\n- 项目名称：20分\n\
+            - 项目背景或项目目标（至少一个不为空）：15分\n- 职责（至少1条）：25分\n- 成果（至少1条）：25分\n- 技术工具（至少1项）：15分\n\
+            \n总分100分。\n\n判定规则：\n1. “信息完整度” = 实际得分\n2. “是否可用于简历”：\n   - 当信息完整度 >= 85\
+            \ 时，为 true\n   - 否则为 false\n3. “缺失字段”只列未完成项\n4. 最关键缺口优先顺序：\n   - 成果\n\
+            \   - 职责\n   - 技术工具\n   - 项目背景/项目目标\n   - 项目名称\n\n严格规则：\n1. 只返回符合结构化输出\
+            \ schema 的结果\n2. 不要输出解释\n3. 不要输出 <think>\n4. 不要输出 markdown\n5. “是否可用于简历”必须是\
+            \ true 或 false\n6. “信息完整度”必须是数字\n7. 缺失字段只列未完成的项\n8. 不要再使用“行动”字段进行判断\n\
+            9. 如果“项目背景”为空但“项目目标”不为空，则视为该项已完成\n10. 如果“职责”“成果”“技术工具”是空数组，则视为未完成\n\n\
+            当前项目 JSON：\n{{#context#}}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              信息完整度:
+                type: number
+              是否可用于简历:
+                type: boolean
+              缺失字段:
+                items:
+                  type: string
+                type: array
+            required:
+            - 信息完整度
+            - 缺失字段
+            - 是否可用于简历
+            type: object
+        structured_output_enabled: true
+        title: 完整度分析器
+        type: llm
+        vision:
+          enabled: false
+      height: 116
+      id: '1775187538911'
+      position:
+        x: 488
+        y: 460
+      positionAbsolute:
+        x: 488
+        y: 460
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1775187538911'
+          - text
+        desc: 根据缺失字段，生成下一轮自然追问。
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen-max-latest
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: c3ba47fb-4f1e-49cb-b9c8-25448c926fdd
+          role: system
+          text: "你是资深 HR 简历顾问，负责根据项目经历当前缺口，继续自然追问用户，帮助补全高质量项目经历。\n\n下面是当前项目经历完整度分析结果：\n\
+            {{#context#}}\n\n请根据其中的：\n- 最关键缺口\n- 缺失字段\n\n生成下一轮自然追问。\n\n【追问目标】\n优先补齐最影响简历质量的信息：\n\
+            1. 成果\n2. 职责\n3. 技术工具\n4. 项目背景 / 项目目标\n5. 时间\n\n【追问要求】\n1. 每次最多生成 2 个问题\n\
+            2. 优先追问顺序：\n   - 成果\n   - 职责\n   - 技术工具\n   - 时间\n3. 问题必须像真实 HR 交流，口语化、自然\n\
+            4. 不要机械重复字段名式提问\n5. 不要重复已经完整的信息\n6. 如果“成果”缺失，优先追问：\n   - 指标提升\n   - 性能优化\n\
+            \   - 模型效果\n   - 用户规模\n   - 上线情况\n   - 业务收益\n7. 如果“职责”缺失，优先追问：\n   - 你主要负责哪个模块\n\
+            \   - 你的核心实现工作\n   - 你解决了什么关键问题\n8. 如果“技术工具”缺失，优先追问：\n   - 使用了哪些语言 / 框架\
+            \ / 算法 / 平台\n9. 如果“时间”缺失，自然询问项目起止时间\n10. 禁止再使用“行动”字段进行追问\n11. 输出必须为 JSON\n\
+            12. 不要输出 markdown\n13. 不要输出解释\n14. 不要输出 <think>\n\n【输出格式】\n{\n  \"追问问题\"\
+            : []\n}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              追问问题:
+                items:
+                  type: string
+                type: array
+            required:
+            - 追问问题
+            type: object
+        structured_output_enabled: true
+        title: 追问生成器
+        type: llm
+        vision:
+          enabled: false
+      height: 116
+      id: '1775187568540'
+      position:
+        x: 467.63633966877387
+        y: 773.545622318583
+      positionAbsolute:
+        x: 467.63633966877387
+        y: 773.545622318583
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: ≥
+            id: c80cb559-04fd-4208-ae64-39c7955acb80
+            value: '70'
+            varType: number
+            variable_selector:
+            - '1775187538911'
+            - structured_output
+            - 信息完整度
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 148
+      id: '1775188186183'
+      position:
+        x: 80
+        y: 631.0233953731455
+      positionAbsolute:
+        x: 80
+        y: 631.0233953731455
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1775186978817'
+          - result
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen-max-latest
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: b66613d4-0164-4a49-bbf0-5d931483871f
+          role: system
+          text: "你是资深 HR 简历优化专家，擅长将结构化项目信息整理成高质量中文简历中的“项目经历”。\n\n下面是完整项目 JSON：\n{{#context#}}\n\
+            \n请将其整理成适合中文技术简历中的项目经历描述。\n\n【输出目标】\n生成可直接粘贴进简历的项目经历内容。\n\n【写作要求】\n1.\
+            \ 输出中文简历风格文案\n2. 保留：\n   - 项目名称\n   - 担任角色\n   - 2~3条核心 bullet\n3. 核心\
+            \ bullet 必须围绕：\n   - 项目背景 / 目标\n   - 你的核心职责\n   - 技术工具\n   - 项目成果\n4.\
+            \ 优先突出：\n   - 可量化结果\n   - 指标提升\n   - 性能优化\n   - 模型效果\n   - 用户规模\n   -\
+            \ 业务价值\n5. 使用 STAR / CAR 风格，但不要机械输出模板词\n6. 每条 bullet 必须简洁有力，适合技术简历\n7.\
+            \ 禁止输出 JSON\n8. 禁止输出 markdown 代码块\n9. 直接输出可粘贴进简历的文本\n10. 如果有量化成果，优先放在最后一条\
+            \ bullet 强调\n11. 不要使用“行动”字段，不要输出流水账动作描述\n12. 优先把“职责 + 技术 + 成果”融合成高质量简历\
+            \ bullet\n\n【推荐输出格式】\n项目名称｜担任角色\n- 项目背景 + 核心职责 + 技术方案\n- 核心模块实现 + 使用技术工具\n\
+            - 最终成果 / 指标提升 / 模型效果 / 业务收益\n\n【输出示例】\n冠心病风险预测项目｜数据分析与建模\n- 基于电子病历和体检数据构建冠心病风险预测模型，负责数据清洗、临床指标特征工程及\
+            \ Logistic 回归训练\n- 使用 Python、Pandas、Scikit-learn 完成特征选择、标准化及 5 折交叉验证\n\
+            - 最终模型 AUC 达到 0.89，为高危患者早期筛查提供辅助支持"
+        selected: false
+        title: 简历文案生成器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775188272157'
+      position:
+        x: 462.1083378609176
+        y: 631.0233953731455
+      positionAbsolute:
+        x: 462.1083378609176
+        y: 631.0233953731455
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775351870885'
+          - reply
+          value_type: string
+          variable: reply
+        - value_selector:
+          - '1775351870885'
+          - updated_resume_json
+          value_type: string
+          variable: updated_resume_json
+        - value_selector:
+          - '1775351870885'
+          - status
+          value_type: string
+          variable: status
+        selected: false
+        title: 输出
+        type: end
+      height: 140
+      id: '1775188773491'
+      position:
+        x: 1056.9980880762664
+        y: 593.9221683151061
+      positionAbsolute:
+        x: 1056.9980880762664
+        y: 593.9221683151061
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775352127847'
+          - reply
+          value_type: string
+          variable: reply
+        - value_selector:
+          - '1775352127847'
+          - updated_resume_json
+          value_type: string
+          variable: updated_resume_json
+        - value_selector:
+          - '1775352127847'
+          - status
+          value_type: string
+          variable: status
+        selected: false
+        title: 输出 2
+        type: end
+      height: 140
+      id: '1775188845736'
+      position:
+        x: 1056.9980880762664
+        y: 766.9031509446017
+      positionAbsolute:
+        x: 1056.9980880762664
+        y: 766.9031509446017
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "\ndef main(reply_text, updated_resume_json):\n    return {\n      \
+          \  \"reply\": reply_text,\n        \"updated_resume_json\": updated_resume_json,\n\
+          \        \"status\": \"project_ready\"\n    }\n"
+        code_language: python3
+        outputs:
+          reply:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+          updated_resume_json:
+            children: null
+            type: string
+        selected: false
+        title: IF结果组装器
+        type: code
+        variables:
+        - value_selector:
+          - '1775188272157'
+          - text
+          value_type: string
+          variable: reply_text
+        - value_selector:
+          - '1775186978817'
+          - result
+          value_type: string
+          variable: updated_resume_json
+      height: 52
+      id: '1775351870885'
+      position:
+        x: 764.1083378609176
+        y: 631.0233953731455
+      positionAbsolute:
+        x: 764.1083378609176
+        y: 631.0233953731455
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\ndef main(reply_text, updated_resume_json):\n    natural_reply\
+          \ = reply_text\n\n    try:\n        data = json.loads(reply_text)\n\n  \
+          \      # 兼容 {\"追问问题\": [...]}\n        if isinstance(data, dict) and \"\
+          追问问题\" in data:\n            questions = data[\"追问问题\"]\n\n            if\
+          \ isinstance(questions, list) and len(questions) > 0:\n                natural_reply\
+          \ = \"我还想继续补充两个关键点，帮助你把这段项目经历写得更专业：\\n\\n\"\n\n                for i, q\
+          \ in enumerate(questions, 1):\n                    natural_reply += f\"\
+          {i}. {q}\\n\"\n\n    except:\n        pass\n\n    return {\n        \"reply\"\
+          : natural_reply.strip(),\n        \"updated_resume_json\": updated_resume_json,\n\
+          \        \"status\": \"need_followup\"\n    }"
+        code_language: python3
+        outputs:
+          reply:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+          updated_resume_json:
+            children: null
+            type: string
+        selected: false
+        title: ELSE结果组装器
+        type: code
+        variables:
+        - value_selector:
+          - '1775187568540'
+          - text
+          value_type: string
+          variable: reply_text
+        - value_selector:
+          - '1775186978817'
+          - result
+          value_type: string
+          variable: updated_resume_json
+      height: 52
+      id: '1775352127847'
+      position:
+        x: 769.6363396687739
+        y: 773.545622318583
+      positionAbsolute:
+        x: 769.6363396687739
+        y: 773.545622318583
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 82.09413804492306
+      y: -116.55873388095952
+      zoom: 0.7388888222129164
+  rag_pipeline_variables: []

@@ -1,0 +1,465 @@
+app:
+  description: 渲染并导出resume_text
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: resume_render_and_export
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1775741184526-source-1775741356279-target
+      source: '1775741184526'
+      sourceHandle: source
+      target: '1775741356279'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: code
+      id: 1775741356279-source-1775741878949-target
+      source: '1775741356279'
+      sourceHandle: source
+      target: '1775741878949'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1775741878949-source-1775742662771-target
+      source: '1775741878949'
+      sourceHandle: source
+      target: '1775742662771'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: end
+      id: 1775742662771-source-1775741443684-target
+      source: '1775742662771'
+      sourceHandle: source
+      target: '1775741443684'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: resume_json
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: resume_json
+        - default: ''
+          hint: ''
+          label: target_role
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: target_role
+        - default: ''
+          hint: ''
+          label: style
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: style
+        - default: ''
+          hint: ''
+          label: file_name
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: file_name
+      height: 187
+      id: '1775741184526'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        is_team_authorization: true
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          label:
+            en_US: resume_json
+            ja_JP: resume_json
+            pt_BR: resume_json
+            zh_Hans: resume_json
+          llm_description: ''
+          max: null
+          min: null
+          name: resume_json
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          label:
+            en_US: target_role
+            ja_JP: target_role
+            pt_BR: target_role
+            zh_Hans: target_role
+          llm_description: ''
+          max: null
+          min: null
+          name: target_role
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          label:
+            en_US: style
+            ja_JP: style
+            pt_BR: style
+            zh_Hans: style
+          llm_description: ''
+          max: null
+          min: null
+          name: style
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          resume_json: ''
+          style: ''
+          target_role: ''
+        plugin_id: null
+        plugin_unique_identifier: null
+        provider_icon:
+          background: '#FFEAD5'
+          content: 🤖
+        provider_id: b0250915-d034-4d78-aaef-66cb9b7e984a
+        provider_name: resume_renderer
+        provider_type: workflow
+        selected: false
+        title: resume_renderer
+        tool_configurations: {}
+        tool_description: 简历渲染层
+        tool_label: resume_renderer
+        tool_name: resume_renderer
+        tool_node_version: '2'
+        tool_parameters:
+          resume_json:
+            type: mixed
+            value: '{{#1775741184526.resume_json#}}'
+          style:
+            type: mixed
+            value: '{{#1775741184526.style#}}'
+          target_role:
+            type: mixed
+            value: '{{#1775741184526.target_role#}}'
+        type: tool
+      height: 52
+      id: '1775741356279'
+      position:
+        x: 382
+        y: 282
+      positionAbsolute:
+        x: 382
+        y: 282
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775742662771'
+          - success
+          value_type: boolean
+          variable: success
+        - value_selector:
+          - '1775742662771'
+          - file_name
+          value_type: string
+          variable: file_name
+        - value_selector:
+          - '1775742662771'
+          - download_url
+          value_type: string
+          variable: download_url
+        - value_selector:
+          - '1775741878949'
+          - clean_text
+          value_type: string
+          variable: resume_text
+        selected: false
+        title: 输出
+        type: end
+      height: 166
+      id: '1775741443684'
+      position:
+        x: 296
+        y: 615
+      positionAbsolute:
+        x: 296
+        y: 615
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import re\n\ndef main(raw_text: str):\n    text = raw_text or \"\"\n\
+          \n    # 去掉 <think>...</think>\n    text = re.sub(r\"<think>.*?</think>\"\
+          , \"\", text, flags=re.DOTALL)\n\n    # 去掉可能存在的 markdown 代码块标记\n    text\
+          \ = re.sub(r\"^```[a-zA-Z]*\\n?\", \"\", text)\n    text = re.sub(r\"\\\
+          n```$\", \"\", text)\n\n    # 去掉首尾空白\n    text = text.strip()\n\n    return\
+          \ {\n        \"clean_text\": text\n    }"
+        code_language: python3
+        outputs:
+          clean_text:
+            children: null
+            type: string
+        selected: false
+        title: resume_text_cleaner
+        type: code
+        variables:
+        - value_selector:
+          - '1775741356279'
+          - resume_text
+          value_type: string
+          variable: raw_text
+      height: 52
+      id: '1775741878949'
+      position:
+        x: 507
+        y: 372
+      positionAbsolute:
+        x: 507
+        y: 372
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        is_team_authorization: true
+        paramSchemas:
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          label:
+            en_US: resume_text
+            ja_JP: resume_text
+            pt_BR: resume_text
+            zh_Hans: resume_text
+          llm_description: ''
+          max: null
+          min: null
+          name: resume_text
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: ''
+          form: llm
+          human_description:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          label:
+            en_US: file_name
+            ja_JP: file_name
+            pt_BR: file_name
+            zh_Hans: file_name
+          llm_description: ''
+          max: null
+          min: null
+          name: file_name
+          options: []
+          placeholder:
+            en_US: ''
+            ja_JP: ''
+            pt_BR: ''
+            zh_Hans: ''
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: string
+        params:
+          file_name: ''
+          resume_text: ''
+        plugin_id: null
+        plugin_unique_identifier: null
+        provider_icon:
+          background: '#FFEAD5'
+          content: 🤖
+        provider_id: 7d606ba0-58b0-406c-871c-7df7c645f2f9
+        provider_name: resume_export_service_caller
+        provider_type: workflow
+        selected: false
+        title: resume_export_service_caller
+        tool_configurations: {}
+        tool_description: 将resume_renderer 负责生成的简历正文导出为word
+        tool_label: resume_export_service_caller
+        tool_name: resume_export_service_caller
+        tool_node_version: '2'
+        tool_parameters:
+          file_name:
+            type: mixed
+            value: '{{#1775741184526.file_name#}}'
+          resume_text:
+            type: mixed
+            value: '{{#1775741878949.clean_text#}}'
+        type: tool
+      height: 52
+      id: '1775742662771'
+      position:
+        x: 361
+        y: 496
+      positionAbsolute:
+        x: 361
+        y: 496
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 38
+      y: -217.5
+      zoom: 1
+  rag_pipeline_variables: []

@@ -1,0 +1,771 @@
+app:
+  description: 从用户当前输入里，抽取并补全一条校园经历，直到这条经历可用于简历。
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: resume_campus_fact_interviewer
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.36@73e3e28eca163b96da65ef9eab8633f9e7257213ff0d2f2bed93b28b552d2cda
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1775527769139-source-1775548377844-target
+      source: '1775527769139'
+      sourceHandle: source
+      target: '1775548377844'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775548377844-source-1775548675879-target
+      source: '1775548377844'
+      sourceHandle: source
+      target: '1775548675879'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1775548675879-source-1775549602647-target
+      selected: false
+      source: '1775548675879'
+      sourceHandle: source
+      target: '1775549602647'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1775549602647-source-1775549756180-target
+      source: '1775549602647'
+      sourceHandle: source
+      target: '1775549756180'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1775549756180-true-1775552616026-target
+      source: '1775549756180'
+      sourceHandle: 'true'
+      target: '1775552616026'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1775549756180-false-1775552660684-target
+      source: '1775549756180'
+      sourceHandle: 'false'
+      target: '1775552660684'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775552616026-source-1775552816981-target
+      source: '1775552616026'
+      sourceHandle: source
+      target: '1775552816981'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775552660684-source-1775552908833-target
+      source: '1775552660684'
+      sourceHandle: source
+      target: '1775552908833'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1775552816981-source-1775548748437-target
+      source: '1775552816981'
+      sourceHandle: source
+      target: '1775548748437'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1775552908833-source-1775553053478-target
+      source: '1775552908833'
+      sourceHandle: source
+      target: '1775553053478'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: user_message
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: user_message
+        - default: '{}'
+          hint: ''
+          label: resume_json
+          options: []
+          placeholder: ''
+          required: false
+          type: paragraph
+          variable: resume_json
+      height: 135
+      id: '1775527769139'
+      position:
+        x: 73
+        y: 107
+      positionAbsolute:
+        x: 73
+        y: 107
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v3.1
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 342cb8de-9a47-466d-8458-86999cdd1933
+          role: system
+          text: '你是一名专业 HR 简历助手。
+
+
+            任务：
+
+            识别用户输入中的校园相关事实，并判断属于哪些校园维度。
+
+
+            重点维度：
+
+            1. 学生组织/社团
+
+            2. 竞赛
+
+            3. 科研/论文
+
+            4. 奖学金/荣誉
+
+            5. 志愿服务/活动
+
+
+            抽取规则：
+
+            【关键规则（必须严格执行）】
+
+
+            1. “新增校园事实” 只允许放入将来可能写进简历的正向事实，例如：
+
+            - 担任学生会部长
+
+            - 获得数学建模国赛二等奖
+
+            - 发表论文
+
+            - 获得奖学金
+
+            - 参与志愿服务
+
+
+            2. 用户明确表示“没有”“未参加”“没做过”的内容，绝不能放入“新增校园事实”
+
+
+            3. 只有当用户明确表达某个维度“没有”时，才能放入“明确没有的维度”
+
+            例如：
+
+            - 我没有参加过社团
+
+            - 我没做过志愿服务
+
+            - 我没有发过论文
+
+
+            4. 如果用户只是没提到某个维度，不等于没有，不能放入“明确没有的维度”
+
+
+            5. 未提及的维度保持沉默，不要猜测
+
+
+            6. 不要把否定句本身当作校园事实
+
+            例如以下内容绝不能进入“新增校园事实”：
+
+            - 没有参加过社团
+
+            - 没有做过志愿服务
+
+            - 没发过论文'
+        - id: f8ed33d8-e035-410a-96a2-c6743efdd600
+          role: user
+          text: '用户当前输入：
+
+            {{#1775527769139.user_message#}}
+
+
+            当前完整简历状态：
+
+            {{#1775527769139.resume_json#}}'
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              命中维度:
+                items:
+                  enum:
+                  - 学生组织/社团
+                  - 竞赛
+                  - 科研/论文
+                  - 奖学金/荣誉
+                  - 志愿服务/活动
+                  type: string
+                type: array
+              新增校园事实:
+                items:
+                  type: string
+                type: array
+              明确没有的维度:
+                items:
+                  enum:
+                  - 学生组织/社团
+                  - 竞赛
+                  - 科研/论文
+                  - 奖学金/荣誉
+                  - 志愿服务/活动
+                  type: string
+                type: array
+            required:
+            - 新增校园事实
+            - 命中维度
+            - 明确没有的维度
+            type: object
+        structured_output_enabled: true
+        title: 校园事实抽取器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775548377844'
+      position:
+        x: 367
+        y: 108
+      positionAbsolute:
+        x: 367
+        y: 108
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\nVALID_DIMS = [\n    \"学生组织/社团\",\n    \"竞赛\",\n    \"\
+          科研/论文\",\n    \"奖学金/荣誉\",\n    \"志愿服务/活动\"\n]\n\nNEGATIVE_PATTERNS = [\n\
+          \    \"没有\",\n    \"没参加\",\n    \"未参加\",\n    \"没做过\",\n    \"未做过\",\n \
+          \   \"没有做过\",\n    \"没发过\",\n    \"未发表\",\n    \"没有发表\",\n    \"没拿过\",\n\
+          \    \"未获得\",\n    \"没有获得\",\n    \"无\"\n]\n\ndef empty_resume():\n    return\
+          \ {\n        \"基本信息\": {},\n        \"教育经历\": [],\n        \"校园经历\": [],\n\
+          \        \"实习经历\": [],\n        \"项目经历\": [],\n        \"_meta\": {\n  \
+          \          \"校园维度状态\": {\n                \"学生组织/社团\": \"unknown\",\n  \
+          \              \"竞赛\": \"unknown\",\n                \"科研/论文\": \"unknown\"\
+          ,\n                \"奖学金/荣誉\": \"unknown\",\n                \"志愿服务/活动\"\
+          : \"unknown\"\n            }\n        }\n    }\n\ndef normalize_list(v):\n\
+          \    if isinstance(v, list):\n        return [str(x).strip() for x in v\
+          \ if str(x).strip()]\n    if isinstance(v, str):\n        s = str(v).strip()\n\
+          \        return [s] if s else []\n    return []\n\ndef is_positive_fact(fact):\n\
+          \    fact = str(fact).strip()\n    if not fact:\n        return False\n\
+          \    for p in NEGATIVE_PATTERNS:\n        if p in fact:\n            return\
+          \ False\n    return True\n\ndef ensure_meta_structure(current):\n    if\
+          \ \"_meta\" not in current or not isinstance(current[\"_meta\"], dict):\n\
+          \        current[\"_meta\"] = {}\n\n    if \"校园维度状态\" not in current[\"\
+          _meta\"] or not isinstance(current[\"_meta\"][\"校园维度状态\"], dict):\n    \
+          \    current[\"_meta\"][\"校园维度状态\"] = empty_resume()[\"_meta\"][\"校园维度状态\"\
+          ].copy()\n\n    # 兼容旧字段 meta，迁移到 _meta\n    if \"meta\" in current and isinstance(current[\"\
+          meta\"], dict):\n        old_status = current[\"meta\"].get(\"校园维度状态\",\
+          \ {})\n        if isinstance(old_status, dict):\n            for dim in\
+          \ VALID_DIMS:\n                old_val = old_status.get(dim)\n         \
+          \       if old_val in [\"done\", \"none\", \"unknown\"]:\n             \
+          \       if current[\"_meta\"][\"校园维度状态\"].get(dim, \"unknown\") == \"unknown\"\
+          :\n                        current[\"_meta\"][\"校园维度状态\"][dim] = old_val\n\
+          \        del current[\"meta\"]\n\n    return current\n\ndef main(current_json,\
+          \ structured_output):\n    try:\n        current = json.loads(current_json)\
+          \ if current_json else empty_resume()\n    except:\n        current = empty_resume()\n\
+          \n    if not current or not isinstance(current, dict):\n        current\
+          \ = empty_resume()\n\n    if \"校园经历\" not in current or not isinstance(current[\"\
+          校园经历\"], list):\n        current[\"校园经历\"] = []\n\n    current = ensure_meta_structure(current)\n\
+          \    dim_status = current[\"_meta\"][\"校园维度状态\"]\n\n    if not isinstance(structured_output,\
+          \ dict):\n        structured_output = {}\n\n    facts = normalize_list(structured_output.get(\"\
+          新增校园事实\", []))\n    hit_dims = [x for x in normalize_list(structured_output.get(\"\
+          命中维度\", [])) if x in VALID_DIMS]\n    none_dims = [x for x in normalize_list(structured_output.get(\"\
+          明确没有的维度\", [])) if x in VALID_DIMS]\n\n    # 合并正向事实\n    for fact in facts:\n\
+          \        if is_positive_fact(fact) and fact not in current[\"校园经历\"]:\n\
+          \            current[\"校园经历\"].append(fact)\n\n    # 命中维度 -> done\n    #\
+          \ 若同一维度同时在 none_dims 中，优先视为 none，不标记 done\n    for dim in hit_dims:\n  \
+          \      if dim not in none_dims:\n            dim_status[dim] = \"done\"\n\
+          \n    # 明确没有 -> none\n    # 但不能覆盖已经有正向事实的 done\n    for dim in none_dims:\n\
+          \        if dim_status.get(dim) != \"done\":\n            dim_status[dim]\
+          \ = \"none\"\n\n    return {\n        \"result\": json.dumps(current, ensure_ascii=False)\n\
+          \    }"
+        code_language: python3
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 校园事实状态合并器
+        type: code
+        variables:
+        - value_selector:
+          - '1775527769139'
+          - resume_json
+          value_type: string
+          variable: current_json
+        - value_selector:
+          - '1775548377844'
+          - structured_output
+          value_type: object
+          variable: structured_output
+      height: 52
+      id: '1775548675879'
+      position:
+        x: 435
+        y: 214
+      positionAbsolute:
+        x: 435
+        y: 214
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775552816981'
+          - reply
+          value_type: string
+          variable: reply
+        - value_selector:
+          - '1775552816981'
+          - updated_resume_json
+          value_type: string
+          variable: updated_resume_json
+        - value_selector:
+          - '1775552816981'
+          - status
+          value_type: string
+          variable: status
+        selected: false
+        title: 输出
+        type: end
+      height: 140
+      id: '1775548748437'
+      position:
+        x: 787
+        y: 308
+      positionAbsolute:
+        x: 787
+        y: 308
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\nVALID_DIMS = [\n    \"学生组织/社团\",\n    \"竞赛\",\n    \"\
+          科研/论文\",\n    \"奖学金/荣誉\",\n    \"志愿服务/活动\"\n]\n\ndef main(resume_json):\n\
+          \    try:\n        data = json.loads(resume_json) if isinstance(resume_json,\
+          \ str) else (resume_json or {})\n    except:\n        data = {}\n\n    meta\
+          \ = data.get(\"_meta\", {})\n    dim_status = meta.get(\"校园维度状态\", {})\n\
+          \n    covered = []\n    pending = []\n\n    for dim in VALID_DIMS:\n   \
+          \     status = dim_status.get(dim, \"unknown\")\n        if status in [\"\
+          done\", \"none\"]:\n            covered.append(dim)\n        else:\n   \
+          \         pending.append(dim)\n\n    ready = len(pending) == 0\n\n    return\
+          \ {\n        \"covered_dims\": covered,\n        \"pending_dims\": pending,\n\
+          \        \"is_ready\": ready\n    }"
+        code_language: python3
+        outputs:
+          covered_dims:
+            children: null
+            type: array[string]
+          is_ready:
+            children: null
+            type: boolean
+          pending_dims:
+            children: null
+            type: array[string]
+        retry_config:
+          max_retries: 3
+          retry_enabled: false
+          retry_interval: 1000
+        selected: false
+        title: 校园覆盖度分析器
+        type: code
+        variables:
+        - value_selector:
+          - '1775548675879'
+          - result
+          value_type: string
+          variable: resume_json
+      height: 52
+      id: '1775549602647'
+      position:
+        x: 244
+        y: 300
+      positionAbsolute:
+        x: 244
+        y: 300
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: bf8a907a-c54a-4c09-a9ba-6b336ceee281
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1775549602647'
+            - is_ready
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 148
+      id: '1775549756180'
+      position:
+        x: -49
+        y: 397.5
+      positionAbsolute:
+        x: -49
+        y: 397.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v3.1
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 66bd163a-c6aa-4a44-a393-af05d5bb3d61
+          role: system
+          text: '你是一名专业 HR 简历助手。
+
+
+            用户的校园经历信息已经收集完成，可以进入下一阶段。
+
+
+            请生成一段自然、简洁、专业的确认回复。
+
+
+            要求：
+
+            1. 确认校园经历信息已记录完成
+
+            2. 不要输出 JSON
+
+            3. 不要逐条机械复述所有校园经历
+
+            4. 语气自然，像真实 HR 顾问
+
+            5. 最后提示：接下来可以继续补充实习经历
+
+
+            当前简历：
+
+            {{#1775548675879.result#}}'
+        selected: false
+        title: 校园阶段摘要生成器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775552616026'
+      position:
+        x: 244
+        y: 397.5
+      positionAbsolute:
+        x: 244
+        y: 397.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v3.1
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 113fb05a-db11-45b2-9252-d410cf9fa594
+          role: system
+          text: "你是一名专业 HR 简历助手，负责继续追问校园经历。\n\n当前 resume_json：\n{{#1775548675879.result#}}\n\
+            \n当前待追问维度：\n{{#1775549602647.pending_dims#}}\n\n你的任务：\n针对所有 still unknown\
+            \ 的校园维度，优先做“存在性确认”，不要默认用户一定参加过。\n\n严格规则：\n1. unknown = 尚未确认是否存在\n2. 对\
+            \ unknown 维度，必须先问“是否参加过”\n3. 不能默认用户已有相关经历\n4. 严禁使用：\n   - “除了你担任过的角色”\n\
+            \   - “你在社团中……”\n   - “你参与的竞赛中……”\n   这类默认已存在经历的问法\n5. 问题尽量覆盖 1~2 个 unknown\
+            \ 维度\n6. 问法自然，像真实 HR 对话\n7. 不要输出 JSON\n8. 只输出给用户的话术\n\n推荐问法：\n- 学生组织/社团：你在校期间有参加过学生会、社团、班委或其他学生组织吗？\n\
+            - 竞赛：你参加过学科竞赛、数学建模、算法竞赛或创新创业比赛吗？\n- 科研/论文：你参与过导师课题、实验室研究或论文发表吗？\n- 奖学金/荣誉：你获得过奖学金或校级荣誉吗？\n\
+            - 志愿服务/活动：你参与过志愿服务、大型活动或学校组织工作吗？"
+        selected: false
+        title: 校园追问生成器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775552660684'
+      position:
+        x: 244
+        y: 517.5
+      positionAbsolute:
+        x: 244
+        y: 517.5
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(reply_text, updated_resume_json):\n    return {\n        \"\
+          reply\": reply_text,\n        \"updated_resume_json\": updated_resume_json,\n\
+          \        \"status\": \"campus_ready\"\n    }"
+        code_language: python3
+        outputs:
+          reply:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+          updated_resume_json:
+            children: null
+            type: string
+        selected: false
+        title: 校园TRUE结果组装器
+        type: code
+        variables:
+        - value_selector:
+          - '1775552616026'
+          - text
+          value_type: string
+          variable: reply_text
+        - value_selector:
+          - '1775548675879'
+          - result
+          value_type: string
+          variable: updated_resume_json
+      height: 52
+      id: '1775552816981'
+      position:
+        x: 516
+        y: 403.5
+      positionAbsolute:
+        x: 516
+        y: 403.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(reply_text, updated_resume_json):\n    return {\n        \"\
+          reply\": reply_text,\n        \"updated_resume_json\": updated_resume_json,\n\
+          \        \"status\": \"need_followup\"\n    }"
+        code_language: python3
+        outputs:
+          reply:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+          updated_resume_json:
+            children: null
+            type: string
+        selected: false
+        title: 校园FALSE结果组装器
+        type: code
+        variables:
+        - value_selector:
+          - '1775552660684'
+          - text
+          value_type: string
+          variable: reply_text
+        - value_selector:
+          - '1775548675879'
+          - result
+          value_type: string
+          variable: updated_resume_json
+      height: 52
+      id: '1775552908833'
+      position:
+        x: 516
+        y: 517.5
+      positionAbsolute:
+        x: 516
+        y: 517.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775552908833'
+          - reply
+          value_type: string
+          variable: reply
+        - value_selector:
+          - '1775552908833'
+          - updated_resume_json
+          value_type: string
+          variable: updated_resume_json
+        - value_selector:
+          - '1775552908833'
+          - status
+          value_type: string
+          variable: status
+        selected: false
+        title: 输出 2
+        type: end
+      height: 140
+      id: '1775553053478'
+      position:
+        x: 793
+        y: 528.5
+      positionAbsolute:
+        x: 793
+        y: 528.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 125.8739105870145
+      y: -59.71548656179357
+      zoom: 1.0111520808513057
+  rag_pipeline_variables: []

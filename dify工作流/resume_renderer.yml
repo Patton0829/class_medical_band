@@ -1,0 +1,579 @@
+app:
+  description: 简历渲染层
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: resume_renderer
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.36@73e3e28eca163b96da65ef9eab8633f9e7257213ff0d2f2bed93b28b552d2cda
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1775718844476-source-1775719810063-target
+      source: '1775718844476'
+      sourceHandle: source
+      target: '1775719810063'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1775718906134-source-1775719810063-target
+      source: '1775718906134'
+      sourceHandle: source
+      target: '1775719810063'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1775719369643-source-1775719810063-target
+      source: '1775719369643'
+      sourceHandle: source
+      target: '1775719810063'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1775719433551-source-1775719810063-target
+      source: '1775719433551'
+      sourceHandle: source
+      target: '1775719810063'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1775719484709-source-1775719810063-target
+      source: '1775719484709'
+      sourceHandle: source
+      target: '1775719810063'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1775719810063-source-1775719016572-target
+      source: '1775719810063'
+      sourceHandle: source
+      target: '1775719016572'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1775718669132-source-1776093389368-target
+      source: '1775718669132'
+      sourceHandle: source
+      target: '1776093389368'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1776093389368-source-1775718844476-target
+      source: '1776093389368'
+      sourceHandle: source
+      target: '1775718844476'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1776093389368-source-1775718906134-target
+      source: '1776093389368'
+      sourceHandle: source
+      target: '1775718906134'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1776093389368-source-1775719369643-target
+      source: '1776093389368'
+      sourceHandle: source
+      target: '1775719369643'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1776093389368-source-1775719433551-target
+      source: '1776093389368'
+      sourceHandle: source
+      target: '1775719433551'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: llm
+      id: 1776093389368-source-1775719484709-target
+      source: '1776093389368'
+      sourceHandle: source
+      target: '1775719484709'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: resume_json
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: resume_json
+        - default: ''
+          hint: ''
+          label: target_role
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: target_role
+        - default: ''
+          hint: ''
+          label: style
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: style
+      height: 161
+      id: '1775718669132'
+      position:
+        x: -137.26853255791008
+        y: 258.03063929516856
+      positionAbsolute:
+        x: -137.26853255791008
+        y: 258.03063929516856
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 8f9e031a-7302-4a33-a454-669ebbb822fc
+          role: system
+          text: "你是资深中文简历优化专家。\n\n请从给定的 resume_json 中提取“基本信息”部分，整理成中文简历顶部信息。\n\n要求：\n\
+            1. 只输出基本信息部分\n2. 包含：\n   - 姓名\n   - 电话\n   - 邮箱\n   - 专业\n   - 毕业时间\n\
+            \   - 求职意向\n3. 如果某字段为空，则不要输出\n4. 输出要适合中文简历页眉\n5. 不要输出 JSON\n6. 不要输出解释\n\
+            7. 不要输出 markdown 代码块\n\n输出风格示例：\n张三｜13800000000｜zhangsan@example.com\n\
+            专业：计算机技术｜毕业时间：2025年｜求职意向：后端开发工程师\n\n当前输入：\n{{#1776093389368.text#}}"
+        selected: false
+        title: 基本信息渲染器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775718844476'
+      position:
+        x: 475
+        y: 229
+      positionAbsolute:
+        x: 475
+        y: 229
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: a4467709-00df-43d3-83be-8f8425bbb951
+          role: system
+          text: "你是资深中文简历优化专家。\n\n请根据给定的 resume_json，整理“教育经历”部分。\n\n要求：\n1. 只输出教育经历部分\n\
+            2. 每段教育经历包含：\n   - 学校\n   - 学历层级\n   - 专业\n   - 时间\n3. 时间格式优先显示：\n   开始时间\
+            \ - 结束时间\n4. 按学历从高到低排序\n5. 不要输出 JSON\n6. 不要输出解释\n7. 标题固定为：教育经历\n\n输出示例：\n\
+            教育经历\n复旦大学｜硕士｜临床医学｜2023年9月 - 2026年\n山东大学｜本科｜临床医学｜2019年9月 - 2023年\n\n当前输入：\n\
+            {{#1776093389368.text#}}"
+        selected: false
+        title: 教育经历渲染器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775718906134'
+      position:
+        x: 394.032264436678
+        y: 346.3219420118192
+      positionAbsolute:
+        x: 394.032264436678
+        y: 346.3219420118192
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775719810063'
+          - text
+          value_type: string
+          variable: resume_text
+        - value_selector:
+          - '1776093389368'
+          - text
+          value_type: string
+          variable: clean_resume_json
+        selected: false
+        title: 输出
+        type: end
+      height: 114
+      id: '1775719016572'
+      position:
+        x: 552.7060768990284
+        y: 606.8281999517062
+      positionAbsolute:
+        x: 552.7060768990284
+        y: 606.8281999517062
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: c73026e6-3495-47d1-ab66-40214c5fed52
+          role: system
+          text: "你是资深中文简历优化专家。\n\n请根据给定的 resume_json，把“校园经历”整理成中文简历中的一栏。\n\n要求：\n\
+            1. 标题固定为：校园经历\n2. 将校园经历整理为 3~4 条简洁 bullet\n3. 优先突出：\n   - 竞赛\n   - 奖学金\
+            \ / 荣誉\n   - 学生组织\n   - 创新创业\n4. 相似内容可以合并，不要简单逐条照抄\n5. 语言自然、简洁、适合简历\n\
+            6. 如果没有校园经历，则输出空字符串\n7. 不要输出 JSON\n8. 不要输出解释\n9. 不要输出 markdown 代码块\n\n\
+            输出示例：\n校园经历\n- 获全国大学生数学建模竞赛二等奖，具备较强的数据建模与问题分析能力\n- 连续两年获得校一等奖学金，专业成绩表现优秀\n\
+            - 担任研究生会技术部部长，组织多场校级技术分享活动\n- 参与校级 AI 创新创业大赛并获全国一等奖，具备创新实践能力\n\n当前输入：\n\
+            {{#1776093389368.text#}}"
+        selected: false
+        title: 校园经历渲染器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775719369643'
+      position:
+        x: 177.99304393371887
+        y: 440.3859905559351
+      positionAbsolute:
+        x: 177.99304393371887
+        y: 440.3859905559351
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 5f4a1da0-49d4-4ab4-ba5e-f3739033592f
+          role: system
+          text: "你是资深中文简历优化专家。\n\n请根据给定的 resume_json，将“实习经历”整理成标准中文简历描述。\n\n要求：\n\
+            1. 标题固定为：实习经历\n2. 从事实池中识别：\n   - 公司/单位\n   - 岗位角色\n   - 时间\n   - 项目/业务背景\n\
+            \   - 具体工作内容\n   - 技术栈/工具\n3. 输出格式应为：\n   公司/单位｜岗位角色｜时间\n   - bullet1\n\
+            \   - bullet2\n   - bullet3\n4. bullet 必须围绕：\n   - 实习背景 / 参与业务\n   - 主要工作内容\n\
+            \   - 使用的技术 / 工具\n5. 不要机械逐字段拼接\n6. 语言必须适合中文技术简历\n7. 如果没有实习经历，则输出空字符串\n\
+            8. 不要输出 JSON\n9. 不要输出解释\n\n输出示例：\n实习经历\n腾讯云｜后端开发实习生｜2024年7月 - 2024年10月\n\
+            - 参与 TI-ONE 机器学习平台私有云后端开发，支撑训练任务调度相关服务建设\n- 负责模型训练任务调度接口开发、测试脚本编写及 Kubernetes\
+            \ 部署工作\n- 使用 Go、Python、Kubernetes 与 Helm 完成后端服务开发与交付支持\n\n当前输入：\n{{#1776093389368.text#}}"
+        selected: false
+        title: 实习经历渲染器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775719433551'
+      position:
+        x: -24.468710637038214
+        y: 557.9691647619464
+      positionAbsolute:
+        x: -24.468710637038214
+        y: 557.9691647619464
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: b8704230-1f44-45b9-8382-75ba1baa1603
+          role: system
+          text: "你是资深中文简历优化专家。\n\n请根据给定的 resume_json，将“项目经历”整理成标准中文简历描述。\n\n要求：\n\
+            1. 标题固定为：项目经历\n2. 每个项目输出格式：\n   项目名称｜担任角色\n   - bullet1\n   - bullet2\n\
+            \   - bullet3\n3. 如果项目有时间，则放在标题后；如果没有时间，可省略\n4. 每个项目 bullet 优先围绕：\n  \
+            \ - 项目背景 / 目标\n   - 核心职责\n   - 技术工具\n   - 项目成果\n5. 优先突出量化结果\n6. 不要机械重复字段原文\n\
+            7. 语言简洁有力，适合技术简历\n8. 如果没有项目经历，则输出空字符串\n9. 不要输出 JSON\n10. 不要输出解释\n\n输出示例：\n\
+            项目经历\n校园二手交易平台｜后端开发\n- 面向校内学生搭建二手商品交易平台，支持商品发布、订单管理与即时沟通\n- 负责用户、商品与订单模块开发，使用\
+            \ Spring Boot、MySQL、Redis 完成核心服务实现\n- 项目上线后覆盖校内 300+ 用户，订单接口响应速度提升 40%\n\
+            \n异步任务调度系统 HikTaskCore｜核心后端开发\n- 基于 Go 构建高并发异步任务调度系统，用于企业级授权激活任务处理\n-\
+            \ 负责 controller-executor 双层架构设计、多维优先级调度策略和双模式重试机制实现\n- 支撑千万级任务稳定执行，系统\
+            \ QPS 从 500 提升至 2000+\n\n当前输入：\n{{#1776093389368.text#}}"
+        selected: false
+        title: 项目经历渲染器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775719484709'
+      position:
+        x: -188.08605880759194
+        y: 668.4897196224663
+      positionAbsolute:
+        x: -188.08605880759194
+        y: 668.4897196224663
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 62c0e3ca-2ede-44ca-ba14-4868df36ba16
+          role: system
+          text: "你是资深中文简历优化专家。\n\n请将以下几个部分组装成一份完整中文简历。\n\n要求：\n1. 按以下顺序输出：\n   - 基本信息\n\
+            \   - 教育经历\n   - 实习经历\n   - 项目经历\n   - 校园经历\n2. 每个模块之间空一行\n3. 如果某部分为空，则跳过\n\
+            4. 整体排版简洁、专业、适合技术岗简历\n5. 可直接复制到 Word 或 PDF\n6. 不要输出 JSON\n7. 不要输出解释\n\
+            8. 不要输出 markdown 代码块\n\n【基本信息】\n{{#1775718844476.text#}}\n\n【教育经历】\n{{#1775718906134.text#}}\n\
+            \n【实习经历】\n{{#1775719433551.text#}}\n\n【项目经历】\n{{#1775719484709.text#}}\n\
+            \n【校园经历】\n{{#1775719369643.text#}}"
+        selected: false
+        title: 简历总组装器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775719810063'
+      position:
+        x: 240.53209037554817
+        y: 705.8228225455932
+      positionAbsolute:
+        x: 240.53209037554817
+        y: 705.8228225455932
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0
+          mode: chat
+          name: qwen3.5-flash
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 8453d67c-df64-4a0d-97e7-b86203f9f3b3
+          role: system
+          text: "你是一名专业医学简历 JSON 清洗器。\n\n你的任务是：\n把用户输入的 resume_json\n清洗成稳定、标准、适合后续分段渲染器消费的\
+            \ clean_resume_json。\n\n你只负责：\n- 去除空字段\n- 去除重复内容\n- 标准化字段结构\n- 保持原始信息真实\n\
+            - 禁止润色内容\n- 禁止新增信息\n- 禁止修改用户原始事实\n\n==================================================\n\
+            【标准输出结构】\n==================================================\n\n输出必须严格为\
+            \ JSON：\n\n{\n  \"基本信息\": {},\n  \"教育经历\": [],\n  \"校园经历\": [],\n  \"\
+            实习经历\": [],\n  \"项目经历\": []\n}\n\n==================================================\n\
+            【字段清洗规则】\n==================================================\n\n1）基本信息\n\
+            保留原字段，不新增。\n\n2）教育经历\n统一保留：\n- 学历层级\n- 学校\n- 专业\n- 开始时间\n- 结束时间\n\n删除空字段。\n\
+            \n3）校园经历\n去重，保留原顺序。\n\n4）实习经历\n去重，保留原顺序。\n\n5）项目经历\n每条统一结构：\n\n{\n  \"\
+            项目名称\": \"\",\n  \"担任角色\": \"\",\n  \"开始时间\": \"\",\n  \"结束时间\": \"\"\
+            ,\n  \"项目背景\": \"\",\n  \"项目目标\": \"\",\n  \"职责\": [],\n  \"成果\": [],\n\
+            \  \"技术工具\": []\n}\n\n删除空字段和空数组。\n\n==================================================\n\
+            【强约束】\n==================================================\n\n1. 只能输出 JSON\n\
+            2. 禁止 markdown\n3. 禁止代码块\n4. 禁止解释\n5. 禁止补充不存在字段\n6. 禁止改写用户经历事实\n7. 删除所有空字段\n\
+            8. 所有数组自动去重\n9. 输出字段顺序必须固定：\n   基本信息 → 教育经历 → 校园经历 → 实习经历 → 项目经历\n10.\
+            \ 禁止把高价值经历压缩成短字符串\n- 实习经历必须尽量保留职责描述\n- 项目经历必须尽量保留背景、职责、成果细节\n- 医学技能关键词禁止丢失：\n\
+            \  ICU、CRRT、呼吸机、卒中、重症、NIHSS、机械通气\n\n以下为用户输入resume_json：\n{{#1775718669132.resume_json#}}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              基本信息:
+                type: object
+              实习经历:
+                items: {}
+                type: array
+              教育经历:
+                items:
+                  type: object
+                type: array
+              校园经历:
+                items: {}
+                type: array
+              项目经历:
+                items:
+                  type: object
+                type: array
+            required:
+            - 基本信息
+            - 教育经历
+            - 校园经历
+            - 实习经历
+            - 项目经历
+            type: object
+        structured_output_enabled: false
+        title: RESUME_JSON_CLEANER_LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1776093389368'
+      position:
+        x: 164.73146744208992
+        y: 258.03063929516856
+      positionAbsolute:
+        x: 164.73146744208992
+        y: 258.03063929516856
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 162.1887472346948
+      y: -33.03297563521278
+      zoom: 0.9392987156625391
+  rag_pipeline_variables: []

@@ -1,0 +1,1067 @@
+app:
+  description: 获取用户基本信息和教育经历
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: resume_basic_info_builder
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.36@73e3e28eca163b96da65ef9eab8633f9e7257213ff0d2f2bed93b28b552d2cda
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1775465122470-source-1775465195812-target
+      selected: false
+      source: '1775465122470'
+      sourceHandle: source
+      target: '1775465195812'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775465195812-source-1775469036974-target
+      selected: false
+      source: '1775465195812'
+      sourceHandle: source
+      target: '1775469036974'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1775469036974-source-1775471374004-target
+      selected: false
+      source: '1775469036974'
+      sourceHandle: source
+      target: '1775471374004'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1775471374004-source-1775472507722-target
+      source: '1775471374004'
+      sourceHandle: source
+      target: '1775472507722'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1775472507722-true-1775473093321-target
+      source: '1775472507722'
+      sourceHandle: 'true'
+      target: '1775473093321'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1775472507722-false-1775473137072-target
+      source: '1775472507722'
+      sourceHandle: 'false'
+      target: '1775473137072'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775473093321-source-1775473273369-target
+      source: '1775473093321'
+      sourceHandle: source
+      target: '1775473273369'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775473137072-source-1775473329721-target
+      source: '1775473137072'
+      sourceHandle: source
+      target: '1775473329721'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1775473273369-source-1775466320352-target
+      source: '1775473273369'
+      sourceHandle: source
+      target: '1775466320352'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1775473329721-source-1775473402710-target
+      source: '1775473329721'
+      sourceHandle: source
+      target: '1775473402710'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1775469036974-source-1775475492573-target
+      source: '1775469036974'
+      sourceHandle: source
+      target: '1775475492573'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1775475492573-source-1775472507722-target
+      source: '1775475492573'
+      sourceHandle: source
+      target: '1775472507722'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: user_message
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: user_message
+        - default: '{}'
+          hint: ''
+          label: resume_json
+          options: []
+          placeholder: ''
+          required: false
+          type: paragraph
+          variable: resume_json
+      height: 135
+      id: '1775465122470'
+      position:
+        x: -5
+        y: 161
+      positionAbsolute:
+        x: -5
+        y: 161
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 7ab4edc0-1599-4f19-a7af-2315eebd6c03
+          role: system
+          text: "你是一名专业 HR 简历助手。\n\n请从用户当前输入中抽取“基本信息”和“教育经历”的新增信息。\n\n要求：\n1. 只输出\
+            \ JSON 实例\n2. 不要输出 schema\n3. 不要输出解释\n4. 不要输出分析过程\n5. 严禁虚构未提供的信息\n6. 用户未提及字段返回空字符串\n\
+            7. 未新增教育经历返回空数组 []\n8. “研究生”统一标准化为“硕士”\n9. 只返回本轮新增部分，不返回完整简历\n\n教育时间抽取规则：\n\
+            1. 当用户提到“某学校 + 某学历 + 某年毕业”时，必须把该年份写入对应教育经历的“结束时间”\n2. 例如：\n   - “浙江大学硕士，2025年毕业”\n\
+            \   应输出为：\n   教育经历 = [\n     {\n       \"学历层级\": \"硕士\",\n       \"学校\"\
+            : \"浙江大学\",\n       \"结束时间\": \"2025年\"\n     }\n   ]\n3. 不要只把“2025年毕业”理解为顶部基本信息\n\
+            4. 如果能够明确对应到某段教育经历，则优先写入教育经历\n\n输出格式：\n{\n  \"基本信息\": {\n    \"姓名\": \"\
+            \",\n    \"性别\": \"\",\n    \"电话\": \"\",\n    \"邮箱\": \"\",\n    \"专业\"\
+            : \"\",\n    \"出生年月\": \"\",\n    \"毕业时间\": \"\",\n    \"政治面貌\": \"\"\
+            ,\n    \"求职意向\": \"\"\n  },\n  \"教育经历\": [\n    {\n      \"学历层级\": \"\"\
+            ,\n      \"学校\": \"\",\n      \"专业\": \"\",\n      \"开始时间\": \"\",\n \
+            \     \"结束时间\": \"\"\n    }\n  ]\n}\n"
+        - id: 8d496d5d-2762-4083-a72a-eec8e31985b0
+          role: user
+          text: '用户当前输入：
+
+            {{#1775465122470.user_message#}}
+
+
+            当前简历状态：
+
+            {{#1775465122470.resume_json#}}'
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              properties:
+                additionalProperties: false
+                properties:
+                  基本信息:
+                    additionalProperties: false
+                    properties:
+                      properties:
+                        additionalProperties: false
+                        properties:
+                          专业:
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          出生年月:
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          姓名:
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          政治面貌:
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          毕业时间:
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          求职意向:
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          电话:
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                          邮箱:
+                            additionalProperties: false
+                            properties:
+                              type:
+                                type: string
+                            required:
+                            - type
+                            type: object
+                        required:
+                        - 姓名
+                        - 电话
+                        - 邮箱
+                        - 专业
+                        - 出生年月
+                        - 毕业时间
+                        - 政治面貌
+                        - 求职意向
+                        type: object
+                      type:
+                        type: string
+                    required:
+                    - type
+                    - properties
+                    type: object
+                  教育经历:
+                    additionalProperties: false
+                    properties:
+                      items:
+                        additionalProperties: false
+                        properties:
+                          properties:
+                            additionalProperties: false
+                            properties:
+                              专业:
+                                additionalProperties: false
+                                properties:
+                                  type:
+                                    type: string
+                                required:
+                                - type
+                                type: object
+                              学历层级:
+                                additionalProperties: false
+                                properties:
+                                  type:
+                                    type: string
+                                required:
+                                - type
+                                type: object
+                              学校:
+                                additionalProperties: false
+                                properties:
+                                  type:
+                                    type: string
+                                required:
+                                - type
+                                type: object
+                              开始时间:
+                                additionalProperties: false
+                                properties:
+                                  type:
+                                    type: string
+                                required:
+                                - type
+                                type: object
+                              结束时间:
+                                additionalProperties: false
+                                properties:
+                                  type:
+                                    type: string
+                                required:
+                                - type
+                                type: object
+                            required:
+                            - 学历层级
+                            - 学校
+                            - 专业
+                            - 开始时间
+                            - 结束时间
+                            type: object
+                          type:
+                            type: string
+                        required:
+                        - type
+                        - properties
+                        type: object
+                      type:
+                        type: string
+                    required:
+                    - type
+                    - items
+                    type: object
+                required:
+                - 基本信息
+                - 教育经历
+                type: object
+              type:
+                type: string
+            required:
+            - type
+            - properties
+            type: object
+        structured_output_enabled: false
+        title: 基本信息抽取器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775465195812'
+      position:
+        x: 292
+        y: 120
+      positionAbsolute:
+        x: 292
+        y: 120
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775473273369'
+          - reply
+          value_type: string
+          variable: reply
+        - value_selector:
+          - '1775473273369'
+          - updated_resume_json
+          value_type: string
+          variable: updated_resume_json
+        - value_selector:
+          - '1775473273369'
+          - status
+          value_type: string
+          variable: status
+        selected: false
+        title: 输出
+        type: end
+      height: 140
+      id: '1775466320352'
+      position:
+        x: 891.2589423762295
+        y: 440.87960482324377
+      positionAbsolute:
+        x: 891.2589423762295
+        y: 440.87960482324377
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\ndef safe_str(v):\n    if v is None:\n        return\
+          \ \"\"\n    return str(v).strip()\n\ndef normalize_level(level):\n    level\
+          \ = safe_str(level)\n    if level == \"研究生\":\n        return \"硕士\"\n \
+          \   return level\n\ndef level_rank(level):\n    mapping = {\n        \"\
+          专科\": 1,\n        \"本科\": 2,\n        \"硕士\": 3,\n        \"博士\": 4\n  \
+          \  }\n    return mapping.get(normalize_level(level), 0)\n\nEDU_DURATION\
+          \ = {\n    \"专科\": 3,\n    \"本科\": 4,\n    \"硕士\": 3,\n    \"博士\": 4\n}\n\
+          \ndef empty_resume():\n    return {\n        \"基本信息\": {\n            \"\
+          姓名\": \"\",\n            \"电话\": \"\",\n            \"邮箱\": \"\",\n    \
+          \        \"专业\": \"\",\n            \"出生年月\": \"\",\n            \"毕业时间\"\
+          : \"\",\n            \"政治面貌\": \"\",\n            \"求职意向\": \"\"\n     \
+          \   },\n        \"教育经历\": [],\n        \"校园经历\": [],\n        \"实习经历\":\
+          \ [],\n        \"项目经历\": []\n    }\n\ndef parse_json_text(text):\n    if\
+          \ not text:\n        return {\n            \"基本信息\": {},\n            \"\
+          教育经历\": []\n        }\n\n    text = text.strip()\n\n    # 去掉 think 块\n \
+          \   if \"</think>\" in text:\n        text = text.split(\"</think>\", 1)[1].strip()\n\
+          \n    # 直接解析\n    try:\n        return json.loads(text)\n    except:\n \
+          \       pass\n\n    # 截取最外层 JSON\n    start = text.find(\"{\")\n    end\
+          \ = text.rfind(\"}\")\n    if start != -1 and end != -1 and end > start:\n\
+          \        candidate = text[start:end + 1]\n        try:\n            return\
+          \ json.loads(candidate)\n        except:\n            pass\n\n    return\
+          \ {\n        \"基本信息\": {},\n        \"教育经历\": []\n    }\n\ndef merge_basic_info(current,\
+          \ incoming):\n    \"\"\"\n    直接覆盖类字段：\n    - 姓名\n    - 电话\n    - 邮箱\n \
+          \   - 出生年月\n    - 政治面貌\n    - 求职意向\n\n    不直接覆盖：\n    - 专业\n    - 毕业时间\n\
+          \    这两个字段后面由“最高学历教育经历”推导\n    \"\"\"\n    direct_fields = [\"姓名\", \"电话\"\
+          , \"邮箱\", \"出生年月\", \"政治面貌\", \"求职意向\"]\n\n    for k in direct_fields:\n\
+          \        v = safe_str(incoming.get(k, \"\"))\n        if v:\n          \
+          \  current[k] = v\n\n    return current\n\ndef merge_education(current_list,\
+          \ incoming_list):\n    \"\"\"\n    按 学历层级 合并：\n    - 本科 / 硕士 / 博士 / 专科\n\
+          \    - 同层级更新\n    - 不同层级追加\n    \"\"\"\n    if not isinstance(current_list,\
+          \ list):\n        current_list = []\n    if not isinstance(incoming_list,\
+          \ list):\n        incoming_list = []\n\n    for edu in incoming_list:\n\
+          \        if not isinstance(edu, dict):\n            continue\n\n       \
+          \ edu_level = normalize_level(edu.get(\"学历层级\", \"\"))\n        edu[\"学历层级\"\
+          ] = edu_level\n\n        if not edu_level:\n            continue\n\n   \
+          \     matched = None\n        for old in current_list:\n            if normalize_level(old.get(\"\
+          学历层级\", \"\")) == edu_level:\n                matched = old\n          \
+          \      break\n\n        if matched is None:\n            current_list.append({\n\
+          \                \"学历层级\": edu_level,\n                \"学校\": safe_str(edu.get(\"\
+          学校\", \"\")),\n                \"专业\": safe_str(edu.get(\"专业\", \"\")),\n\
+          \                \"开始时间\": safe_str(edu.get(\"开始时间\", \"\")),\n        \
+          \        \"结束时间\": safe_str(edu.get(\"结束时间\", \"\"))\n            })\n \
+          \       else:\n            for field in [\"学校\", \"专业\", \"开始时间\", \"结束时间\"\
+          ]:\n                new_val = safe_str(edu.get(field, \"\"))\n         \
+          \       if new_val:\n                    matched[field] = new_val\n\n  \
+          \  return current_list\n\ndef infer_start_time(level, end_time):\n    level\
+          \ = normalize_level(level)\n    end_time = safe_str(end_time)\n\n    if\
+          \ not level or not end_time:\n        return \"\"\n\n    duration = EDU_DURATION.get(level)\n\
+          \    if not duration:\n        return \"\"\n\n    # 提取年份，例如：\n    # 2022\
+          \ / 2022年 / 2022-06 / 2022年6月\n    digits = \"\".join(ch for ch in end_time\
+          \ if ch.isdigit())\n    if len(digits) < 4:\n        return \"\"\n\n   \
+          \ year = int(digits[:4])\n    start_year = year - duration\n\n    return\
+          \ f\"{start_year}年9月\"\n\ndef fill_education_time(current_list):\n    if\
+          \ not isinstance(current_list, list):\n        return current_list\n\n \
+          \   for edu in current_list:\n        if not isinstance(edu, dict):\n  \
+          \          continue\n\n        level = normalize_level(edu.get(\"学历层级\"\
+          , \"\"))\n        start_time = safe_str(edu.get(\"开始时间\", \"\"))\n     \
+          \   end_time = safe_str(edu.get(\"结束时间\", \"\"))\n\n        # 缺开始时间但有结束时间时，自动反推\n\
+          \        if not start_time and end_time:\n            inferred = infer_start_time(level,\
+          \ end_time)\n            if inferred:\n                edu[\"开始时间\"] = inferred\n\
+          \n    return current_list\n\ndef get_highest_education(edu_list):\n    if\
+          \ not isinstance(edu_list, list) or not edu_list:\n        return None\n\
+          \n    sorted_list = sorted(\n        edu_list,\n        key=lambda x: level_rank(x.get(\"\
+          学历层级\", \"\")),\n        reverse=True\n    )\n    return sorted_list[0]\
+          \ if sorted_list else None\n\ndef sync_highest_education_end_from_basic_info(current):\n\
+          \    \"\"\"\n    如果最高学历教育经历缺少结束时间，而顶部基本信息里已有毕业时间，\n    则优先回填给最高学历教育经历。\n\
+          \    \"\"\"\n    highest = get_highest_education(current.get(\"教育经历\", []))\n\
+          \    if not highest:\n        return current\n\n    edu_end = safe_str(highest.get(\"\
+          结束时间\", \"\"))\n    basic_end = safe_str(current.get(\"基本信息\", {}).get(\"\
+          毕业时间\", \"\"))\n\n    if not edu_end and basic_end:\n        highest[\"\
+          结束时间\"] = basic_end\n\n    return current\n\ndef sync_basic_info_from_highest_education(current):\n\
+          \    \"\"\"\n    用最高学历回填顶部展示字段：\n    - 专业\n    - 毕业时间\n    \"\"\"\n    highest\
+          \ = get_highest_education(current.get(\"教育经历\", []))\n    if not highest:\n\
+          \        return current\n\n    highest_major = safe_str(highest.get(\"专业\"\
+          , \"\"))\n    highest_end = safe_str(highest.get(\"结束时间\", \"\"))\n\n  \
+          \  if highest_major:\n        current[\"基本信息\"][\"专业\"] = highest_major\n\
+          \n    if highest_end:\n        current[\"基本信息\"][\"毕业时间\"] = highest_end\n\
+          \n    return current\n\ndef main(current_json, extracted_text):\n    # 解析当前完整简历\n\
+          \    try:\n        current = json.loads(current_json) if current_json else\
+          \ empty_resume()\n    except:\n        current = empty_resume()\n\n    if\
+          \ not current:\n        current = empty_resume()\n\n    # 保底字段\n    template\
+          \ = empty_resume()\n    for k, v in template.items():\n        if k not\
+          \ in current:\n            current[k] = v\n\n    if \"基本信息\" not in current\
+          \ or not isinstance(current[\"基本信息\"], dict):\n        current[\"基本信息\"\
+          ] = template[\"基本信息\"]\n\n    if \"教育经历\" not in current or not isinstance(current[\"\
+          教育经历\"], list):\n        current[\"教育经历\"] = []\n\n    # 解析本轮抽取结果\n    incoming\
+          \ = parse_json_text(extracted_text)\n\n    # merge 基本信息（直接字段）\n    current[\"\
+          基本信息\"] = merge_basic_info(\n        current[\"基本信息\"],\n        incoming.get(\"\
+          基本信息\", {})\n    )\n\n    # merge 教育经历\n    current[\"教育经历\"] = merge_education(\n\
+          \        current[\"教育经历\"],\n        incoming.get(\"教育经历\", [])\n    )\n\
+          \n    # 如果顶部毕业时间已有，而最高学历缺结束时间，则回填\n    current = sync_highest_education_end_from_basic_info(current)\n\
+          \    \n    # 自动补全教育经历开始时间\n    current[\"教育经历\"] = fill_education_time(current[\"\
+          教育经历\"])\n\n    # 用最高学历同步顶部专业/毕业时间\n    current = sync_basic_info_from_highest_education(current)\n\
+          \n    return {\n        \"result\": json.dumps(current, ensure_ascii=False)\n\
+          \    }"
+        code_language: python3
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 基本信息状态合并
+        type: code
+        variables:
+        - value_selector:
+          - '1775465122470'
+          - resume_json
+          value_type: string
+          variable: current_json
+        - value_selector:
+          - '1775465195812'
+          - text
+          value_type: string
+          variable: extracted_text
+      height: 52
+      id: '1775469036974'
+      position:
+        x: 503
+        y: 254
+      positionAbsolute:
+        x: 503
+        y: 254
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 29d7443d-3ea7-4a7b-a1e9-3c74f0417ed6
+          role: system
+          text: "你是一名专业 HR 简历助手。\n\n请根据当前 resume_json，判断“基本信息 + 教育经历”是否已经足够进入下一阶段。\n\
+            \n【必须满足的核心字段】\n以下字段缺失时，不能进入下一阶段：\n1. 姓名\n2. 电话\n3. 求职意向\n4. 毕业时间\n5. 至少有一段教育经历，并且至少存在一段教育经历同时包含：\n\
+            \   - 学历层级\n   - 学校\n   - 专业\n\n【教育链完整性规则（必须严格执行）】\n请先收集当前教育经历中出现过的学历层级集合，只考虑以下四种标准学历：\n\
+            - 专科\n- 本科\n- 硕士\n- 博士\n\n然后严格按下面规则判断：\n\n1. 如果出现“硕士”，则必须同时出现“本科”\n  \
+            \ - 若没有“本科”，则在“缺失字段”中加入：本科教育经历\n\n2. 如果出现“博士”，则必须同时出现“硕士”和“本科”\n   - 若没有“硕士”，则在“缺失字段”中加入：硕士教育经历\n\
+            \   - 若没有“本科”，则在“缺失字段”中加入：本科教育经历\n\n3. 如果只出现“本科”，则不要求补充其他更低或更高学历\n\n4.\
+            \ 如果只出现“专科”，则不要求补充其他学历\n\n5. “缺失字段”中不得遗漏上述学历链规则推导出的缺失项\n\n【建议补充字段】\n以下字段缺失时，可以提醒补充，但不阻塞进入下一阶段：\n\
+            1. 性别\n2. 出生年月\n3. 政治面貌\n4. 邮箱\n\n【评分规则】\n- 核心字段完整程度可用于给出“信息完整度”\n- 但只要“缺失字段”非空，就必须输出：\n\
+            \  \"是否满足进入下一阶段\": \"false\"\n\n【输出要求】\n1. 严禁虚构\n2. 仅根据输入 JSON 判断\n3.\
+            \ 核心缺失写入“缺失字段”\n4. 增强字段缺失写入“建议补充字段”\n5. 若“缺失字段”为空，则输出 \"true\"\n6. 若“缺失字段”不为空，则输出\
+            \ \"false\"\n7. 严格按 schema 输出\n8. 不要输出解释\n9. 必须先判断学历链是否完整，再输出结果\n10. 如果出现博士但没有硕士，必须判定为不完整\n\
+            11. 如果出现硕士但没有本科，必须判定为不完整\n\n当前 resume_json：你是一名专业 HR 简历助手。\n\n请根据当前 resume_json，判断“基本信息\
+            \ + 教育经历”的基础字段是否足够完整。\n\n【必须满足的基础字段】\n以下字段缺失时，不能进入下一阶段：\n1. 姓名\n2. 电话\n\
+            3. 求职意向\n4. 毕业时间\n5. 至少有一段教育经历，并且至少存在一段教育经历同时包含：\n   - 学历层级\n   - 学校\n\
+            \   - 专业\n\n注意：\n1. 本节点不负责判断“硕士是否缺本科”“博士是否缺硕士”这类学历链规则\n2. 本节点只判断基础字段是否齐全\n\
+            \n【建议补充字段】\n以下字段缺失时，可以提醒补充，但不阻塞进入下一阶段：\n1. 性别\n2. 出生年月\n3. 政治面貌\n4. 邮箱\n\
+            \n【输出要求】\n1. 严禁虚构\n2. 仅根据输入 JSON 判断\n3. 基础缺失写入“缺失字段”\n4. 增强字段缺失写入“建议补充字段”\n\
+            5. 若“缺失字段”为空，则输出 \"true\"\n6. 若“缺失字段”不为空，则输出 \"false\"\n7. 严格按 schema\
+            \ 输出\n8. 不要输出解释\n\n当前 resume_json：\n{{#1775469036974.result#}}\n{{#1775469036974.result#}}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              信息完整度:
+                type: number
+              建议补充字段:
+                items:
+                  type: string
+                type: array
+              是否满足基础条件:
+                type: string
+              缺失字段:
+                items:
+                  type: string
+                type: array
+            required:
+            - 信息完整度
+            - 缺失字段
+            - 建议补充字段
+            - 是否满足基础条件
+            type: object
+        structured_output_enabled: true
+        title: 基本信息完整度分析器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775471374004'
+      position:
+        x: 87.32621464257784
+        y: 339.4786439277337
+      positionAbsolute:
+        x: 87.32621464257784
+        y: 339.4786439277337
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: 4088ead1-7cf7-4d38-9b0e-4a042dc748e2
+            value: 'true'
+            varType: string
+            variable_selector:
+            - '1775471374004'
+            - structured_output
+            - 是否满足基础条件
+          - comparison_operator: contains
+            id: 39927fc6-92e7-4250-9849-a6f39d61dcb0
+            value: 'true'
+            varType: string
+            variable_selector:
+            - '1775475492573'
+            - structured_output
+            - 学历链是否完整
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 198
+      id: '1775472507722'
+      position:
+        x: -5
+        y: 489.52180339500546
+      positionAbsolute:
+        x: -5
+        y: 489.52180339500546
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: b47c6058-0e03-464e-9a4a-1c2354a806d7
+          role: system
+          text: '你是一名专业 HR 简历助手。
+
+
+            用户的“基本信息 + 教育经历”已经足够完整，可以进入下一阶段。
+
+
+            请生成一段自然、简洁、专业的确认回复。
+
+
+            要求：
+
+            1. 确认我已经记录好了用户的基本信息和教育经历
+
+            2. 不要输出 JSON
+
+            3. 不要逐字段机械罗列
+
+            4. 语气自然，像真实 HR 顾问
+
+            5. 最后自然提示：接下来可以继续补充校园经历
+
+
+            当前简历：
+
+            {{#1775469036974.result#}}'
+        selected: false
+        title: 基本信息摘要生成器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775473093321'
+      position:
+        x: 297
+        y: 489.52180339500546
+      positionAbsolute:
+        x: 297
+        y: 489.52180339500546
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 2a23a63c-3c43-45ad-b2ba-e2e3192670fd
+          role: system
+          text: '你是一名专业 HR 简历助手。
+
+
+            请根据当前缺失项，继续向用户追问 1~2 个最关键问题，用于补充简历。
+
+
+            【优先级规则（必须严格执行）】
+
+            第一优先级：学历链缺失项
+
+            - 如果缺失“硕士”
+
+            - 或缺失“本科”
+
+            必须优先追问该段教育经历的学校、专业、毕业时间
+
+            禁止优先跳去问实习、项目、校园经历
+
+
+            第二优先级：基础缺失字段
+
+            例如：
+
+            - 电话
+
+            - 求职意向
+
+            - 毕业时间
+
+            - 教育经历字段
+
+
+            【追问要求】
+
+            1. 一次最多追问 2 个问题
+
+            2. 优先补齐学历链
+
+            3. 不要重复用户已有信息
+
+            4. 用真实 HR 对话口吻
+
+            5. 语气自然专业
+
+            6. 不要输出 JSON
+
+
+            基础缺失字段：
+
+            {{#1775471374004.structured_output.缺失字段#}}
+
+
+            学历链缺失项：
+
+            {{#1775475492573.structured_output.学历链缺失项#}}
+
+
+            当前简历：
+
+            {{#1775469036974.result#}}'
+        selected: false
+        title: 基本信息追问生成器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775473137072'
+      position:
+        x: 297
+        y: 616.5218033950055
+      positionAbsolute:
+        x: 297
+        y: 616.5218033950055
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "\ndef main(reply_text, updated_resume_json):\n    return {\n      \
+          \  \"reply\": reply_text,\n        \"updated_resume_json\": updated_resume_json,\n\
+          \        \"status\": \"basic_info_ready\"\n    }\n"
+        code_language: python3
+        outputs:
+          reply:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+          updated_resume_json:
+            children: null
+            type: string
+        selected: false
+        title: 基本信息IF结果组装器
+        type: code
+        variables:
+        - value_selector:
+          - '1775473093321'
+          - text
+          value_type: string
+          variable: reply_text
+        - value_selector:
+          - '1775469036974'
+          - result
+          value_type: string
+          variable: updated_resume_json
+      height: 52
+      id: '1775473273369'
+      position:
+        x: 599
+        y: 489.52180339500546
+      positionAbsolute:
+        x: 599
+        y: 489.52180339500546
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "\ndef main(reply_text, updated_resume_json):\n    return {\n      \
+          \  \"reply\": reply_text,\n        \"updated_resume_json\": updated_resume_json,\n\
+          \        \"status\": \"need_followup\"\n    }\n"
+        code_language: python3
+        outputs:
+          reply:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+          updated_resume_json:
+            children: null
+            type: string
+        selected: false
+        title: 基本信息ELSE结果组装器
+        type: code
+        variables:
+        - value_selector:
+          - '1775473137072'
+          - text
+          value_type: string
+          variable: reply_text
+        - value_selector:
+          - '1775469036974'
+          - result
+          value_type: string
+          variable: updated_resume_json
+      height: 52
+      id: '1775473329721'
+      position:
+        x: 599
+        y: 616.5218033950055
+      positionAbsolute:
+        x: 599
+        y: 616.5218033950055
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775473329721'
+          - reply
+          value_type: string
+          variable: reply
+        - value_selector:
+          - '1775473329721'
+          - updated_resume_json
+          value_type: string
+          variable: updated_resume_json
+        - value_selector:
+          - '1775473329721'
+          - status
+          value_type: string
+          variable: status
+        selected: false
+        title: 输出 2
+        type: end
+      height: 140
+      id: '1775473402710'
+      position:
+        x: 901
+        y: 616.5218033950055
+      positionAbsolute:
+        x: 901
+        y: 616.5218033950055
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: qwen3-max
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 092d941a-e4a4-4249-ae51-9235f495f884
+          role: system
+          text: "你是一名专业 HR 简历助手。\n\n请只根据当前 resume_json 中的“教育经历”，判断学历链是否完整。\n\n先提取当前已经出现的学历层级，只允许使用以下标准值：\n\
+            - 专科\n- 本科\n- 硕士\n- 博士\n\n判断规则（必须严格执行）：\n1. 如果出现“硕士”，则必须同时出现“本科”\n   -\
+            \ 若没有“本科”，则“学历链缺失项”加入：本科教育经历\n\n2. 如果出现“博士”，则必须同时出现“硕士”和“本科”\n   - 若没有“硕士”，则加入：硕士教育经历\n\
+            \   - 若没有“本科”，则加入：本科教育经历\n\n3. 如果只出现“本科”，则学历链完整\n4. 如果只出现“专科”，则学历链完整\n\
+            5. 如果“学历链缺失项”为空，则输出 \"true\"\n6. 如果“学历链缺失项”非空，则输出 \"false\"\n\n输出要求：\n\
+            1. 严禁虚构\n2. 只根据教育经历判断\n3. 严格按 schema 输出\n4. 不要输出解释\n\n当前 resume_json：\n\
+            {{#1775469036974.result#}}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              学历链是否完整:
+                type: string
+              学历链缺失项:
+                items:
+                  type: string
+                type: array
+              已出现学历层级:
+                items:
+                  type: string
+                type: array
+            required:
+            - 已出现学历层级
+            - 学历链缺失项
+            - 学历链是否完整
+            type: object
+        structured_output_enabled: true
+        title: 教育链完整性分析器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775475492573'
+      position:
+        x: 421.1980782089797
+        y: 347.4372665377176
+      positionAbsolute:
+        x: 421.1980782089797
+        y: 347.4372665377176
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 66.29587000768242
+      y: -17.992139807585318
+      zoom: 0.7663099801038944
+  rag_pipeline_variables: []

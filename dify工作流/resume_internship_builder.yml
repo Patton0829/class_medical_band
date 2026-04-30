@@ -1,0 +1,772 @@
+app:
+  description: 获取用户实习经历
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: resume_internship_builder
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.1.36@73e3e28eca163b96da65ef9eab8633f9e7257213ff0d2f2bed93b28b552d2cda
+    version: null
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 20
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1775558074565-source-1775558076382-target
+      source: '1775558074565'
+      sourceHandle: source
+      target: '1775558076382'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775558076382-source-1775558259998-target
+      source: '1775558076382'
+      sourceHandle: source
+      target: '1775558259998'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1775558259998-source-1775558344439-target
+      source: '1775558259998'
+      sourceHandle: source
+      target: '1775558344439'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1775558344439-source-1775558547071-target
+      source: '1775558344439'
+      sourceHandle: source
+      target: '1775558547071'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1775558547071-true-1775558640904-target
+      source: '1775558547071'
+      sourceHandle: 'true'
+      target: '1775558640904'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1775558547071-false-1775558745837-target
+      source: '1775558547071'
+      sourceHandle: 'false'
+      target: '1775558745837'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775558640904-source-1775558793744-target
+      source: '1775558640904'
+      sourceHandle: source
+      target: '1775558793744'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 1775558745837-source-1775558906615-target
+      source: '1775558745837'
+      sourceHandle: source
+      target: '1775558906615'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1775558793744-source-1775558994728-target
+      source: '1775558793744'
+      sourceHandle: source
+      target: '1775558994728'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1775558906615-source-1775559036632-target
+      source: '1775558906615'
+      sourceHandle: source
+      target: '1775559036632'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: user_message
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: user_message
+        - default: '{}'
+          hint: ''
+          label: resume_json
+          options: []
+          placeholder: ''
+          required: false
+          type: paragraph
+          variable: resume_json
+      height: 135
+      id: '1775558074565'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params: {}
+          mode: chat
+          name: qwen-plus-latest
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: 52e9ca22-77da-46fc-9607-4b91598da54a
+          role: system
+          text: "你是一名专业 HR 简历助手。\n\n任务：\n从用户当前输入中，抽取“单段实习经历”的新增事实。\n\n重点关注以下 6 个维度：\n\
+            1. 公司/单位\n2. 岗位角色\n3. 时间\n4. 项目/业务背景\n5. 具体工作内容\n6. 技术栈/工具\n\n输出字段说明：\n\
+            1. 新增实习事实：只放可直接写入简历的正向事实\n2. 命中维度：本轮用户明确提供了信息的维度\n3. 明确没有的维度：只有当用户明确说“没有”“未参与”“未接触”某个维度时，才允许放入\n\
+            \n关键规则（必须严格执行）：\n1. 未提及 ≠ 没有\n2. 如果用户没有提到某个维度，绝不能放入“明确没有的维度”\n3. “明确没有的维度”只能用于用户明确否定的情况，例如：\n\
+               - 我没有接触过部署\n   - 我没有参与项目背景设计\n4. 如果一个维度出现在“命中维度”，则绝不能同时出现在“明确没有的维度”\n\
+            5. 只抽取本轮新增信息\n6. 严禁脑补\n7. 不要把“未提及”当成“none”\n\n用户输入：\n{{#1775558074565.user_message#}}\n\
+            \n当前简历状态：\n{{#1775558074565.resume_json#}}\n\n示例1：\n用户输入：\n我在腾讯云做后端开发实习，时间是2024年7月到现在，主要参与TI-ONE私有云开发，使用Go和Python开发接口。\n\
+            \n正确输出：\n{\n  \"新增实习事实\": [\n    \"公司/单位：腾讯云\",\n    \"岗位角色：后端开发实习\",\n\
+            \    \"时间：2024年7月至今\",\n    \"项目/业务背景：TI-ONE私有云开发\",\n    \"具体工作内容：开发接口\"\
+            ,\n    \"技术栈/工具：Go, Python\"\n  ],\n  \"命中维度\": [\n    \"公司/单位\",\n  \
+            \  \"岗位角色\",\n    \"时间\",\n    \"项目/业务背景\",\n    \"具体工作内容\",\n    \"技术栈/工具\"\
+            \n  ],\n  \"明确没有的维度\": []\n}\n\n示例2：\n用户输入：\n我没有接触过部署，也没有参与项目背景设计。\n\n\
+            正确输出：\n{\n  \"新增实习事实\": [],\n  \"命中维度\": [],\n  \"明确没有的维度\": [\n    \"\
+            项目/业务背景\"\n  ]\n}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              命中维度:
+                items:
+                  enum:
+                  - 公司/单位
+                  - 岗位角色
+                  - 时间
+                  - 项目/业务背景
+                  - 具体工作内容
+                  - 技术栈/工具
+                  type: string
+                type: array
+              新增实习事实:
+                items:
+                  type: string
+                type: array
+              明确没有的维度:
+                items:
+                  enum:
+                  - 公司/单位
+                  - 岗位角色
+                  - 时间
+                  - 项目/业务背景
+                  - 具体工作内容
+                  - 技术栈/工具
+                  type: string
+                type: array
+            required:
+            - 新增实习事实
+            - 命中维度
+            - 明确没有的维度
+            type: object
+        structured_output_enabled: true
+        title: 实习事实抽取器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775558076382'
+      position:
+        x: 382
+        y: 282
+      positionAbsolute:
+        x: 382
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\nVALID_DIMS = [\n    \"公司/单位\",\n    \"岗位角色\",\n    \"\
+          时间\",\n    \"项目/业务背景\",\n    \"具体工作内容\",\n    \"技术栈/工具\"\n]\n\nNEGATIVE_PATTERNS\
+          \ = [\n    \"没有\",\n    \"没做过\",\n    \"未参与\",\n    \"未接触\",\n    \"无\"\n\
+          ]\n\nFACT_PREFIX_TO_DIM = {\n    \"公司/单位：\": \"公司/单位\",\n    \"公司/单位:\"\
+          : \"公司/单位\",\n    \"岗位角色：\": \"岗位角色\",\n    \"岗位角色:\": \"岗位角色\",\n    \"\
+          时间：\": \"时间\",\n    \"时间:\": \"时间\",\n    \"项目/业务背景：\": \"项目/业务背景\",\n \
+          \   \"项目/业务背景:\": \"项目/业务背景\",\n    \"具体工作内容：\": \"具体工作内容\",\n    \"具体工作内容:\"\
+          : \"具体工作内容\",\n    \"技术栈/工具：\": \"技术栈/工具\",\n    \"技术栈/工具:\": \"技术栈/工具\"\
+          ,\n}\n\ndef empty_resume():\n    return {\n        \"基本信息\": {},\n     \
+          \   \"教育经历\": [],\n        \"校园经历\": [],\n        \"实习经历\": [],\n      \
+          \  \"项目经历\": [],\n        \"_meta\": {\n            \"实习维度状态\": {\n    \
+          \            \"公司/单位\": \"unknown\",\n                \"岗位角色\": \"unknown\"\
+          ,\n                \"时间\": \"unknown\",\n                \"项目/业务背景\": \"\
+          unknown\",\n                \"具体工作内容\": \"unknown\",\n                \"\
+          技术栈/工具\": \"unknown\"\n            }\n        }\n    }\n\ndef normalize_list(v):\n\
+          \    if isinstance(v, list):\n        return [str(x).strip() for x in v\
+          \ if str(x).strip()]\n    if isinstance(v, str):\n        s = str(v).strip()\n\
+          \        return [s] if s else []\n    return []\n\ndef is_positive_fact(fact):\n\
+          \    fact = str(fact).strip()\n    if not fact:\n        return False\n\
+          \    for p in NEGATIVE_PATTERNS:\n        if p in fact:\n            return\
+          \ False\n    return True\n\ndef ensure_meta_structure(current):\n    if\
+          \ \"_meta\" not in current or not isinstance(current[\"_meta\"], dict):\n\
+          \        current[\"_meta\"] = {}\n\n    if \"实习维度状态\" not in current[\"\
+          _meta\"] or not isinstance(current[\"_meta\"][\"实习维度状态\"], dict):\n    \
+          \    current[\"_meta\"][\"实习维度状态\"] = empty_resume()[\"_meta\"][\"实习维度状态\"\
+          ].copy()\n\n    # 兼容旧字段 meta，迁移到 _meta\n    if \"meta\" in current and isinstance(current[\"\
+          meta\"], dict):\n        old_status = current[\"meta\"].get(\"实习维度状态\",\
+          \ {})\n        if isinstance(old_status, dict):\n            for dim in\
+          \ VALID_DIMS:\n                old_val = old_status.get(dim)\n         \
+          \       if old_val in [\"done\", \"none\", \"unknown\"]:\n             \
+          \       if current[\"_meta\"][\"实习维度状态\"].get(dim, \"unknown\") == \"unknown\"\
+          :\n                        current[\"_meta\"][\"实习维度状态\"][dim] = old_val\n\
+          \        del current[\"meta\"]\n\n    return current\n\ndef infer_dims_from_facts(facts):\n\
+          \    inferred = set()\n    for fact in facts:\n        for prefix, dim in\
+          \ FACT_PREFIX_TO_DIM.items():\n            if fact.startswith(prefix):\n\
+          \                inferred.add(dim)\n                break\n    return inferred\n\
+          \ndef main(current_json, structured_output):\n    try:\n        current\
+          \ = json.loads(current_json) if current_json else empty_resume()\n    except:\n\
+          \        current = empty_resume()\n\n    if not current or not isinstance(current,\
+          \ dict):\n        current = empty_resume()\n\n    if \"实习经历\" not in current\
+          \ or not isinstance(current[\"实习经历\"], list):\n        current[\"实习经历\"\
+          ] = []\n\n    current = ensure_meta_structure(current)\n    dim_status =\
+          \ current[\"_meta\"][\"实习维度状态\"]\n\n    if not isinstance(structured_output,\
+          \ dict):\n        structured_output = {}\n\n    facts = normalize_list(structured_output.get(\"\
+          新增实习事实\", []))\n    hit_dims = [x for x in normalize_list(structured_output.get(\"\
+          命中维度\", [])) if x in VALID_DIMS]\n    none_dims = [x for x in normalize_list(structured_output.get(\"\
+          明确没有的维度\", [])) if x in VALID_DIMS]\n\n    # 1) 合并正向事实\n    for fact in\
+          \ facts:\n        if is_positive_fact(fact) and fact not in current[\"实习经历\"\
+          ]:\n            current[\"实习经历\"].append(fact)\n\n    # 2) 从事实前缀兜底推断维度\n\
+          \    inferred_dims = infer_dims_from_facts(facts)\n\n    # 3) 合并命中维度：显式命中\
+          \ + 兜底推断\n    final_hit_dims = set(hit_dims) | inferred_dims\n\n    # 4)\
+          \ 设置 done\n    for dim in final_hit_dims:\n        if dim in VALID_DIMS\
+          \ and dim not in none_dims:\n            dim_status[dim] = \"done\"\n\n\
+          \    # 5) 设置 none，但不能覆盖 done\n    for dim in none_dims:\n        if dim_status.get(dim)\
+          \ != \"done\":\n            dim_status[dim] = \"none\"\n\n    return {\n\
+          \        \"result\": json.dumps(current, ensure_ascii=False)\n    }"
+        code_language: python3
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 实习状态合并器
+        type: code
+        variables:
+        - value_selector:
+          - '1775558074565'
+          - resume_json
+          value_type: string
+          variable: current_json
+        - value_selector:
+          - '1775558076382'
+          - structured_output
+          value_type: object
+          variable: structured_output
+      height: 52
+      id: '1775558259998'
+      position:
+        x: 367
+        y: 432
+      positionAbsolute:
+        x: 367
+        y: 432
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "import json\n\nVALID_DIMS = [\n    \"公司/单位\",\n    \"岗位角色\",\n    \"\
+          时间\",\n    \"项目/业务背景\",\n    \"具体工作内容\",\n    \"技术栈/工具\"\n]\n\nCORE_DIMS\
+          \ = [\"公司/单位\", \"岗位角色\", \"时间\", \"项目/业务背景\"]\n\ndef count_facts_by_prefix(facts,\
+          \ prefix):\n    count = 0\n    for fact in facts:\n        if isinstance(fact,\
+          \ str) and fact.startswith(prefix):\n            count += 1\n    return\
+          \ count\n\ndef main(resume_json):\n    try:\n        data = json.loads(resume_json)\
+          \ if isinstance(resume_json, str) else resume_json\n    except:\n      \
+          \  data = {}\n\n    dim_status = data.get(\"_meta\", {}).get(\"实习维度状态\"\
+          , {})\n    facts = data.get(\"实习经历\", [])\n\n    covered = []\n    pending\
+          \ = []\n\n    for dim in VALID_DIMS:\n        status = dim_status.get(dim,\
+          \ \"unknown\")\n        if status in [\"done\", \"none\"]:\n           \
+          \ covered.append(dim)\n        else:\n            pending.append(dim)\n\n\
+          \    # 核心基础维度必须全部完成\n    core_ok = all(dim_status.get(dim, \"unknown\")\
+          \ == \"done\" for dim in CORE_DIMS)\n\n    # 深度判断\n    work_count = count_facts_by_prefix(facts,\
+          \ \"具体工作内容:\")\n    tech_count = count_facts_by_prefix(facts, \"技术栈/工具:\"\
+          )\n\n    # 满足以下其一才算深度足够\n    depth_ok = (\n        work_count >= 2 or\n\
+          \        tech_count >= 2 or\n        len(facts) >= 7\n    )\n\n    ready\
+          \ = core_ok and depth_ok\n\n    return {\n        \"covered_dims\": covered,\n\
+          \        \"pending_dims\": pending,\n        \"is_ready\": ready\n    }"
+        code_language: python3
+        outputs:
+          covered_dims:
+            children: null
+            type: array[string]
+          is_ready:
+            children: null
+            type: boolean
+          pending_dims:
+            children: null
+            type: array[string]
+        selected: false
+        title: 实习覆盖度分析器
+        type: code
+        variables:
+        - value_selector:
+          - '1775558259998'
+          - result
+          value_type: string
+          variable: resume_json
+      height: 52
+      id: '1775558344439'
+      position:
+        x: 320
+        y: 548
+      positionAbsolute:
+        x: 320
+        y: 548
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: a34f3e2b-6b74-41c9-9019-597866368184
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1775558344439'
+            - is_ready
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 148
+      id: '1775558547071'
+      position:
+        x: -4
+        y: 647
+      positionAbsolute:
+        x: -4
+        y: 647
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params: {}
+          mode: chat
+          name: qwen-plus-latest
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: b75c7115-1f1d-4ac8-8415-9332286cbbc2
+          role: system
+          text: '你是一名专业 HR 简历助手。
+
+
+            用户当前这段实习经历已经补充完整，可以进入下一阶段。
+
+
+            请生成一段自然、简洁、专业的确认回复。
+
+
+            要求：
+
+            1. 确认我已经记录好了这段实习经历
+
+            2. 不要输出 JSON
+
+            3. 不要机械逐字段复述
+
+            4. 语气自然，像真实 HR 顾问
+
+            5. 最后提示：接下来可以继续补充项目经历
+
+
+            当前简历：
+
+            {{#1775558259998.result#}}'
+        selected: false
+        title: 实习阶段摘要生成器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775558640904'
+      position:
+        x: 298
+        y: 647
+      positionAbsolute:
+        x: 298
+        y: 647
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params: {}
+          mode: chat
+          name: qwen-plus-latest
+          provider: langgenius/tongyi/tongyi
+        prompt_template:
+        - id: dda1e42d-9404-4741-a2a7-2d7b71d52f18
+          role: system
+          text: '你是一名专业 HR 简历助手。
+
+
+            当前用户这段实习经历的基础信息已经较完整，但内容还不够丰富。
+
+
+            请仅围绕以下待补充方向继续提问：
+
+            {{#1775558344439.pending_dims#}}
+
+
+            如果基础维度已经齐全，请优先追问：
+
+            1. 更具体的工作内容
+
+            2. 更完整的技术栈/工具
+
+            3. 具体负责了哪些模块、服务或开发任务
+
+
+            要求：
+
+            1. 一次最多问 2 个问题
+
+            2. 不要重复问公司、岗位、时间这类已经明确的信息
+
+            3. 问题自然口语化
+
+            4. 不要追问量化指标
+
+            5. 不要输出 JSON
+
+
+            优先追问更容易写进简历的工作内容，例如：
+
+            - 接口开发
+
+            - 测试脚本
+
+            - 服务部署
+
+            - 模块开发
+
+            - 问题排查
+
+            - 技术工具使用
+
+
+            不要优先追问过深的实现细节，例如：
+
+            - RESTful 还是 gRPC
+
+            - 底层协议细节
+
+            - 复杂架构设计细节
+
+            除非用户已经主动提到。
+
+
+            当前简历：
+
+            {{#1775558259998.result#}}'
+        selected: false
+        title: 实习追问生成器
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1775558745837'
+      position:
+        x: 298
+        y: 774
+      positionAbsolute:
+        x: 298
+        y: 774
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(reply_text, updated_resume_json):\n    return {\n        \"\
+          reply\": reply_text,\n        \"updated_resume_json\": updated_resume_json,\n\
+          \        \"status\": \"internship_ready\"\n    }"
+        code_language: python3
+        outputs:
+          reply:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+          updated_resume_json:
+            children: null
+            type: string
+        selected: false
+        title: 实习TRUE结果组装器
+        type: code
+        variables:
+        - value_selector:
+          - '1775558640904'
+          - text
+          value_type: string
+          variable: reply_text
+        - value_selector:
+          - '1775558259998'
+          - result
+          value_type: string
+          variable: updated_resume_json
+      height: 52
+      id: '1775558793744'
+      position:
+        x: 600
+        y: 647
+      positionAbsolute:
+        x: 600
+        y: 647
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(reply_text, updated_resume_json):\n    return {\n        \"\
+          reply\": reply_text,\n        \"updated_resume_json\": updated_resume_json,\n\
+          \        \"status\": \"need_followup\"\n    }"
+        code_language: python3
+        outputs:
+          reply:
+            children: null
+            type: string
+          status:
+            children: null
+            type: string
+          updated_resume_json:
+            children: null
+            type: string
+        selected: false
+        title: 实习FALSE结果组装器
+        type: code
+        variables:
+        - value_selector:
+          - '1775558745837'
+          - text
+          value_type: string
+          variable: reply_text
+        - value_selector:
+          - '1775558259998'
+          - result
+          value_type: string
+          variable: updated_resume_json
+      height: 52
+      id: '1775558906615'
+      position:
+        x: 600
+        y: 774
+      positionAbsolute:
+        x: 600
+        y: 774
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775558793744'
+          - reply
+          value_type: string
+          variable: reply
+        - value_selector:
+          - '1775558793744'
+          - updated_resume_json
+          value_type: string
+          variable: updated_resume_json
+        - value_selector:
+          - '1775558793744'
+          - status
+          value_type: string
+          variable: status
+        selected: false
+        title: 输出
+        type: end
+      height: 140
+      id: '1775558994728'
+      position:
+        x: 878.9361419742754
+        y: 590.8445195895398
+      positionAbsolute:
+        x: 878.9361419742754
+        y: 590.8445195895398
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1775558906615'
+          - reply
+          value_type: string
+          variable: reply
+        - value_selector:
+          - '1775558906615'
+          - updated_resume_json
+          value_type: string
+          variable: updated_resume_json
+        - value_selector:
+          - '1775558906615'
+          - status
+          value_type: string
+          variable: status
+        selected: false
+        title: 输出 2
+        type: end
+      height: 140
+      id: '1775559036632'
+      position:
+        x: 902
+        y: 774
+      positionAbsolute:
+        x: 902
+        y: 774
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 100.12979410810124
+      y: -152.62650490079903
+      zoom: 0.7748559309591744
+  rag_pipeline_variables: []
