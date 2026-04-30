@@ -1,0 +1,6 @@
+names:
+  0: digit
+  1: box
+path: ../../dataset/label_box_image_dataset_det_yolov8
+train: train
+val: val
